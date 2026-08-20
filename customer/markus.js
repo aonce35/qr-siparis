@@ -1,4 +1,5 @@
-const SUPABASE_URL = "https://dppqwqsawarkyzzonzyu.supabase.co";
+const SUPABASE_URL =
+  "https://dppqwqsawarkyzzonzyu.supabase.co";
 
 const SUPABASE_ANON_KEY =
   "sb_publishable_fhNovHoi8Xgh1jScRsdrgQ_ZCe6I4tP";
@@ -9,40 +10,690 @@ const db = supabase.createClient(
 );
 
 
+/* =====================================
+   MASA
+===================================== */
+
 const params =
   new URLSearchParams(
     window.location.search
   );
 
 const tableNumber =
-  params.get("table");
+  params.get("table") || "1";
 
 
-let products = [];
+/* =====================================
+   MARKUS MENÜSÜ
+===================================== */
+
+const products = [
+
+  /* TOSTLAR */
+
+  {
+    id: "markus-tost-1",
+    name: "Kaşarlı Tost",
+    description:
+      "Kaşar, domates, turşu",
+    category: "Tostlar",
+    price: 250
+  },
+
+  {
+    id: "markus-tost-2",
+    name: "Karışık Tost",
+    description:
+      "Sucuk, kaşar, domates, turşu",
+    category: "Tostlar",
+    price: 300
+  },
+
+  {
+    id: "markus-tost-3",
+    name: "Ayvalık Tostu",
+    description:
+      "Kaşar, sucuk, salam, sosis, domates, turşu",
+    category: "Tostlar",
+    price: 350
+  },
+
+
+  /* BURGERLER */
+
+  {
+    id: "markus-burger-1",
+    name: "Hamburger",
+    description:
+      "125 Gr dana eti, marul, domates, turşu, özel sos",
+    category: "Burgerler",
+    price: 450
+  },
+
+  {
+    id: "markus-burger-2",
+    name: "Cheeseburger",
+    description:
+      "125 Gr dana eti, cheddar, marul, domates, turşu, özel sos",
+    category: "Burgerler",
+    price: 500
+  },
+
+  {
+    id: "markus-burger-3",
+    name: "Chicken Burger",
+    description:
+      "Çıtır tavuk, marul, domates, turşu, özel sos",
+    category: "Burgerler",
+    price: 400
+  },
+
+
+  /* KÖFTE & TAVUK */
+
+  {
+    id: "markus-kofte-1",
+    name: "Köfte Porsiyon",
+    description:
+      "5 Adet El Yapımı Köfte, Salata, Patates, Közlenmiş Biber, Domates",
+    category: "Köfte & Tavuk",
+    price: 500
+  },
+
+  {
+    id: "markus-kofte-2",
+    name: "Köfte Ekmek",
+    description:
+      "3 Adet El Yapımı Köfte, Mayonez, Domates, Soğan",
+    category: "Köfte & Tavuk",
+    price: 350
+  },
+
+  {
+    id: "markus-tavuk-1",
+    name: "Tavuk Pirzola",
+    description:
+      "2 Adet Pirzola, Salata, Patates, Közlenmiş Biber, Domates",
+    category: "Köfte & Tavuk",
+    price: 500
+  },
+
+
+  /* ANA YEMEKLER */
+
+  {
+    id: "markus-makarna",
+    name: "Makarna",
+    description:
+      "Krema, mantar / Krema, tavuk / Napolitan",
+    category: "Ana Yemekler",
+    price: 400
+  },
+
+  {
+    id: "markus-manti",
+    name: "Mantı",
+    description:
+      "Sarımsaklı yoğurt, salçalı tereyağlı sos",
+    category: "Ana Yemekler",
+    price: 400
+  },
+
+  {
+    id: "markus-gozleme",
+    name: "Gözleme",
+    description:
+      "Ispanak-lorlu / Kaşarlı / Patatesli",
+    category: "Ana Yemekler",
+    price: 250
+  },
+
+  {
+    id: "markus-yumurta",
+    name: "Yumurta",
+    description:
+      "Sahanda / Omlet",
+    category: "Ana Yemekler",
+    price: 250
+  },
+
+
+  /* ATIŞTIRMALIKLAR */
+
+  {
+    id: "markus-sigara",
+    name: "Sigara Böreği",
+    description:
+      "5 Adet El Yapımı Sigara Böreği, Domates, Salatalık, Zeytin",
+    category: "Atıştırmalıklar",
+    price: 300
+  },
+
+  {
+    id: "markus-patates",
+    name: "Patates Kızartması",
+    description:
+      "Patates, ketçap, mayonez",
+    category: "Atıştırmalıklar",
+    price: 250
+  },
+
+  {
+    id: "markus-patates-double",
+    name: "Duble Patates Kızartması",
+    description:
+      "Patates, ketçap, mayonez",
+    category: "Atıştırmalıklar",
+    price: 350
+  },
+
+  {
+    id: "markus-citir-tavuk",
+    name: "Çıtır Tavuk Patates",
+    description:
+      "5 Adet Çıtır Tavuk, Patates",
+    category: "Atıştırmalıklar",
+    price: 350
+  },
+
+  {
+    id: "markus-bira-tabagi",
+    name: "Bira Tabağı",
+    description:
+      "Sosis, nugget, çıtır tavuk, soğan halkası, sigara böreği, mozzarella stick, patates",
+    category: "Atıştırmalıklar",
+    price: 500
+  },
+
+
+  /* İÇECEKLER */
+
+  {
+    id: "markus-cola",
+    name: "Cola",
+    description: "",
+    category: "İçecekler",
+    price: 150
+  },
+
+  {
+    id: "markus-fanta",
+    name: "Fanta",
+    description: "",
+    category: "İçecekler",
+    price: 150
+  },
+
+  {
+    id: "markus-sprite",
+    name: "Sprite",
+    description: "",
+    category: "İçecekler",
+    price: 150
+  },
+
+  {
+    id: "markus-fuse",
+    name: "Fuse Tea",
+    description: "",
+    category: "İçecekler",
+    price: 150
+  },
+
+  {
+    id: "markus-meyve",
+    name: "Meyve Suyu",
+    description: "",
+    category: "İçecekler",
+    price: 150
+  },
+
+  {
+    id: "markus-soda",
+    name: "Soda",
+    description: "",
+    category: "İçecekler",
+    price: 50
+  },
+
+  {
+    id: "markus-soda-meyve",
+    name: "Soda Meyveli",
+    description: "",
+    category: "İçecekler",
+    price: 70
+  },
+
+  {
+    id: "markus-churchill",
+    name: "Churchill",
+    description: "",
+    category: "İçecekler",
+    price: 120
+  },
+
+  {
+    id: "markus-limonata",
+    name: "Limonata",
+    description: "",
+    category: "İçecekler",
+    price: 200
+  },
+
+  {
+    id: "markus-karadut",
+    name: "Karadut",
+    description: "",
+    category: "İçecekler",
+    price: 200
+  },
+
+  {
+    id: "markus-milkshake",
+    name: "Milkshake",
+    description: "",
+    category: "İçecekler",
+    price: 250
+  },
+
+  {
+    id: "markus-alkolsuz",
+    name: "Alkolsüz Kokteyller",
+    description: "",
+    category: "İçecekler",
+    price: 350
+  },
+
+  {
+    id: "markus-enerji",
+    name: "Enerji İçeceği",
+    description: "",
+    category: "İçecekler",
+    price: 200
+  },
+
+  {
+    id: "markus-ayran",
+    name: "Ayran Küçük",
+    description: "",
+    category: "İçecekler",
+    price: 50
+  },
+
+  {
+    id: "markus-ayran-buyuk",
+    name: "Ayran Büyük",
+    description: "",
+    category: "İçecekler",
+    price: 70
+  },
+
+  {
+    id: "markus-su-kucuk",
+    name: "Su Küçük",
+    description: "",
+    category: "İçecekler",
+    price: 30
+  },
+
+  {
+    id: "markus-su-buyuk",
+    name: "Su Büyük",
+    description: "",
+    category: "İçecekler",
+    price: 70
+  },
+
+  {
+    id: "markus-cay",
+    name: "Çay",
+    description: "",
+    category: "İçecekler",
+    price: 50
+  },
+
+
+  /* KAHVELER */
+
+  {
+    id: "markus-americano",
+    name: "Ice Americano / Americano",
+    description: "",
+    category: "Kahveler",
+    price: 200
+  },
+
+  {
+    id: "markus-latte",
+    name: "Ice Latte / Latte / Cappuccino",
+    description: "",
+    category: "Kahveler",
+    price: 200
+  },
+
+  {
+    id: "markus-caramel",
+    name: "Ice Caramel Latte",
+    description: "",
+    category: "Kahveler",
+    price: 200
+  },
+
+  {
+    id: "markus-vanilla",
+    name: "Ice Vanilla Latte",
+    description: "",
+    category: "Kahveler",
+    price: 200
+  },
+
+  {
+    id: "markus-flat",
+    name: "Flat White",
+    description: "",
+    category: "Kahveler",
+    price: 200
+  },
+
+  {
+    id: "markus-cortado",
+    name: "Cortado",
+    description: "",
+    category: "Kahveler",
+    price: 200
+  },
+
+  {
+    id: "markus-mocha",
+    name: "Mocha",
+    description: "",
+    category: "Kahveler",
+    price: 200
+  },
+
+  {
+    id: "markus-long",
+    name: "Long Black",
+    description: "",
+    category: "Kahveler",
+    price: 200
+  },
+
+  {
+    id: "markus-espresso",
+    name: "Espresso",
+    description: "",
+    category: "Kahveler",
+    price: 180
+  },
+
+  {
+    id: "markus-turk",
+    name: "Türk Kahvesi",
+    description: "",
+    category: "Kahveler",
+    price: 150
+  },
+
+
+  /* ALKOLLÜ */
+
+  {
+    id: "markus-efes-pilsen",
+    name: "Efes Pilsen",
+    description: "",
+    category: "Alkollü İçecekler",
+    price: 250
+  },
+
+  {
+    id: "markus-efes-malt",
+    name: "Efes Malt",
+    description: "",
+    category: "Alkollü İçecekler",
+    price: 250
+  },
+
+  {
+    id: "markus-efes-ozel",
+    name: "Efes Özel Seri",
+    description: "",
+    category: "Alkollü İçecekler",
+    price: 250
+  },
+
+  {
+    id: "markus-tuborg",
+    name: "Tuborg",
+    description: "",
+    category: "Alkollü İçecekler",
+    price: 250
+  },
+
+  {
+    id: "markus-carlsberg",
+    name: "Carlsberg",
+    description: "",
+    category: "Alkollü İçecekler",
+    price: 250
+  },
+
+  {
+    id: "markus-bomonti",
+    name: "Bomonti Filtresiz",
+    description: "",
+    category: "Alkollü İçecekler",
+    price: 250
+  },
+
+  {
+    id: "markus-miller",
+    name: "Miller",
+    description: "",
+    category: "Alkollü İçecekler",
+    price: 250
+  },
+
+  {
+    id: "markus-becks",
+    name: "Becks",
+    description: "",
+    category: "Alkollü İçecekler",
+    price: 250
+  },
+
+  {
+    id: "markus-belfast",
+    name: "Belfast",
+    description: "",
+    category: "Alkollü İçecekler",
+    price: 250
+  },
+
+  {
+    id: "markus-bud",
+    name: "Bud",
+    description: "",
+    category: "Alkollü İçecekler",
+    price: 250
+  },
+
+  {
+    id: "markus-corona",
+    name: "Corona",
+    description: "",
+    category: "Alkollü İçecekler",
+    price: 250
+  },
+
+  {
+    id: "markus-desperados",
+    name: "Desperados",
+    description: "",
+    category: "Alkollü İçecekler",
+    price: 300
+  },
+
+  {
+    id: "markus-sol",
+    name: "Sol",
+    description: "",
+    category: "Alkollü İçecekler",
+    price: 300
+  },
+
+  {
+    id: "markus-blanc",
+    name: "Blanc",
+    description: "",
+    category: "Alkollü İçecekler",
+    price: 300
+  },
+
+  {
+    id: "markus-stella",
+    name: "Stella Artois",
+    description: "",
+    category: "Alkollü İçecekler",
+    price: 300
+  },
+
+  {
+    id: "markus-raki",
+    name: "Rakı Tek/Duble",
+    description: "",
+    category: "Alkollü İçecekler",
+    price: 250
+  },
+
+  {
+    id: "markus-viski",
+    name: "Viski Tek/Duble",
+    description: "",
+    category: "Alkollü İçecekler",
+    price: 250
+  },
+
+  {
+    id: "markus-cin",
+    name: "Cin Tek/Duble",
+    description: "",
+    category: "Alkollü İçecekler",
+    price: 250
+  },
+
+  {
+    id: "markus-vodka",
+    name: "Vodka Tek/Duble",
+    description: "",
+    category: "Alkollü İçecekler",
+    price: 250
+  },
+
+  {
+    id: "markus-sarap",
+    name: "Şarap Kadeh",
+    description: "",
+    category: "Alkollü İçecekler",
+    price: 300
+  },
+
+
+  /* KOKTEYLLER */
+
+  {
+    id: "markus-mojito",
+    name: "Mojito",
+    description: "",
+    category: "Kokteyller",
+    price: 500
+  },
+
+  {
+    id: "markus-strawberry",
+    name: "Strawberry Mojito",
+    description: "",
+    category: "Kokteyller",
+    price: 500
+  },
+
+  {
+    id: "markus-long-island",
+    name: "Long Island",
+    description: "",
+    category: "Kokteyller",
+    price: 600
+  },
+
+  {
+    id: "markus-margarita",
+    name: "Margarita",
+    description: "",
+    category: "Kokteyller",
+    price: 500
+  },
+
+  {
+    id: "markus-tequila",
+    name: "Tequila Sunrise",
+    description: "",
+    category: "Kokteyller",
+    price: 500
+  },
+
+  {
+    id: "markus-sex",
+    name: "Sex On The Beach",
+    description: "",
+    category: "Kokteyller",
+    price: 500
+  },
+
+  {
+    id: "markus-bana",
+    name: "Bana Bırak",
+    description: "",
+    category: "Kokteyller",
+    price: 500
+  },
+
+  {
+    id: "markus-cin-tonik",
+    name: "Cin Tonik",
+    description: "",
+    category: "Kokteyller",
+    price: 500
+  },
+
+  {
+    id: "markus-vodka-redbull",
+    name: "Vodka Redbull",
+    description: "",
+    category: "Kokteyller",
+    price: 500
+  }
+
+];
+
+
 let cart = [];
 
 
+/* =====================================
+   BAŞLANGIÇ
+===================================== */
+
 document.addEventListener(
   "DOMContentLoaded",
-  init
+  initMarkus
 );
 
 
-async function init() {
+function initMarkus() {
 
   console.log(
-    "MARKUS SİSTEMİ BAŞLADI"
+    "MARKUS MENÜ BAŞLADI"
   );
-
-
-  if (!tableNumber) {
-
-    showNotice(
-      "Masa bilgisi bulunamadı."
-    );
-
-    return;
-  }
 
 
   const tableBadge =
@@ -59,171 +710,34 @@ async function init() {
   }
 
 
-  await loadRestaurant();
+  renderMarkusCategories();
 
-  await loadProducts();
+  renderMarkusMenu();
 
-
-  renderCategories();
-
-  renderMenu();
-
-  renderCart();
+  renderMarkusCart();
 
 }
 
 
-/* =========================
-   RESTAURANT
-========================= */
+/* =====================================
+   KATEGORİLER
+===================================== */
 
-async function loadRestaurant() {
-
-  const { data, error } =
-    await db
-      .from("restaurant_settings")
-      .select("name")
-      .limit(1)
-      .maybeSingle();
-
-
-  if (error) {
-
-    console.error(
-      "RESTAURANT ERROR:",
-      error
-    );
-
-    return;
-  }
-
-
-  if (
-    data &&
-    data.name
-  ) {
-
-    const element =
-      document.getElementById(
-        "restaurantName"
-      );
-
-
-    if (element) {
-
-      element.textContent =
-        data.name;
-
-    }
-
-  }
-
-}
-
-
-/* =========================
-   MARKUS PRODUCTS
-========================= */
-
-async function loadProducts() {
-
-  console.log(
-    "MARKUS ÜRÜNLERİ YÜKLENİYOR..."
-  );
-
-
-  const { data, error } =
-    await db
-      .from("products")
-      .select(
-        "id, name, description, category, price, is_active, sort_order"
-      )
-      .eq(
-        "restaurant_slug",
-        "markus"
-      )
-      .eq(
-        "is_active",
-        true
-      )
-      .order(
-        "sort_order",
-        {
-          ascending: true
-        }
-      );
-
-
-  if (error) {
-
-    console.error(
-      "MARKUS PRODUCTS ERROR:",
-      error
-    );
-
-    showNotice(
-      "Menü yüklenemedi: " +
-      error.message
-    );
-
-    products = [];
-
-    return;
-  }
-
-
-  console.log(
-    "MARKUS ÜRÜNLERİ:",
-    data
-  );
-
-
-  products =
-    Array.isArray(data)
-      ? data
-      : [];
-
-
-  if (
-    products.length === 0
-  ) {
-
-    showNotice(
-      "Markus menüsünde ürün bulunamadı."
-    );
-
-  }
-
-}
-
-
-/* =========================
-   CATEGORIES
-========================= */
-
-function categories() {
+function getMarkusCategories() {
 
   return [
     ...new Set(
-
-      products
-        .map(
-          product =>
-            product.category
-        )
-        .filter(Boolean)
-
+      products.map(
+        product =>
+          product.category
+      )
     )
   ];
 
 }
 
 
-/* =========================
-   RENDER CATEGORIES
-========================= */
-
-function renderCategories() {
+function renderMarkusCategories() {
 
   const element =
     document.getElementById(
@@ -232,34 +746,28 @@ function renderCategories() {
 
 
   if (!element) {
-
     return;
-
   }
 
 
   const list =
-    categories();
+    getMarkusCategories();
 
 
   element.innerHTML =
     list
       .map(
         (category, index) => `
-
           <button
-            class="category ${
+            class="${
               index === 0
                 ? "active"
                 : ""
             }"
-            onclick="scrollToCategory('${escAttr(category)}')"
+            onclick="scrollToMarkusCategory('${escAttr(category)}')"
           >
-
             ${esc(category)}
-
           </button>
-
         `
       )
       .join("");
@@ -267,11 +775,11 @@ function renderCategories() {
 }
 
 
-/* =========================
-   RENDER MENU
-========================= */
+/* =====================================
+   MENÜ
+===================================== */
 
-function renderMenu() {
+function renderMarkusMenu() {
 
   const menu =
     document.getElementById(
@@ -280,84 +788,61 @@ function renderMenu() {
 
 
   if (!menu) {
-
     return;
-
   }
 
 
-  if (
-    !products.length
-  ) {
-
-    menu.innerHTML = `
-      <div style="
-        padding:20px;
-        background:#fff;
-        border-radius:15px;
-      ">
-        Menüde ürün bulunamadı.
-      </div>
-    `;
-
-    return;
-
-  }
-
-
-  const list =
-    categories();
+  const categories =
+    getMarkusCategories();
 
 
   menu.innerHTML =
-    list
-      .map(
-        category => {
+    categories
+      .map(category => {
 
-          const categoryProducts =
-            products.filter(
-              product =>
-                product.category ===
-                category
-            );
-
-
-          return `
-
-            <section
-              id="cat-${slug(category)}"
-            >
-
-              <h2 class="category-title">
-                ${esc(category)}
-              </h2>
+        const categoryProducts =
+          products.filter(
+            product =>
+              product.category ===
+              category
+          );
 
 
-              ${categoryProducts
-                .map(productHTML)
-                .join("")}
+        return `
+          <section
+            id="cat-${slug(category)}"
+          >
 
-            </section>
+            <h2 class="category-title">
+              ${esc(category)}
+            </h2>
 
-          `;
+            ${
+              categoryProducts
+                .map(
+                  markusProductHTML
+                )
+                .join("")
+            }
 
-        }
-      )
+          </section>
+        `;
+
+      })
       .join("");
 
 }
 
 
-/* =========================
-   PRODUCT
-========================= */
+/* =====================================
+   ÜRÜN
+===================================== */
 
-function productHTML(
+function markusProductHTML(
   product
 ) {
 
   return `
-
     <article class="product">
 
       <div class="product-info">
@@ -378,13 +863,10 @@ function productHTML(
             : ""
         }
 
-
         <div class="price">
-
           ₺${Number(
-            product.price || 0
+            product.price
           ).toFixed(2)}
-
         </div>
 
       </div>
@@ -392,51 +874,41 @@ function productHTML(
 
       <button
         class="add"
-        onclick="addToCart('${escAttr(product.id)}')"
+        onclick="addMarkusToCart('${escAttr(product.id)}')"
       >
         Ekle
       </button>
 
     </article>
-
   `;
 
 }
 
 
-/* =========================
-   CART
-========================= */
+/* =====================================
+   SEPETE EKLE
+===================================== */
 
-function addToCart(
+function addMarkusToCart(
   id
 ) {
 
   const product =
     products.find(
-      product =>
-        String(product.id) ===
-        String(id)
+      item =>
+        item.id === id
     );
 
 
   if (!product) {
-
-    console.error(
-      "Ürün bulunamadı:",
-      id
-    );
-
     return;
-
   }
 
 
   const existing =
     cart.find(
       item =>
-        String(item.id) ===
-        String(id)
+        item.id === id
     );
 
 
@@ -448,40 +920,35 @@ function addToCart(
 
     cart.push({
 
-      id:
-        product.id,
+      id: product.id,
 
-      name:
-        product.name,
+      name: product.name,
 
-      price:
-        Number(
-          product.price || 0
-        ),
+      price: Number(
+        product.price
+      ),
 
-      qty:
-        1,
+      qty: 1,
 
-      note:
-        ""
+      note: ""
 
     });
 
   }
 
 
-  renderCart();
+  renderMarkusCart();
 
-  openCart();
+  openMarkusCart();
 
 }
 
 
-/* =========================
-   QUANTITY
-========================= */
+/* =====================================
+   ADET
+===================================== */
 
-function changeQty(
+function changeMarkusQty(
   id,
   amount
 ) {
@@ -489,141 +956,97 @@ function changeQty(
   const item =
     cart.find(
       item =>
-        String(item.id) ===
-        String(id)
+        item.id === id
     );
 
 
   if (!item) {
-
     return;
-
   }
 
 
   item.qty += amount;
 
 
-  if (
-    item.qty <= 0
-  ) {
+  if (item.qty <= 0) {
 
     cart =
       cart.filter(
         item =>
-          String(item.id) !==
-          String(id)
+          item.id !== id
       );
 
   }
 
 
-  renderCart();
+  renderMarkusCart();
 
 }
 
 
-/* =========================
-   ITEM NOTE
-========================= */
+/* =====================================
+   SEPET
+===================================== */
 
-function updateItemNote(
-  id,
-  value
-) {
+function renderMarkusCart() {
 
-  const item =
-    cart.find(
-      item =>
-        String(item.id) ===
-        String(id)
-    );
-
-
-  if (item) {
-
-    item.note =
-      value;
-
-  }
-
-}
-
-
-/* =========================
-   RENDER CART
-========================= */
-
-function renderCart() {
-
-  const cartCount =
+  const countElement =
     document.getElementById(
       "cartCount"
     );
 
 
-  const cartTotal =
+  const totalElement =
     document.getElementById(
       "cartTotal"
     );
 
 
-  const cartItems =
+  const itemsElement =
     document.getElementById(
       "cartItems"
     );
 
 
   if (
-    !cartCount ||
-    !cartTotal ||
-    !cartItems
+    !countElement ||
+    !totalElement ||
+    !itemsElement
   ) {
-
     return;
-
   }
 
 
   const count =
     cart.reduce(
-      (
-        total,
-        item
-      ) =>
-        total +
-        item.qty,
+      (sum, item) =>
+        sum + item.qty,
       0
     );
 
 
   const total =
     cart.reduce(
-      (
-        sum,
-        item
-      ) =>
+      (sum, item) =>
         sum +
         item.price *
-        item.qty,
+          item.qty,
       0
     );
 
 
-  cartCount.textContent =
+  countElement.textContent =
     count;
 
 
-  cartTotal.textContent =
+  totalElement.textContent =
     "₺" +
     total.toFixed(2);
 
 
-  if (
-    !cart.length
-  ) {
+  if (!cart.length) {
 
-    cartItems.innerHTML =
+    itemsElement.innerHTML =
       "<p>Sepet boş.</p>";
 
     return;
@@ -631,14 +1054,26 @@ function renderCart() {
   }
 
 
-  cartItems.innerHTML =
+  itemsElement.innerHTML =
     cart
       .map(
         item => `
 
-          <div class="cart-row">
+          <div
+            class="cart-row"
+            style="
+              padding:12px;
+              border-bottom:1px solid #ddd;
+              margin-bottom:8px;
+            "
+          >
 
-            <div class="cart-main">
+            <div
+              style="
+                display:flex;
+                justify-content:space-between;
+              "
+            >
 
               <strong>
                 ${esc(item.name)}
@@ -654,44 +1089,32 @@ function renderCart() {
             </div>
 
 
-            <div class="qty">
+            <div
+              style="
+                display:flex;
+                align-items:center;
+                gap:14px;
+                margin-top:10px;
+              "
+            >
 
               <button
-                onclick="changeQty(
-                  '${escAttr(item.id)}',
-                  -1
-                )"
+                onclick="changeMarkusQty('${escAttr(item.id)}',-1)"
               >
                 −
               </button>
-
 
               <span>
                 ${item.qty}
               </span>
 
-
               <button
-                onclick="changeQty(
-                  '${escAttr(item.id)}',
-                  1
-                )"
+                onclick="changeMarkusQty('${escAttr(item.id)}',1)"
               >
                 +
               </button>
 
             </div>
-
-
-            <input
-              class="item-note"
-              value="${escAttr(item.note)}"
-              placeholder="Bu ürün için not..."
-              oninput="updateItemNote(
-                '${escAttr(item.id)}',
-                this.value
-              )"
-            >
 
           </div>
 
@@ -702,35 +1125,78 @@ function renderCart() {
 }
 
 
-/* =========================
-   SEND ORDER
-========================= */
+/* =====================================
+   SEPET AÇ / KAPAT
+===================================== */
+
+function openMarkusCart() {
+
+  const modal =
+    document.getElementById(
+      "cartModal"
+    );
+
+
+  if (modal) {
+
+    modal.classList.remove(
+      "hidden"
+    );
+
+  }
+
+}
+
+
+function openCart() {
+  openMarkusCart();
+}
+
+
+function closeCart() {
+
+  const modal =
+    document.getElementById(
+      "cartModal"
+    );
+
+
+  if (modal) {
+
+    modal.classList.add(
+      "hidden"
+    );
+
+  }
+
+}
+
+
+/* =====================================
+   SİPARİŞ GÖNDER
+===================================== */
 
 async function placeOrder() {
 
-  if (
-    !cart.length
-  ) {
+  if (!cart.length) {
 
     alert(
       "Sepet boş."
     );
 
     return;
-
   }
 
 
   const button =
     document.querySelector(
-      ".primary"
+      "#cartModal .primary"
     );
 
 
   if (button) {
 
-    button.disabled =
-      true;
+    button.disabled = true;
 
     button.textContent =
       "Gönderiliyor...";
@@ -740,13 +1206,10 @@ async function placeOrder() {
 
   const total =
     cart.reduce(
-      (
-        sum,
-        item
-      ) =>
+      (sum, item) =>
         sum +
         item.price *
-        item.qty,
+          item.qty,
       0
     );
 
@@ -762,10 +1225,6 @@ async function placeOrder() {
       ? noteElement.value.trim()
       : "";
 
-
-  /* =====================
-     ORDER
-  ===================== */
 
   const {
     data: order,
@@ -798,7 +1257,6 @@ async function placeOrder() {
   if (error) {
 
     console.error(
-      "ORDER ERROR:",
       error
     );
 
@@ -807,17 +1265,19 @@ async function placeOrder() {
       error.message
     );
 
+    if (button) {
 
-    resetOrderButton();
+      button.disabled =
+        false;
+
+      button.textContent =
+        "Siparişi Gönder";
+
+    }
 
     return;
-
   }
 
-
-  /* =====================
-     ORDER ITEMS
-  ===================== */
 
   const orderItems =
     cart.map(
@@ -826,7 +1286,6 @@ async function placeOrder() {
         order_id:
           order.id,
 
-        /* GERÇEK SUPABASE UUID */
         product_id:
           item.id,
 
@@ -848,7 +1307,8 @@ async function placeOrder() {
 
 
   const {
-    error: itemsError
+    error:
+      itemsError
   } =
     await db
       .from("order_items")
@@ -859,27 +1319,14 @@ async function placeOrder() {
 
   if (itemsError) {
 
-    console.error(
-      "ORDER ITEMS ERROR:",
-      itemsError
-    );
-
     alert(
       "Sipariş ürünleri kaydedilemedi: " +
       itemsError.message
     );
 
-
-    resetOrderButton();
-
     return;
-
   }
 
-
-  /* =====================
-     SUCCESS
-  ===================== */
 
   cart = [];
 
@@ -892,31 +1339,14 @@ async function placeOrder() {
   }
 
 
-  renderCart();
+  renderMarkusCart();
 
   closeCart();
 
 
-  showNotice(
+  showMarkusNotice(
     `Siparişiniz alındı. Masa ${tableNumber}.`
   );
-
-
-  resetOrderButton();
-
-}
-
-
-/* =========================
-   RESET BUTTON
-========================= */
-
-function resetOrderButton() {
-
-  const button =
-    document.querySelector(
-      ".primary"
-    );
 
 
   if (button) {
@@ -932,62 +1362,227 @@ function resetOrderButton() {
 }
 
 
-/* =========================
-   CART OPEN / CLOSE
-========================= */
+/* =====================================
+   SİPARİŞ GEÇMİŞİ
+===================================== */
 
-function openCart() {
+async function loadOrderHistory() {
 
-  const modal =
+  const element =
     document.getElementById(
-      "cartModal"
+      "orderHistoryContent"
     );
 
 
-  if (!modal) {
-
+  if (!element) {
     return;
-
   }
 
 
-  modal.classList.remove(
-    "hidden"
-  );
+  element.innerHTML =
+    "<p>Siparişler yükleniyor...</p>";
 
 
-  renderCart();
+  const {
+    data,
+    error
+  } =
+    await db
+      .from("orders")
+      .select(
+        "id, created_at, status, total, table_number"
+      )
+      .eq(
+        "table_number",
+        String(
+          tableNumber
+        )
+      )
+      .order(
+        "created_at",
+        {
+          ascending: false
+        }
+      );
+
+
+  if (error) {
+
+    element.innerHTML = `
+      <p>
+        Siparişler yüklenemedi.
+      </p>
+    `;
+
+    console.error(
+      error
+    );
+
+    return;
+  }
+
+
+  if (!data || !data.length) {
+
+    element.innerHTML = `
+      <p>
+        Bu masa için henüz sipariş yok.
+      </p>
+    `;
+
+    return;
+  }
+
+
+  const total =
+    data.reduce(
+      (sum, order) =>
+        sum +
+        Number(
+          order.total || 0
+        ),
+      0
+    );
+
+
+  const statusNames = {
+
+    new:
+      "Yeni",
+
+    preparing:
+      "Hazırlanıyor",
+
+    ready:
+      "Hazır",
+
+    completed:
+      "Tamamlandı"
+
+  };
+
+
+  element.innerHTML = `
+
+    <div
+      style="
+        padding:16px;
+        margin-bottom:16px;
+        border:1px solid #d9d1c5;
+        border-radius:14px;
+        background:#fff;
+      "
+    >
+
+      <strong>
+        Masa toplamı
+      </strong>
+
+      <div
+        style="
+          margin-top:6px;
+          color:#07553f;
+          font-size:24px;
+          font-weight:700;
+        "
+      >
+        ₺${total.toFixed(2)}
+      </div>
+
+    </div>
+
+
+    ${data.map(order => {
+
+      const date =
+        new Date(
+          order.created_at
+        ).toLocaleString(
+          "tr-TR",
+          {
+            day: "2-digit",
+            month: "2-digit",
+            hour: "2-digit",
+            minute: "2-digit"
+          }
+        );
+
+
+      return `
+
+        <div
+          style="
+            padding:15px;
+            margin-bottom:10px;
+            border:1px solid #d9d1c5;
+            border-radius:14px;
+            background:#fff;
+          "
+        >
+
+          <div
+            style="
+              display:flex;
+              justify-content:space-between;
+              gap:10px;
+            "
+          >
+
+            <strong>
+              Sipariş
+            </strong>
+
+            <strong>
+              ₺${Number(
+                order.total || 0
+              ).toFixed(2)}
+            </strong>
+
+          </div>
+
+
+          <div
+            style="
+              margin-top:7px;
+              color:#777;
+              font-size:13px;
+            "
+          >
+            ${date}
+          </div>
+
+
+          <div
+            style="
+              margin-top:8px;
+              color:#07553f;
+              font-weight:600;
+            "
+          >
+            ${
+              statusNames[
+                order.status
+              ] ||
+              order.status
+            }
+          </div>
+
+        </div>
+
+      `;
+
+    }).join("")}
+
+  `;
 
 }
 
 
-function closeCart() {
+/* =====================================
+   KATEGORİYE GİT
+===================================== */
 
-  const modal =
-    document.getElementById(
-      "cartModal"
-    );
-
-
-  if (!modal) {
-
-    return;
-
-  }
-
-
-  modal.classList.add(
-    "hidden"
-  );
-
-}
-
-
-/* =========================
-   CATEGORY SCROLL
-========================= */
-
-function scrollToCategory(
+function scrollToMarkusCategory(
   category
 ) {
 
@@ -1001,6 +1596,7 @@ function scrollToCategory(
   if (element) {
 
     element.scrollIntoView({
+
       behavior:
         "smooth",
 
@@ -1014,11 +1610,11 @@ function scrollToCategory(
 }
 
 
-/* =========================
-   NOTICE
-========================= */
+/* =====================================
+   BİLDİRİM
+===================================== */
 
-function showNotice(
+function showMarkusNotice(
   text
 ) {
 
@@ -1029,9 +1625,7 @@ function showNotice(
 
 
   if (!notice) {
-
     return;
-
   }
 
 
@@ -1043,16 +1637,62 @@ function showNotice(
     "hidden"
   );
 
+
+  setTimeout(
+    () => {
+
+      notice.classList.add(
+        "hidden"
+      );
+
+    },
+    4000
+  );
+
 }
 
 
-/* =========================
-   HELPERS
-========================= */
+/* =====================================
+   GÜVENLİ HTML
+===================================== */
 
-function slug(
-  text
-) {
+function esc(value) {
+
+  return String(
+    value ?? ""
+  ).replace(
+    /[&<>"']/g,
+    character => ({
+
+      "&":
+        "&amp;",
+
+      "<":
+        "&lt;",
+
+      ">":
+        "&gt;",
+
+      '"':
+        "&quot;",
+
+      "'":
+        "&#39;"
+
+    })[character]
+  );
+
+}
+
+
+function escAttr(value) {
+
+  return esc(value);
+
+}
+
+
+function slug(text) {
 
   return String(
     text || ""
@@ -1062,50 +1702,5 @@ function slug(
       /[^a-z0-9çğıöşü]+/g,
       "-"
     );
-
-}
-
-
-function esc(
-  text
-) {
-
-  return String(
-    text ?? ""
-  )
-    .replace(
-      /[&<>"']/g,
-      character =>
-        ({
-          "&":
-            "&amp;",
-
-          "<":
-            "&lt;",
-
-          ">":
-            "&gt;",
-
-          '"':
-            "&quot;",
-
-          "'":
-            "&#39;"
-
-        })[
-          character
-        ]
-    );
-
-}
-
-
-function escAttr(
-  text
-) {
-
-  return esc(
-    text
-  );
 
 }
