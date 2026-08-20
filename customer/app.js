@@ -1,4 +1,5 @@
 const SUPABASE_URL = "https://dppqwgsawarkyzzonzyu.supabase.co";
+alert("APP.JS ÇALIŞIYOR");
 const SUPABASE_ANON_KEY = "sb_publishable_fhNovHoi8Xgh1jScRsdrgQ_ZCe6I4tP";
 
 const db = supabase.createClient(
