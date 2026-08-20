@@ -3,21 +3,21 @@
 }
 
 html {
-  background: #000;
-  color: #fff;
-  scroll-behavior: smooth;
+  background: #f5f5f5;
+  color: #111;
 }
 
 body {
   margin: 0;
   min-height: 100vh;
 
-  background: #000;
-  color: #fff;
+  background: #f5f5f5;
+  color: #111;
 
   font-family:
     -apple-system,
     BlinkMacSystemFont,
+    "SF Pro Display",
     "SF Pro Text",
     "Helvetica Neue",
     Arial,
@@ -42,19 +42,19 @@ body {
 
   padding: 20px 18px 16px;
 
-  background: #000;
-  color: #fff;
+  background: #fff;
+  color: #111;
 
-  border-bottom: 1px solid #1d1d1d;
+  border-bottom: 1px solid #e8e8e8;
 }
 
 .eyebrow {
   margin-bottom: 5px;
 
-  color: #777;
+  color: #888;
 
   font-size: 10px;
-  font-weight: 600;
+  font-weight: 700;
 
   letter-spacing: 2px;
   text-transform: uppercase;
@@ -63,12 +63,12 @@ body {
 #restaurantName {
   margin: 0;
 
-  color: #fff;
+  color: #111;
 
   font-size: 25px;
   font-weight: 700;
 
-  letter-spacing: -0.5px;
+  letter-spacing: -0.6px;
 }
 
 .table-badge {
@@ -76,8 +76,8 @@ body {
 
   border-radius: 10px;
 
-  background: #fff;
-  color: #000;
+  background: #111;
+  color: #fff;
 
   font-size: 13px;
   font-weight: 600;
@@ -98,7 +98,7 @@ main {
 
   padding: 18px 16px 120px;
 
-  background: #000;
+  background: #f5f5f5;
 }
 
 
@@ -111,11 +111,11 @@ main {
 
   padding: 13px 15px;
 
-  border: 1px solid #292929;
+  border: 1px solid #ddd;
   border-radius: 12px;
 
-  background: #111;
-  color: #fff;
+  background: #fff;
+  color: #222;
 
   font-size: 14px;
 }
@@ -152,11 +152,11 @@ main {
 
   padding: 10px 15px;
 
-  border: 1px solid #292929;
+  border: 1px solid #ddd;
   border-radius: 999px;
 
-  background: #111;
-  color: #aaa;
+  background: #fff;
+  color: #666;
 
   font-family: inherit;
 
@@ -168,10 +168,10 @@ main {
 
 .categories button.active,
 .categories button.selected {
-  background: #fff;
-  color: #000;
+  background: #111;
+  color: #fff;
 
-  border-color: #fff;
+  border-color: #111;
 }
 
 
@@ -185,7 +185,7 @@ main {
 
   gap: 12px;
 
-  background: #000;
+  background: transparent;
 }
 
 
@@ -204,13 +204,16 @@ main {
 
   padding: 16px;
 
-  border: 1px solid #242424;
+  border: 1px solid #e5e5e5;
   border-radius: 16px;
 
-  background: #111;
-  color: #fff;
+  background: #fff;
+  color: #111;
 
   overflow: hidden;
+
+  box-shadow:
+    0 2px 8px rgba(0, 0, 0, 0.035);
 }
 
 
@@ -232,7 +235,7 @@ main {
 .menu-item h4 {
   margin-top: 0;
 
-  color: #fff;
+  color: #111;
 
   font-weight: 650;
 
@@ -243,7 +246,7 @@ main {
 .product p,
 .product-card p,
 .menu-item p {
-  color: #999;
+  color: #777;
 
   line-height: 1.5;
 }
@@ -252,7 +255,7 @@ main {
 .product strong,
 .product-card strong,
 .menu-item strong {
-  color: #fff;
+  color: #111;
 }
 
 
@@ -264,13 +267,15 @@ main {
 .product button,
 .product-card button,
 .menu-item button {
-  border: 1px solid #fff;
+  border: 1px solid #111;
   border-radius: 10px;
 
-  background: #fff;
-  color: #000;
+  background: #111;
+  color: #fff;
 
   padding: 9px 13px;
+
+  font-family: inherit;
 
   font-size: 13px;
   font-weight: 600;
@@ -304,14 +309,14 @@ main {
 
   padding: 15px 22px;
 
-  border: 1px solid #fff;
+  border: 1px solid #111;
   border-radius: 14px;
 
-  background: #fff;
-  color: #000;
+  background: #111;
+  color: #fff;
 
   box-shadow:
-    0 8px 30px rgba(0, 0, 0, 0.5);
+    0 8px 25px rgba(0, 0, 0, 0.18);
 
   font-family: inherit;
 
@@ -342,8 +347,8 @@ main {
 
   border-radius: 999px;
 
-  background: #000;
-  color: #fff;
+  background: #fff;
+  color: #111;
 
   font-size: 11px;
 }
@@ -368,7 +373,7 @@ main {
   padding: 15px;
 
   background:
-    rgba(0, 0, 0, 0.78);
+    rgba(0, 0, 0, 0.55);
 
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
@@ -376,7 +381,7 @@ main {
 
 
 /* =========================
-   CART
+   CART CARD
 ========================= */
 
 .modal-card {
@@ -389,14 +394,14 @@ main {
 
   padding: 20px;
 
-  border: 1px solid #292929;
+  border: 1px solid #e5e5e5;
   border-radius: 22px 22px 16px 16px;
 
-  background: #111;
-  color: #fff;
+  background: #fff;
+  color: #111;
 
   box-shadow:
-    0 -10px 40px rgba(0, 0, 0, 0.5);
+    0 -10px 40px rgba(0, 0, 0, 0.15);
 }
 
 
@@ -416,7 +421,7 @@ main {
 .modal-head h2 {
   margin: 0;
 
-  color: #fff;
+  color: #111;
 
   font-size: 22px;
 }
@@ -428,8 +433,8 @@ main {
   border: 0;
   border-radius: 50%;
 
-  background: #222;
-  color: #fff;
+  background: #f1f1f1;
+  color: #111;
 
   font-size: 23px;
 
@@ -453,11 +458,11 @@ main {
 #cartItems > div {
   padding: 13px;
 
-  border: 1px solid #292929;
+  border: 1px solid #e5e5e5;
   border-radius: 12px;
 
-  background: #181818;
-  color: #fff;
+  background: #fafafa;
+  color: #111;
 }
 
 
@@ -473,16 +478,16 @@ main {
 
   padding: 16px 0;
 
-  border-top: 1px solid #292929;
-  border-bottom: 1px solid #292929;
+  border-top: 1px solid #e5e5e5;
+  border-bottom: 1px solid #e5e5e5;
 
   margin-bottom: 18px;
 
-  color: #aaa;
+  color: #777;
 }
 
 .order-summary strong {
-  color: #fff;
+  color: #111;
 
   font-size: 20px;
 }
@@ -497,7 +502,7 @@ main {
 
   margin-bottom: 8px;
 
-  color: #fff;
+  color: #111;
 
   font-size: 13px;
   font-weight: 600;
@@ -517,13 +522,13 @@ textarea {
 
   padding: 13px;
 
-  border: 1px solid #292929;
+  border: 1px solid #ddd;
   border-radius: 12px;
 
   outline: none;
 
-  background: #000;
-  color: #fff;
+  background: #fafafa;
+  color: #111;
 
   font-family: inherit;
   font-size: 14px;
@@ -532,11 +537,13 @@ textarea {
 }
 
 textarea:focus {
-  border-color: #666;
+  border-color: #999;
+
+  background: #fff;
 }
 
 textarea::placeholder {
-  color: #666;
+  color: #999;
 }
 
 
@@ -549,11 +556,11 @@ textarea::placeholder {
 
   padding: 15px;
 
-  border: 1px solid #fff;
+  border: 1px solid #111;
   border-radius: 12px;
 
-  background: #fff;
-  color: #000;
+  background: #111;
+  color: #fff;
 
   font-family: inherit;
 
@@ -611,27 +618,6 @@ textarea::placeholder {
 
 
 /* =========================
-   DARK OVERRIDES
-========================= */
-
-body,
-main,
-.menu,
-.categories {
-  background-color: #000 !important;
-}
-
-.topbar {
-  background-color: #000 !important;
-}
-
-.menu *,
-.categories * {
-  color-scheme: dark;
-}
-
-
-/* =========================
    SCROLLBAR
 ========================= */
 
@@ -640,10 +626,10 @@ main,
 }
 
 ::-webkit-scrollbar-track {
-  background: #000;
+  background: #f5f5f5;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #333;
+  background: #ccc;
   border-radius: 10px;
 }
