@@ -1,27 +1,109 @@
 <!doctype html>
 <html lang="tr">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>QR Sipariş - Admin</title><link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>QR Sipariş - Admin</title>
+  <link rel="stylesheet" href="style.css?v=3">
 </head>
+
 <body>
+
 <div id="loginView" class="center">
   <div class="login-card">
-    <h1>QR Sipariş</h1><p>Garson / Mekan Sahibi Paneli</p>
-    <input id="email" type="email" placeholder="E-posta">
-    <input id="password" type="password" placeholder="Şifre">
-    <button onclick="login()">Giriş Yap</button>
+
+    <h1>QR Sipariş</h1>
+
+    <p>Garson / Mekan Sahibi Paneli</p>
+
+    <input
+      id="email"
+      type="email"
+      placeholder="E-posta"
+      autocomplete="email"
+    >
+
+    <input
+      id="password"
+      type="password"
+      placeholder="Şifre"
+      autocomplete="current-password"
+    >
+
+    <button
+      id="loginButton"
+      type="button"
+      onclick="login()"
+    >
+      Giriş Yap
+    </button>
+
     <div id="loginError"></div>
+
   </div>
 </div>
 
+
 <div id="appView" class="hidden">
-<header><div><span class="eyebrow">CANLI SİPARİŞLER</span><h1>Admin Paneli</h1></div><button class="logout" onclick="logout()">Çıkış</button></header>
-<main>
-  <div class="stats"><div><small>Yeni</small><strong id="newCount">0</strong></div><div><small>Hazırlanıyor</small><strong id="prepCount">0</strong></div><div><small>Hazır</small><strong id="readyCount">0</strong></div></div>
-  <div class="board" id="orders"></div>
-</main>
+
+  <header>
+    <div>
+      <span class="eyebrow">
+        CANLI SİPARİŞLER
+      </span>
+
+      <h1>Admin Paneli</h1>
+    </div>
+
+    <button
+      class="logout"
+      type="button"
+      onclick="logout()"
+    >
+      Çıkış
+    </button>
+  </header>
+
+
+  <main>
+
+    <div class="stats">
+
+      <div>
+        <small>Yeni</small>
+        <strong id="newCount">0</strong>
+      </div>
+
+      <div>
+        <small>Hazırlanıyor</small>
+        <strong id="prepCount">0</strong>
+      </div>
+
+      <div>
+        <small>Hazır</small>
+        <strong id="readyCount">0</strong>
+      </div>
+
+    </div>
+
+
+    <div
+      class="board"
+      id="orders"
+    >
+      <div class="order">
+        Siparişler yükleniyor...
+      </div>
+    </div>
+
+  </main>
+
 </div>
+
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="app.js"></script>
-</body></html>
+
+<script src="app.js?v=999"></script>
+
+</body>
+</html>
