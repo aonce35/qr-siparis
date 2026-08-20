@@ -2,1012 +2,944 @@
 <html lang="tr">
 
 <head>
+  <meta charset="UTF-8">
 
-<meta charset="UTF-8">
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1"
+  >
 
-<meta
-  name="viewport"
-  content="width=device-width, initial-scale=1"
->
+  <title>Markus Foodbar</title>
 
-<title>Markus Foodbar</title>
+  <link
+    rel="stylesheet"
+    href="style.css?v=200"
+  >
 
-<style>
+  <style>
 
-/* =====================================================
-   MARKUS THEME
-===================================================== */
+    /* =====================================
+       MARKUS RENKLERİ
+    ===================================== */
 
-:root {
-  --green: #164b38;
-  --green-light: #23644b;
-  --cream: #f4efe5;
-  --cream-dark: #e9e2d5;
-  --white: #fffdf8;
-  --text: #173b2f;
-  --muted: #718078;
-  --border: #d8d2c5;
-}
+    :root {
+      --markus-green: #07553f;
+      --markus-dark: #064936;
+      --markus-cream: #f7f2e9;
+      --markus-gold: #b79668;
+      --markus-line: #d9d1c5;
+      --markus-text: #164c3d;
+      --markus-muted: #77736c;
+    }
 
-* {
-  box-sizing: border-box;
-}
 
-html {
-  background: var(--cream);
-  color: var(--text);
-  scroll-behavior: smooth;
-}
+    * {
+      box-sizing: border-box;
+    }
 
-body {
-  margin: 0;
-  min-height: 100vh;
 
-  background: var(--cream);
-  color: var(--text);
+    html {
+      background: var(--markus-cream);
+    }
 
-  font-family:
-    -apple-system,
-    BlinkMacSystemFont,
-    "SF Pro Display",
-    "Helvetica Neue",
-    Arial,
-    sans-serif;
 
-  -webkit-font-smoothing: antialiased;
-}
+    body {
+      margin: 0;
 
-button,
-input,
-textarea {
-  font-family: inherit;
-}
+      min-height: 100vh;
 
-.hidden {
-  display: none !important;
-}
+      background: var(--markus-cream);
 
+      color: var(--markus-text);
 
-/* =====================================================
-   MRX WELCOME
-===================================================== */
+      font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "SF Pro Text",
+        "Helvetica Neue",
+        Arial,
+        sans-serif;
 
-#mrxWelcome {
-  position: fixed;
-  inset: 0;
+      -webkit-font-smoothing: antialiased;
+    }
 
-  z-index: 99999;
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    /* =====================================
+       MRX / MARKUS GİRİŞ EKRANI
+    ===================================== */
 
-  padding: 28px;
+    #mrxWelcome {
 
-  background: #000;
+      position: fixed;
 
-  transition:
-    opacity .45s ease,
-    visibility .45s ease;
-}
+      inset: 0;
 
-#mrxWelcome.hidden {
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
-}
+      z-index: 99999;
 
-.mrx-welcome-content {
-  width: 100%;
-  max-width: 380px;
+      display: flex;
 
-  text-align: center;
+      align-items: center;
 
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
+      justify-content: center;
 
-.mrx-logo {
-  margin: 0;
+      padding: 28px;
 
-  color: #fff;
+      background: var(--markus-cream);
 
-  font-size: 62px;
-  font-weight: 700;
+      transition:
+        opacity 0.45s ease,
+        visibility 0.45s ease;
+    }
 
-  letter-spacing: 8px;
-}
 
-.mrx-slogan {
-  margin: 25px 0 42px;
+    #mrxWelcome.hidden {
 
-  color: #fff;
+      opacity: 0;
 
-  font-size: 17px;
-}
+      visibility: hidden;
 
-.mrx-menu-button {
-  width: 100%;
-  max-width: 280px;
+      pointer-events: none;
+    }
 
-  padding: 17px 24px;
 
-  border: 1px solid #fff;
-  border-radius: 12px;
+    .mrx-welcome-content {
 
-  background: #fff;
-  color: #000;
+      width: 100%;
 
-  font-size: 16px;
-  font-weight: 600;
-}
+      max-width: 390px;
 
-.mrx-footer {
-  margin-top: 48px;
+      text-align: center;
 
-  color: #666;
+      display: flex;
 
-  font-size: 10px;
-  letter-spacing: 2px;
-}
+      flex-direction: column;
 
+      align-items: center;
+    }
 
-/* =====================================================
-   MAIN
-===================================================== */
 
-#mainMenuContent {
-  display: none;
+    /* =====================================
+       MARKUS LOGO
+    ===================================== */
 
-  min-height: 100vh;
+    .markus-logo {
 
-  background: var(--cream);
-}
+      width: 235px;
 
-#mainMenuContent.visible {
-  display: block;
-}
+      height: 235px;
 
+      border: 1.5px solid #c9c1b6;
 
-/* =====================================================
-   HEADER
-===================================================== */
+      border-radius: 50%;
 
-.topbar {
-  position: sticky;
-  top: 0;
+      display: flex;
 
-  z-index: 100;
+      flex-direction: column;
 
-  padding:
-    18px
-    18px
-    15px;
+      align-items: center;
 
-  background:
-    rgba(244,239,229,.96);
+      justify-content: center;
 
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+      position: relative;
 
-  border-bottom:
-    1px solid var(--border);
-}
+      background:
+        rgba(255,255,255,0.16);
 
-.brand-area {
-  text-align: center;
-}
+      margin-bottom: 50px;
+    }
 
-.brand-mark {
-  display: inline-flex;
 
-  align-items: center;
-  justify-content: center;
+    .markus-sun {
 
-  width: 58px;
-  height: 58px;
+      width: 34px;
 
-  margin-bottom: 5px;
+      height: 34px;
 
-  border:
-    1px solid #c8c1b4;
+      border-radius: 50%;
 
-  border-radius: 50%;
+      background: var(--markus-gold);
 
-  background:
-    rgba(255,255,255,.5);
+      margin-bottom: 16px;
 
-  color: var(--green);
+      position: relative;
+    }
 
-  font-size: 13px;
-  font-weight: 700;
 
-  letter-spacing: 2px;
-}
+    .markus-sun::before {
 
-.brand-name {
-  margin: 0;
+      content: "";
 
-  color: var(--green);
+      position: absolute;
 
-  font-size: 26px;
-  font-weight: 700;
+      inset: -9px;
 
-  letter-spacing: 1px;
-}
+      border-radius: 50%;
 
-.brand-subtitle {
-  margin-top: 3px;
+      border: 2px dotted var(--markus-gold);
 
-  color: #8b938d;
+      opacity: 0.75;
+    }
 
-  font-size: 9px;
 
-  letter-spacing: 3px;
-  text-transform: uppercase;
-}
+    .markus-name {
 
-.table-badge {
-  position: absolute;
+      color: var(--markus-green);
 
-  top: 20px;
-  right: 16px;
+      font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
 
-  padding:
-    8px
-    11px;
+      font-size: 31px;
 
-  border:
-    1px solid var(--green);
+      font-weight: 600;
 
-  border-radius: 10px;
+      letter-spacing: 5px;
 
-  background: var(--green);
-  color: #fff;
+      line-height: 1;
 
-  font-size: 12px;
-  font-weight: 600;
-}
+      margin-left: 5px;
+    }
 
 
-/* =====================================================
-   ORDER BUTTON
-===================================================== */
+    .markus-foodbar {
 
-.my-orders-wrapper {
-  padding:
-    10px
-    15px;
+      margin-top: 11px;
 
-  background: var(--cream);
-}
+      color: var(--markus-gold);
 
-.my-orders-button {
-  width: 100%;
+      font-size: 12px;
 
-  padding: 12px 15px;
+      font-weight: 600;
 
-  border:
-    1px solid var(--border);
+      letter-spacing: 3px;
+    }
 
-  border-radius: 12px;
 
-  background: rgba(255,253,248,.7);
+    .markus-waves {
 
-  color: var(--green);
+      margin-top: 17px;
 
-  font-size: 13px;
-  font-weight: 700;
+      color: var(--markus-green);
 
-  text-align: left;
-}
+      font-size: 25px;
 
+      letter-spacing: -4px;
 
-/* =====================================================
-   MAIN
-===================================================== */
+      line-height: 0.6;
+    }
 
-main {
-  max-width: 700px;
 
-  margin: auto;
+    /* =====================================
+       MENÜYÜ GÖR
+    ===================================== */
 
-  padding:
-    12px
-    15px
-    120px;
-}
+    .mrx-menu-button {
 
+      width: 100%;
 
-/* =====================================================
-   CATEGORY BAR
-===================================================== */
+      max-width: 340px;
 
-.categories {
-  display: flex;
+      padding: 17px 24px;
 
-  gap: 8px;
+      border: none;
 
-  overflow-x: auto;
+      border-radius: 12px;
 
-  margin:
-    4px
-    0
-    22px;
+      background: var(--markus-green);
 
-  padding-bottom: 4px;
+      color: white;
 
-  scrollbar-width: none;
-}
+      font-family: inherit;
 
-.categories::-webkit-scrollbar {
-  display: none;
-}
+      font-size: 16px;
 
-.categories button {
-  flex: 0 0 auto;
+      font-weight: 700;
 
-  padding:
-    9px
-    14px;
+      cursor: pointer;
 
-  border:
-    1px solid var(--border);
+      transition:
+        transform 0.15s ease,
+        opacity 0.15s ease;
+    }
 
-  border-radius: 999px;
 
-  background:
-    rgba(255,253,248,.8);
+    .mrx-menu-button:active {
 
-  color: var(--green);
+      transform: scale(0.97);
 
-  font-size: 12px;
-  font-weight: 700;
-}
+      opacity: 0.85;
+    }
 
-.categories button.active {
-  background: var(--green);
-  color: #fff;
 
-  border-color: var(--green);
-}
+    .mrx-footer {
 
+      margin-top: 38px;
 
-/* =====================================================
-   CATEGORY TITLE
-===================================================== */
+      color: #777;
 
-.category-title {
-  margin:
-    24px
-    3px
-    12px;
+      font-size: 10px;
 
-  color: var(--green);
+      letter-spacing: 2px;
+    }
 
-  font-size: 22px;
-  font-weight: 750;
 
-  letter-spacing: -.3px;
-}
+    /* =====================================
+       MENÜ
+    ===================================== */
 
-.category-title::after {
-  content: "";
+    #mainMenuContent {
 
-  display: block;
+      display: none;
 
-  width: 30px;
-  height: 2px;
+      min-height: 100vh;
 
-  margin-top: 7px;
+      background: var(--markus-cream);
 
-  background: var(--green);
-}
+      color: var(--markus-text);
+    }
 
 
-/* =====================================================
-   PRODUCT
-===================================================== */
+    #mainMenuContent.visible {
 
-.product {
-  display: flex;
+      display: block;
+    }
 
-  align-items: center;
-  justify-content: space-between;
 
-  gap: 14px;
+    /* =====================================
+       TOPBAR
+    ===================================== */
 
-  margin-bottom: 9px;
+    #mainMenuContent .topbar {
 
-  padding:
-    15px
-    14px;
+      position: relative;
 
-  border:
-    1px solid var(--border);
+      display: flex;
 
-  border-radius: 15px;
+      flex-direction: column;
 
-  background:
-    rgba(255,253,248,.78);
-}
+      align-items: center;
 
-.product-info {
-  min-width: 0;
-  flex: 1;
-}
+      padding: 25px 18px 20px;
 
-.product h3 {
-  margin:
-    0
-    0
-    4px;
+      background: var(--markus-cream) !important;
 
-  color: var(--green);
+      border: none !important;
+    }
 
-  font-size: 15px;
-  font-weight: 700;
-}
 
-.product p {
-  margin:
-    0
-    7px;
+    #mainMenuContent .topbar > div:first-child {
 
-  color: var(--muted);
+      display: none;
+    }
 
-  font-size: 11px;
 
-  line-height: 1.45;
-}
+    /* =====================================
+       MENÜDEKİ MARKUS LOGOSU
+    ===================================== */
 
-.price {
-  color: var(--green);
+    .menu-markus-logo {
 
-  font-size: 14px;
-  font-weight: 750;
-}
+      width: 150px;
 
-.add {
-  flex-shrink: 0;
+      height: 150px;
 
-  padding:
-    9px
-    12px;
+      border: 1px solid #c9c1b6;
 
-  border:
-    1px solid var(--green);
+      border-radius: 50%;
 
-  border-radius: 9px;
+      display: flex;
 
-  background: var(--green);
-  color: #fff;
+      flex-direction: column;
 
-  font-size: 12px;
-  font-weight: 700;
-}
+      align-items: center;
 
+      justify-content: center;
 
-/* =====================================================
-   CART
-===================================================== */
+      background:
+        rgba(255,255,255,0.18);
 
-.cart-button {
-  position: fixed;
+      margin-bottom: 14px;
+    }
 
-  left: 50%;
-  bottom: 18px;
 
-  transform:
-    translateX(-50%);
+    .menu-markus-logo .markus-sun {
 
-  z-index: 500;
+      width: 23px;
 
-  min-width: 190px;
+      height: 23px;
 
-  padding:
-    15px
-    22px;
+      margin-bottom: 10px;
+    }
 
-  border:
-    1px solid var(--green);
 
-  border-radius: 14px;
+    .menu-markus-logo .markus-name {
 
-  background: var(--green);
-  color: #fff;
+      font-size: 20px;
 
-  box-shadow:
-    0 8px 25px
-    rgba(22,75,56,.25);
+      letter-spacing: 3px;
+    }
 
-  font-size: 15px;
-  font-weight: 750;
-}
 
-#cartCount {
-  display: inline-flex;
+    .menu-markus-logo .markus-foodbar {
 
-  align-items: center;
-  justify-content: center;
+      font-size: 8px;
 
-  min-width: 21px;
-  height: 21px;
+      margin-top: 7px;
 
-  margin-left: 6px;
+      letter-spacing: 2px;
+    }
 
-  border-radius: 50%;
 
-  background: #fff;
-  color: var(--green);
+    .menu-markus-logo .markus-waves {
 
-  font-size: 11px;
-}
+      font-size: 17px;
 
+      margin-top: 10px;
+    }
 
-/* =====================================================
-   MODAL
-===================================================== */
 
-.modal {
-  position: fixed;
+    /* =====================================
+       MASA
+    ===================================== */
 
-  inset: 0;
+    #mainMenuContent .table-badge {
 
-  z-index: 1000;
+      position: absolute;
 
-  display: flex;
+      right: 18px;
 
-  align-items: flex-end;
-  justify-content: center;
+      top: 28px;
 
-  padding: 12px;
+      padding: 10px 14px;
 
-  background:
-    rgba(0,0,0,.48);
+      border-radius: 11px;
 
-  backdrop-filter: blur(7px);
-  -webkit-backdrop-filter: blur(7px);
-}
+      background: var(--markus-green) !important;
 
-.modal-card {
-  width: 100%;
-  max-width: 600px;
+      color: #fff !important;
 
-  max-height: 88vh;
+      font-size: 13px;
 
-  overflow-y: auto;
+      font-weight: 700;
+    }
 
-  padding: 20px;
 
-  border-radius:
-    22px
-    22px
-    15px
-    15px;
+    /* =====================================
+       SİPARİŞLERİM
+    ===================================== */
 
-  background: var(--white);
+    .orders-history-button {
 
-  color: var(--text);
-}
+      width: calc(100% - 32px);
 
-.modal-head {
-  display: flex;
+      margin: 0 16px 20px;
 
-  align-items: center;
-  justify-content: space-between;
+      padding: 15px 17px;
 
-  margin-bottom: 18px;
-}
+      display: flex;
 
-.modal-head h2 {
-  margin: 0;
+      align-items: center;
 
-  color: var(--green);
+      justify-content: space-between;
 
-  font-size: 22px;
-}
+      border: 1.5px solid var(--markus-green);
 
-.close-button {
-  width: 34px;
-  height: 34px;
+      border-radius: 13px;
 
-  border: 0;
+      background: transparent;
 
-  border-radius: 50%;
+      color: var(--markus-green);
 
-  background: var(--cream-dark);
+      font-family: inherit;
 
-  color: var(--green);
+      font-size: 15px;
 
-  font-size: 21px;
-}
+      font-weight: 700;
 
+      cursor: pointer;
+    }
 
-/* =====================================================
-   CART ROW
-===================================================== */
 
-.cart-row {
-  padding: 13px;
+    .orders-history-button .arrow {
 
-  margin-bottom: 9px;
+      font-size: 22px;
 
-  border:
-    1px solid var(--border);
+      line-height: 1;
+    }
 
-  border-radius: 12px;
 
-  background: var(--cream);
-}
+    /* =====================================
+       MAIN
+    ===================================== */
 
-.cart-main {
-  display: flex;
+    #mainMenuContent main {
 
-  justify-content: space-between;
+      max-width: 700px;
 
-  gap: 10px;
+      margin: 0 auto;
 
-  color: var(--green);
-}
+      padding:
+        0 16px 120px;
 
-.qty {
-  display: flex;
+      background:
+        var(--markus-cream) !important;
+    }
 
-  align-items: center;
 
-  gap: 12px;
+    /* =====================================
+       KATEGORİLER
+    ===================================== */
 
-  margin-top: 10px;
-}
+    #mainMenuContent .categories {
 
-.qty button {
-  width: 30px;
-  height: 30px;
+      display: flex;
 
-  border: 0;
+      gap: 8px;
 
-  border-radius: 8px;
+      overflow-x: auto;
 
-  background: var(--green);
-  color: #fff;
-}
+      scrollbar-width: none;
 
-.item-note {
-  width: 100%;
+      padding:
+        0 0 7px;
 
-  margin-top: 10px;
+      margin-bottom: 22px;
 
-  padding: 9px;
+      background:
+        transparent !important;
+    }
 
-  border:
-    1px solid var(--border);
 
-  border-radius: 9px;
+    #mainMenuContent .categories::-webkit-scrollbar {
+      display: none;
+    }
 
-  background: #fff;
 
-  outline: none;
-}
+    #mainMenuContent .categories button {
 
+      flex: 0 0 auto;
 
-/* =====================================================
-   SUMMARY
-===================================================== */
+      padding: 10px 15px;
 
-.order-summary {
-  display: flex;
+      border: 1px solid #d5cec3 !important;
 
-  justify-content: space-between;
+      border-radius: 999px;
 
-  padding:
-    15px
-    0;
+      background: #fff !important;
 
-  margin-top: 12px;
+      color: var(--markus-green) !important;
 
-  border-top:
-    1px solid var(--border);
+      font-family: inherit;
 
-  border-bottom:
-    1px solid var(--border);
+      font-size: 13px;
 
-  color: var(--muted);
-}
+      font-weight: 650;
 
-.order-summary strong {
-  color: var(--green);
+      white-space: nowrap;
+    }
 
-  font-size: 20px;
-}
 
-.label {
-  display: block;
+    #mainMenuContent .categories button.active,
+    #mainMenuContent .categories button.selected {
 
-  margin:
-    17px
-    0
-    7px;
+      background:
+        var(--markus-green) !important;
 
-  color: var(--green);
+      color: white !important;
 
-  font-size: 13px;
-  font-weight: 700;
-}
+      border-color:
+        var(--markus-green) !important;
+    }
 
-textarea {
-  width: 100%;
 
-  min-height: 85px;
+    /* =====================================
+       MENÜ
+    ===================================== */
 
-  padding: 12px;
+    #mainMenuContent .menu {
 
-  border:
-    1px solid var(--border);
+      display: flex;
 
-  border-radius: 11px;
+      flex-direction: column;
 
-  background: #fff;
+      gap: 25px;
 
-  color: var(--text);
+      background:
+        transparent !important;
+    }
 
-  outline: none;
-}
 
-.primary {
-  width: 100%;
+    #mainMenuContent .menu > section {
 
-  margin-top: 13px;
+      background: transparent;
+    }
 
-  padding: 15px;
 
-  border: 0;
+    /* =====================================
+       KATEGORİ BAŞLIKLARI
+    ===================================== */
 
-  border-radius: 12px;
+    #mainMenuContent .category-title {
 
-  background: var(--green);
+      margin:
+        5px 0 12px;
 
-  color: #fff;
+      color:
+        var(--markus-green) !important;
 
-  font-size: 15px;
-  font-weight: 750;
-}
+      font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
 
+      font-size: 25px;
 
-/* =====================================================
-   ORDERS
-===================================================== */
+      font-weight: 700;
+    }
 
-.my-order {
-  margin-bottom: 13px;
 
-  padding: 15px;
+    /* =====================================
+       ÜRÜN KARTLARI
+    ===================================== */
 
-  border:
-    1px solid var(--border);
+    #mainMenuContent .product {
 
-  border-radius: 15px;
+      display: flex;
 
-  background: var(--cream);
-}
+      align-items: center;
 
-.my-order-head {
-  display: flex;
+      justify-content: space-between;
 
-  justify-content: space-between;
+      gap: 14px;
 
-  margin-bottom: 10px;
+      padding: 16px;
 
-  color: var(--muted);
+      margin-bottom: 9px;
 
-  font-size: 12px;
-}
+      border:
+        1px solid var(--markus-line) !important;
 
-.my-order-head strong {
-  color: var(--green);
+      border-radius: 14px;
 
-  font-size: 14px;
-}
+      background:
+        rgba(255,255,255,0.35) !important;
 
-.my-order-status {
-  display: inline-block;
+      color:
+        var(--markus-text) !important;
+    }
 
-  padding:
-    6px
-    9px;
 
-  margin-bottom: 12px;
+    #mainMenuContent .product-info {
 
-  border-radius: 8px;
+      min-width: 0;
 
-  background: var(--green);
+      flex: 1;
+    }
 
-  color: #fff;
 
-  font-size: 11px;
-  font-weight: 700;
-}
+    #mainMenuContent .product h3 {
 
-.my-order-item {
-  display: flex;
+      margin:
+        0 0 6px;
 
-  justify-content: space-between;
+      color:
+        var(--markus-green) !important;
 
-  padding:
-    7px
-    0;
+      font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
 
-  border-bottom:
-    1px solid var(--border);
+      font-size: 17px;
 
-  color: var(--text);
+      font-weight: 700;
+    }
 
-  font-size: 13px;
-}
 
-.my-order-total {
-  display: flex;
+    #mainMenuContent .product p {
 
-  justify-content: space-between;
+      margin:
+        0 0 8px;
 
-  margin-top: 12px;
+      color:
+        #777 !important;
 
-  color: var(--muted);
-}
+      font-size: 13px;
 
-.my-order-total strong {
-  color: var(--green);
+      line-height: 1.4;
+    }
 
-  font-size: 17px;
-}
 
-.my-orders-grand-total {
-  display: flex;
+    #mainMenuContent .price {
 
-  justify-content: space-between;
+      color:
+        var(--markus-green) !important;
 
-  padding-top: 15px;
+      font-size: 15px;
 
-  border-top:
-    2px solid var(--green);
+      font-weight: 750;
+    }
 
-  color: var(--green);
 
-  font-weight: 700;
-}
+    /* =====================================
+       EKLE
+    ===================================== */
 
+    #mainMenuContent .product .add {
 
-/* =====================================================
-   PROGRESS
-===================================================== */
+      flex: 0 0 auto;
 
-.order-progress {
-  position: relative;
+      padding:
+        11px 15px;
 
-  display: flex;
+      border:
+        1px solid var(--markus-green) !important;
 
-  justify-content: space-between;
+      border-radius: 10px;
 
-  margin:
-    8px
-    2px
-    18px;
-}
+      background:
+        var(--markus-green) !important;
 
-.order-progress::before {
-  content: "";
+      color:
+        #fff !important;
 
-  position: absolute;
+      font-family: inherit;
 
-  left: 9px;
-  right: 9px;
-  top: 9px;
+      font-size: 13px;
 
-  height: 2px;
+      font-weight: 700;
+    }
 
-  background: #d6d0c5;
-}
 
-.progress-line {
-  position: absolute;
+    /* =====================================
+       SEPET
+    ===================================== */
 
-  left: 9px;
-  top: 9px;
+    #mainMenuContent .cart-button {
 
-  height: 2px;
+      position: fixed;
 
-  background: var(--green);
-}
+      z-index: 500;
 
-.progress-step {
-  position: relative;
+      left: 50%;
 
-  z-index: 2;
+      bottom: 18px;
 
-  width: 25%;
+      transform:
+        translateX(-50%);
 
-  display: flex;
+      width: calc(100% - 34px);
 
-  flex-direction: column;
+      max-width: 580px;
 
-  align-items: center;
+      padding: 15px;
 
-  gap: 5px;
+      border:
+        1px solid var(--markus-green) !important;
 
-  color: #999;
+      border-radius: 13px;
 
-  font-size: 9px;
+      background:
+        var(--markus-green) !important;
 
-  text-align: center;
-}
+      color:
+        #fff !important;
 
-.progress-dot {
-  width: 19px;
-  height: 19px;
+      font-family: inherit;
 
-  border:
-    2px solid #d6d0c5;
+      font-size: 15px;
 
-  border-radius: 50%;
+      font-weight: 700;
 
-  background: var(--white);
-}
+      box-shadow:
+        0 8px 25px
+        rgba(0,0,0,0.12);
+    }
 
-.progress-step.done {
-  color: var(--green);
-  font-weight: 700;
-}
 
-.progress-step.done .progress-dot {
-  border-color: var(--green);
+    #mainMenuContent #cartCount {
 
-  background: var(--green);
-}
+      display: inline-flex;
 
-.progress-step.current .progress-dot {
-  box-shadow:
-    0 0 0 4px
-    rgba(22,75,56,.10);
-}
+      align-items: center;
 
+      justify-content: center;
 
-/* =====================================================
-   MOBILE
-===================================================== */
+      min-width: 23px;
 
-@media (max-width: 600px) {
+      height: 23px;
 
-  .brand-name {
-    font-size: 24px;
-  }
+      margin-left: 6px;
 
-  .table-badge {
-    top: 17px;
-  }
+      border-radius: 50%;
 
-  main {
-    padding:
-      10px
-      13px
-      115px;
-  }
+      background: #fff !important;
 
-  .product {
-    padding: 14px 12px;
-  }
+      color:
+        var(--markus-green) !important;
 
-  .product h3 {
-    font-size: 14px;
-  }
+      font-size: 11px;
+    }
 
-  .product p {
-    font-size: 10px;
-  }
 
-}
+    /* =====================================
+       SEPET MODAL
+    ===================================== */
 
-</style>
+    #mainMenuContent .modal {
+
+      background:
+        rgba(20,30,25,0.45);
+    }
+
+
+    #mainMenuContent .modal-card {
+
+      background:
+        var(--markus-cream) !important;
+
+      color:
+        var(--markus-text) !important;
+
+      border:
+        1px solid var(--markus-line) !important;
+
+      border-radius:
+        22px 22px 16px 16px;
+    }
+
+
+    #mainMenuContent .modal-card h2 {
+
+      color:
+        var(--markus-green) !important;
+
+      font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+    }
+
+
+    #mainMenuContent .modal-head button {
+
+      background:
+        var(--markus-green) !important;
+
+      color: white !important;
+    }
+
+
+    #mainMenuContent #cartItems > div {
+
+      background:
+        #fff !important;
+
+      color:
+        var(--markus-text) !important;
+
+      border-color:
+        var(--markus-line) !important;
+    }
+
+
+    #mainMenuContent .order-summary {
+
+      border-color:
+        var(--markus-line) !important;
+    }
+
+
+    #mainMenuContent .order-summary strong {
+
+      color:
+        var(--markus-green) !important;
+    }
+
+
+    #mainMenuContent textarea {
+
+      background: #fff !important;
+
+      color:
+        var(--markus-text) !important;
+
+      border-color:
+        var(--markus-line) !important;
+    }
+
+
+    #mainMenuContent .primary {
+
+      background:
+        var(--markus-green) !important;
+
+      color: #fff !important;
+
+      border-color:
+        var(--markus-green) !important;
+    }
+
+
+    /* =====================================
+       MOBİL
+    ===================================== */
+
+    @media (max-width: 600px) {
+
+      .markus-logo {
+
+        width: 220px;
+
+        height: 220px;
+
+        margin-bottom: 45px;
+      }
+
+
+      .markus-name {
+
+        font-size: 29px;
+      }
+
+
+      .menu-markus-logo {
+
+        width: 135px;
+
+        height: 135px;
+      }
+
+
+      #mainMenuContent .table-badge {
+
+        top: 24px;
+
+        right: 15px;
+      }
+
+
+      #mainMenuContent main {
+
+        padding-left: 14px;
+
+        padding-right: 14px;
+      }
+
+
+      .orders-history-button {
+
+        width:
+          calc(100% - 28px);
+
+        margin-left: 14px;
+
+        margin-right: 14px;
+      }
+    }
+
+  </style>
 
 </head>
 
@@ -1015,1465 +947,403 @@ textarea {
 <body>
 
 
-<!-- =====================================================
-     MRX WELCOME
-===================================================== -->
+  <!-- =====================================
+       MARKUS GİRİŞ EKRANI
+  ===================================== -->
 
-<section id="mrxWelcome">
+  <section id="mrxWelcome">
 
-  <div class="mrx-welcome-content">
-
-    <h1 class="mrx-logo">
-      MRX
-    </h1>
-
-    <p class="mrx-slogan">
-      Yeni nesil sipariş deneyimi.
-    </p>
-
-    <button
-      class="mrx-menu-button"
-      onclick="openMRXMenu()"
-    >
-      Menüyü Gör →
-    </button>
-
-    <div class="mrx-footer">
-      POWERED BY MRX
-    </div>
-
-  </div>
-
-</section>
+    <div class="mrx-welcome-content">
 
 
-<!-- =====================================================
-     MAIN
-===================================================== -->
+      <!-- MARKUS LOGO -->
 
-<div id="mainMenuContent">
+      <div class="markus-logo">
 
+        <div class="markus-sun"></div>
 
-<header class="topbar">
+        <div class="markus-name">
+          MARKUS
+        </div>
 
-  <div class="brand-area">
+        <div class="markus-foodbar">
+          FOODBAR
+        </div>
 
-    <div class="brand-mark">
-      MARKUS
-    </div>
+        <div class="markus-waves">
+          ≋≋≋
+        </div>
 
-    <h1 class="brand-name">
-      MARKUS
-    </h1>
-
-    <div class="brand-subtitle">
-      FOODBAR
-    </div>
-
-  </div>
-
-  <div
-    class="table-badge"
-    id="tableBadge"
-  >
-    Masa
-  </div>
-
-</header>
+      </div>
 
 
-<div class="my-orders-wrapper">
-
-  <button
-    class="my-orders-button"
-    onclick="openMyOrders()"
-  >
-    🧾 Siparişlerim
-  </button>
-
-</div>
-
-
-<main>
-
-  <div
-    id="notice"
-    class="hidden"
-  ></div>
-
-
-  <div
-    id="categories"
-    class="categories"
-  ></div>
-
-
-  <section
-    id="menu"
-    class="menu"
-  ></section>
-
-</main>
-
-
-<!-- =====================================================
-     CART
-===================================================== -->
-
-<button
-  class="cart-button"
-  onclick="openCart()"
->
-
-  Sepet
-
-  <span id="cartCount">
-    0
-  </span>
-
-</button>
-
-
-<div
-  id="cartModal"
-  class="modal hidden"
->
-
-  <div class="modal-card">
-
-    <div class="modal-head">
-
-      <h2>
-        Sepet
-      </h2>
+      <!-- BUTON -->
 
       <button
-        class="close-button"
-        onclick="closeCart()"
+        class="mrx-menu-button"
+        onclick="openMRXMenu()"
       >
-        ×
+        Menüyü Gör →
       </button>
+
+
+      <div class="mrx-footer">
+        POWERED BY MRX
+      </div>
+
 
     </div>
 
+  </section>
 
-    <div id="cartItems"></div>
 
 
-    <div class="order-summary">
+  <!-- =====================================
+       ANA MENÜ
+  ===================================== -->
+
+  <div id="mainMenuContent">
+
+
+    <header class="topbar">
+
+
+      <!-- MARKUS LOGO -->
+
+      <div class="menu-markus-logo">
+
+        <div class="markus-sun"></div>
+
+        <div class="markus-name">
+          MARKUS
+        </div>
+
+        <div class="markus-foodbar">
+          FOODBAR
+        </div>
+
+        <div class="markus-waves">
+          ≋≋≋
+        </div>
+
+      </div>
+
+
+      <!-- MASA -->
+
+      <div
+        class="table-badge"
+        id="tableBadge"
+      >
+        Masa
+      </div>
+
+
+    </header>
+
+
+
+    <!-- =====================================
+         SİPARİŞLERİM
+    ===================================== -->
+
+    <button
+      id="ordersHistoryButton"
+      class="orders-history-button"
+      onclick="openOrderHistory()"
+    >
 
       <span>
-        Toplam
+        Siparişlerim
       </span>
 
-      <strong id="cartTotal">
-        ₺0
-      </strong>
+      <span class="arrow">
+        ›
+      </span>
 
-    </div>
-
-
-    <label class="label">
-      Sipariş notu
-    </label>
-
-
-    <textarea
-      id="orderNote"
-      placeholder="Örn. Soğansız, sos ayrı..."
-    ></textarea>
-
-
-    <button
-      class="primary"
-      onclick="placeOrder()"
-    >
-      Siparişi Gönder
     </button>
 
-  </div>
-
-</div>
 
 
-<!-- =====================================================
-     ORDERS
-===================================================== -->
+    <!-- =====================================
+         MENÜ
+    ===================================== -->
 
-<div
-  id="myOrdersModal"
-  class="modal hidden"
->
-
-  <div class="modal-card">
-
-    <div class="modal-head">
-
-      <h2>
-        Siparişlerim
-      </h2>
-
-      <button
-        class="close-button"
-        onclick="closeMyOrders()"
-      >
-        ×
-      </button>
-
-    </div>
+    <main>
 
 
-    <div id="myOrders">
+      <div
+        id="notice"
+        class="notice hidden"
+      ></div>
 
-      Siparişler yükleniyor...
 
-    </div>
+      <div
+        id="categories"
+        class="categories"
+      ></div>
 
+
+      <section
+        id="menu"
+        class="menu"
+      ></section>
+
+
+    </main>
+
+
+
+    <!-- =====================================
+         SEPET
+    ===================================== -->
+
+    <button
+      id="cartButton"
+      class="cart-button"
+      onclick="openCart()"
+    >
+
+      Sepet
+
+      <span id="cartCount">
+        0
+      </span>
+
+    </button>
+
+
+
+    <!-- =====================================
+         SEPET MODALI
+    ===================================== -->
 
     <div
-      class="my-orders-grand-total"
+      id="cartModal"
+      class="modal hidden"
     >
 
-      <span>
-        Masa Toplamı
-      </span>
+      <div class="modal-card">
 
-      <strong id="myOrdersTotal">
-        ₺0
-      </strong>
 
-    </div>
+        <div class="modal-head">
 
-  </div>
-
-</div>
-
-
-</div>
-
-
-<script
-  src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
-></script>
-
-
-<script>
-
-/* =====================================================
-   SUPABASE
-===================================================== */
-
-const SUPABASE_URL =
-  "https://dppqwgsawarkyzzonzyu.supabase.co";
-
-const SUPABASE_ANON_KEY =
-  "sb_publishable_fhNovHoi8Xgh1jScRsdrgQ_ZCe6I4tP";
-
-const db =
-  supabase.createClient(
-    SUPABASE_URL,
-    SUPABASE_ANON_KEY
-  );
-
-
-/* =====================================================
-   CUSTOMER
-===================================================== */
-
-let customerId =
-  localStorage.getItem(
-    "mrx_customer_id"
-  );
-
-if (!customerId) {
-
-  customerId =
-    crypto.randomUUID();
-
-  localStorage.setItem(
-    "mrx_customer_id",
-    customerId
-  );
-
-}
-
-
-/* =====================================================
-   TABLE
-===================================================== */
-
-const params =
-  new URLSearchParams(
-    window.location.search
-  );
-
-const tableNumber =
-  params.get("table") || "1";
-
-
-document.getElementById(
-  "tableBadge"
-).textContent =
-  "Masa " + tableNumber;
-
-
-/* =====================================================
-   MARKUS MENU
-===================================================== */
-
-const menuData = [
-
-  {
-    category: "Tostlar",
-
-    items: [
-
-      ["Kaşarlı Tost",
-       "Kaşar, domates, turşu",
-       250],
-
-      ["Karışık Tost",
-       "Sucuk, kaşar, domates, turşu",
-       300],
-
-      ["Ayvalık Tostu",
-       "Kaşar, sucuk, salam, sosis, domates, turşu",
-       350]
-
-    ]
-  },
-
-
-  {
-    category: "Burgerler",
-
-    items: [
-
-      ["Hamburger",
-       "125 gr dana eti, marul, domates, turşu, özel sos",
-       450],
-
-      ["Cheeseburger",
-       "125 gr dana eti, cheddar, marul, domates, turşu, özel sos",
-       500],
-
-      ["Chicken Burger",
-       "Çıtır tavuk, marul, domates, turşu, özel sos",
-       400]
-
-    ]
-  },
-
-
-  {
-    category: "Köfte & Tavuk",
-
-    items: [
-
-      ["Köfte Porsiyon",
-       "5 adet el yapımı köfte, salata, patates, közlenmiş biber, domates",
-       500],
-
-      ["Köfte Ekmek",
-       "3 adet el yapımı köfte, maydanoz, domates, soğan",
-       350],
-
-      ["Tavuk Pirzola",
-       "2 adet pirzola, salata, patates, közlenmiş biber, domates",
-       500]
-
-    ]
-  },
-
-
-  {
-    category: "Ana Yemekler",
-
-    items: [
-
-      ["Makarna",
-       "Krema, mantar / krema, tavuk / Napolitan",
-       400],
-
-      ["Mantı",
-       "Sarımsaklı yoğurt, salçalı tereyağlı sos",
-       400],
-
-      ["Gözleme",
-       "Ispanak-lorlu / kaşarlı / patatesli",
-       250],
-
-      ["Yumurta",
-       "Sahanda / omlet",
-       250]
-
-    ]
-  },
-
-
-  {
-    category: "Atıştırmalıklar",
-
-    items: [
-
-      ["Sigara Böreği",
-       "5 adet el yapımı sigara böreği, domates, salatalık, zeytin",
-       300],
-
-      ["Patates Kızartması",
-       "Patates, ketçap, mayonez",
-       250],
-
-      ["Duble Patates Kızartması",
-       "Patates, ketçap, mayonez",
-       350],
-
-      ["Çıtır Tavuk Patates",
-       "5 adet çıtır tavuk, patates",
-       350],
-
-      ["Bira Tabağı",
-       "Sosis, nugget, çıtır tavuk, soğan halkası, sigara böreği, mozzarella stick, patates",
-       500]
-
-    ]
-  },
-
-
-  {
-    category: "Alkolsüz İçecekler",
-
-    items: [
-
-      ["Cola", "", 150],
-      ["Fanta", "", 150],
-      ["Sprite", "", 150],
-      ["Fuse Tea", "", 150],
-      ["Meyve Suyu", "", 150],
-      ["Soda", "", 50],
-      ["Soda Meyveli", "", 70],
-      ["Churchill", "", 120],
-      ["Limonata", "", 200],
-      ["Karadut", "", 200],
-      ["Milkshake", "", 250],
-      ["Alkolsüz Kokteyller", "", 350],
-      ["Enerji İçeceği", "", 200],
-      ["Ayran Küçük", "", 50],
-      ["Ayran Büyük", "", 70],
-      ["Su Küçük", "", 30],
-      ["Su Büyük", "", 70],
-      ["Çay", "", 50]
-
-    ]
-  },
-
-
-  {
-    category: "Kahveler",
-
-    items: [
-
-      ["Ice Americano / Americano", "", 200],
-      ["Ice Latte / Latte / Cappuccino", "", 200],
-      ["Ice Caramel Latte", "", 200],
-      ["Ice Vanilla Latte", "", 200],
-      ["Flat White", "", 200],
-      ["Cortado", "", 200],
-      ["Mocha", "", 200],
-      ["Long Black", "", 200],
-      ["Espresso", "", 180],
-      ["Türk Kahvesi", "", 150]
-
-    ]
-  },
-
-
-  {
-    category: "Alkollü İçecekler",
-
-    items: [
-
-      ["Efes Pilsen", "", 250],
-      ["Efes Malt", "", 250],
-      ["Efes Özel Seri", "", 250],
-      ["Tuborg", "", 250],
-      ["Carlsberg", "", 250],
-      ["Bomonti Filtresiz", "", 250],
-      ["Miller", "", 250],
-      ["Becks", "", 250],
-      ["Belfast", "", 250],
-      ["Bud", "", 250],
-      ["Corona", "", 300],
-      ["Desperados", "", 300],
-      ["Sol", "", 300],
-      ["Blanc", "", 300],
-      ["Stella Artois", "", 300],
-      ["Rakı Tek / Duble", "", 400],
-      ["Viski Tek / Duble", "", 400],
-      ["Cin Tek / Duble", "", 400],
-      ["Vodka Tek / Duble", "", 400],
-      ["Şarap Kadeh", "", 300]
-
-    ]
-  },
-
-
-  {
-    category: "Kokteyller",
-
-    items: [
-
-      ["Mojito", "", 500],
-      ["Strawberry Mojito", "", 500],
-      ["Long Island", "", 600],
-      ["Margarita", "", 500],
-      ["Tequila Sunrise", "", 500],
-      ["Sex On The Beach", "", 500],
-      ["Bana Bırak", "", 500],
-      ["Cin Tonik", "", 500],
-      ["Vodka Redbull", "", 500]
-
-    ]
-  }
-
-];
-
-
-/* =====================================================
-   STATE
-===================================================== */
-
-let cart = [];
-
-
-/* =====================================================
-   RENDER CATEGORIES
-===================================================== */
-
-function renderCategories() {
-
-  const element =
-    document.getElementById(
-      "categories"
-    );
-
-
-  element.innerHTML =
-    menuData.map(
-      (category, index) => `
-
-        <button
-          class="${
-            index === 0
-              ? "active"
-              : ""
-          }"
-          onclick="scrollToCategory(
-            '${escAttr(category.category)}'
-          )"
-        >
-          ${esc(category.category)}
-        </button>
-
-      `
-    ).join("");
-
-}
-
-
-/* =====================================================
-   RENDER MENU
-===================================================== */
-
-function renderMenu() {
-
-  const menu =
-    document.getElementById(
-      "menu"
-    );
-
-
-  menu.innerHTML =
-    menuData.map(
-      category => `
-
-        <section
-          id="cat-${slug(category.category)}"
-        >
-
-          <h2
-            class="category-title"
-          >
-            ${esc(category.category)}
+          <h2>
+            Sepet
           </h2>
 
 
-          ${category.items
-            .map(
-              item => `
-
-                <article
-                  class="product"
-                >
-
-                  <div
-                    class="product-info"
-                  >
-
-                    <h3>
-                      ${esc(item[0])}
-                    </h3>
-
-                    ${
-                      item[1]
-                        ? `
-                          <p>
-                            ${esc(item[1])}
-                          </p>
-                        `
-                        : ""
-                    }
-
-                    <div
-                      class="price"
-                    >
-                      ₺${Number(
-                        item[2]
-                      ).toFixed(2)}
-                    </div>
-
-                  </div>
-
-
-                  <button
-                    class="add"
-                    onclick="addToCart(
-                      '${escAttr(item[0])}',
-                      ${item[2]}
-                    )"
-                  >
-                    Ekle
-                  </button>
-
-                </article>
-
-              `
-            )
-            .join("")}
-
-        </section>
-
-      `
-    ).join("");
-
-}
-
-
-/* =====================================================
-   CART
-===================================================== */
-
-function addToCart(
-  name,
-  price
-) {
-
-  const existing =
-    cart.find(
-      item =>
-        item.name === name
-    );
-
-
-  if (existing) {
-
-    existing.qty++;
-
-  } else {
-
-    cart.push({
-
-      name,
-      price:
-        Number(price),
-
-      qty:
-        1,
-
-      note:
-        ""
-
-    });
-
-  }
-
-
-  renderCart();
-
-  openCart();
-
-}
-
-
-function changeQty(
-  index,
-  amount
-) {
-
-  if (!cart[index]) {
-    return;
-  }
-
-
-  cart[index].qty +=
-    amount;
-
-
-  if (
-    cart[index].qty <= 0
-  ) {
-
-    cart.splice(
-      index,
-      1
-    );
-
-  }
-
-
-  renderCart();
-
-}
-
-
-function renderCart() {
-
-  const count =
-    cart.reduce(
-      (sum, item) =>
-        sum + item.qty,
-      0
-    );
-
-
-  const total =
-    cart.reduce(
-      (sum, item) =>
-        sum +
-        item.price *
-        item.qty,
-      0
-    );
-
-
-  document.getElementById(
-    "cartCount"
-  ).textContent =
-    count;
-
-
-  document.getElementById(
-    "cartTotal"
-  ).textContent =
-    "₺" +
-    total.toFixed(2);
-
-
-  const container =
-    document.getElementById(
-      "cartItems"
-    );
-
-
-  if (!cart.length) {
-
-    container.innerHTML =
-      "<p>Sepet boş.</p>";
-
-    return;
-  }
-
-
-  container.innerHTML =
-    cart.map(
-      (item, index) => `
-
-        <div class="cart-row">
-
-          <div class="cart-main">
-
-            <strong>
-              ${esc(item.name)}
-            </strong>
-
-            <strong>
-              ₺${(
-                item.price *
-                item.qty
-              ).toFixed(2)}
-            </strong>
-
-          </div>
-
-
-          <div class="qty">
-
-            <button
-              onclick="changeQty(
-                ${index},
-                -1
-              )"
-            >
-              −
-            </button>
-
-            <span>
-              ${item.qty}
-            </span>
-
-            <button
-              onclick="changeQty(
-                ${index},
-                1
-              )"
-            >
-              +
-            </button>
-
-          </div>
-
-
-          <input
-            class="item-note"
-            placeholder="Bu ürün için not..."
-            value="${escAttr(item.note)}"
-            oninput="
-              cart[${index}].note =
-              this.value
-            "
+          <button
+            onclick="closeCart()"
           >
+            ×
+          </button>
 
         </div>
 
-      `
-    ).join("");
 
-}
+        <div
+          id="cartItems"
+        ></div>
 
 
-/* =====================================================
-   PLACE ORDER
-===================================================== */
+        <div class="order-summary">
 
-async function placeOrder() {
+          <span>
+            Toplam
+          </span>
 
-  if (!cart.length) {
+          <strong id="cartTotal">
+            ₺0
+          </strong>
 
-    alert(
-      "Sepet boş."
-    );
+        </div>
 
-    return;
-  }
 
+        <label class="label">
+          Sipariş notu
+        </label>
 
-  const button =
-    document.querySelector(
-      ".primary"
-    );
 
+        <textarea
+          id="orderNote"
+          placeholder="Örn. Soğansız, sos ayrı..."
+        ></textarea>
 
-  button.disabled =
-    true;
 
-  button.textContent =
-    "Gönderiliyor...";
+        <button
+          class="primary"
+          onclick="placeOrder()"
+        >
+          Siparişi Gönder
+        </button>
 
 
-  const total =
-    cart.reduce(
-      (sum, item) =>
-        sum +
-        item.price *
-        item.qty,
-      0
-    );
+      </div>
 
+    </div>
 
-  const note =
-    document.getElementById(
-      "orderNote"
-    ).value.trim();
 
+    <!-- =====================================
+         SİPARİŞ GEÇMİŞİ MODALI
+    ===================================== -->
 
-  /*
-    Markus ürünleri henüz
-    products tablosuna bağlanmadığı
-    için burada ürün ID'si kullanmıyoruz.
-  */
+    <div
+      id="orderHistoryModal"
+      class="modal hidden"
+    >
 
-  const {
-    data: order,
-    error
-  } = await db
-    .from("orders")
-    .insert({
+      <div class="modal-card">
 
-      table_number:
-        String(tableNumber),
+        <div class="modal-head">
 
-      status:
-        "new",
+          <h2>
+            Siparişlerim
+          </h2>
 
-      total:
-        total,
-
-      customer_note:
-        note ||
-        null,
-
-      customer_id:
-        customerId
-
-    })
-    .select()
-    .single();
-
-
-  if (error) {
-
-    console.error(
-      error
-    );
-
-    alert(
-      "Sipariş gönderilemedi: " +
-      error.message
-    );
-
-    button.disabled =
-      false;
-
-    button.textContent =
-      "Siparişi Gönder";
-
-    return;
-  }
-
-
-  const orderItems =
-    cart.map(
-      item => ({
-
-        order_id:
-          order.id,
-
-        product_name:
-          item.name,
-
-        quantity:
-          item.qty,
-
-        unit_price:
-          item.price,
-
-        note:
-          item.note ||
-          null
-
-      })
-    );
-
-
-  const {
-    error: itemError
-  } = await db
-    .from("order_items")
-    .insert(
-      orderItems
-    );
-
-
-  if (itemError) {
-
-    console.error(
-      itemError
-    );
-
-    alert(
-      "Sipariş ürünleri kaydedilemedi: " +
-      itemError.message
-    );
-
-    button.disabled =
-      false;
-
-    button.textContent =
-      "Siparişi Gönder";
-
-    return;
-  }
-
-
-  cart = [];
-
-  document.getElementById(
-    "orderNote"
-  ).value =
-    "";
-
-
-  renderCart();
-
-  closeCart();
-
-
-  alert(
-    "Siparişiniz alındı! 🌿"
-  );
-
-
-  button.disabled =
-    false;
-
-  button.textContent =
-    "Siparişi Gönder";
-
-}
-
-
-/* =====================================================
-   MY ORDERS
-===================================================== */
-
-async function openMyOrders() {
-
-  document.getElementById(
-    "myOrdersModal"
-  ).classList.remove(
-    "hidden"
-  );
-
-
-  await loadMyOrders();
-
-}
-
-
-function closeMyOrders() {
-
-  document.getElementById(
-    "myOrdersModal"
-  ).classList.add(
-    "hidden"
-  );
-
-}
-
-
-async function loadMyOrders() {
-
-  const container =
-    document.getElementById(
-      "myOrders"
-    );
-
-
-  container.innerHTML =
-    "Siparişler yükleniyor...";
-
-
-  const {
-    data,
-    error
-  } = await db
-    .from("orders")
-    .select(`
-      id,
-      created_at,
-      status,
-      total,
-      order_items (
-        product_name,
-        quantity,
-        unit_price
-      )
-    `)
-    .eq(
-      "customer_id",
-      customerId
-    )
-    .order(
-      "created_at",
-      {
-        ascending:
-          false
-      }
-    );
-
-
-  if (error) {
-
-    container.innerHTML =
-      `
-        <p>
-          Siparişler yüklenemedi:
-          ${esc(error.message)}
-        </p>
-      `;
-
-    return;
-  }
-
-
-  if (
-    !data ||
-    !data.length
-  ) {
-
-    container.innerHTML =
-      `
-        <p>
-          Henüz siparişiniz yok.
-        </p>
-      `;
-
-    document.getElementById(
-      "myOrdersTotal"
-    ).textContent =
-      "₺0";
-
-    return;
-  }
-
-
-  let total =
-    0;
-
-
-  container.innerHTML =
-    data.map(
-      order => {
-
-        const orderTotal =
-          Number(
-            order.total || 0
-          );
-
-
-        total +=
-          orderTotal;
-
-
-        const statusNames = {
-
-          new:
-            "Yeni",
-
-          preparing:
-            "Hazırlanıyor",
-
-          ready:
-            "Hazır",
-
-          completed:
-            "Tamamlandı"
-
-        };
-
-
-        const status =
-          statusNames[
-            order.status
-          ] ||
-          order.status;
-
-
-        const items =
-          (
-            order.order_items ||
-            []
-          )
-          .map(
-            item => `
-
-              <div
-                class="my-order-item"
-              >
-
-                <span>
-                  ${item.quantity} ×
-                  ${esc(
-                    item.product_name
-                  )}
-                </span>
-
-                <strong>
-                  ₺${(
-                    Number(
-                      item.unit_price
-                    ) *
-                    Number(
-                      item.quantity
-                    )
-                  ).toFixed(2)}
-                </strong>
-
-              </div>
-
-            `
-          )
-          .join("");
-
-
-        return `
-
-          <article
-            class="my-order"
+          <button
+            onclick="closeOrderHistory()"
           >
+            ×
+          </button>
 
-            <div
-              class="my-order-head"
-            >
-
-              <strong>
-                Sipariş
-              </strong>
-
-              <span>
-                ${new Date(
-                  order.created_at
-                ).toLocaleTimeString(
-                  "tr-TR",
-                  {
-                    hour:
-                      "2-digit",
-
-                    minute:
-                      "2-digit"
-                  }
-                )}
-              </span>
-
-            </div>
+        </div>
 
 
-            <div
-              class="my-order-status"
-            >
-              ${esc(status)}
-            </div>
+        <div id="orderHistoryContent">
+
+          <p>
+            Sipariş geçmişiniz yükleniyor...
+          </p>
+
+        </div>
 
 
-            <div>
+      </div>
 
-              ${items}
-
-            </div>
+    </div>
 
 
-            <div
-              class="my-order-total"
-            >
+  </div>
 
-              <span>
-                Toplam
-              </span>
 
-              <strong>
-                ₺${orderTotal.toFixed(2)}
-              </strong>
 
-            </div>
+  <!-- =====================================
+       SUPABASE
+  ===================================== -->
 
-          </article>
+  <script
+    src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
+  ></script>
 
-        `;
 
+  <script
+    src="./app.js?v=200"
+  ></script>
+
+
+
+  <!-- =====================================
+       MARKUS MENÜ AÇMA
+  ===================================== -->
+
+  <script>
+
+    function openMRXMenu() {
+
+      const welcome =
+        document.getElementById(
+          "mrxWelcome"
+        );
+
+      const menu =
+        document.getElementById(
+          "mainMenuContent"
+        );
+
+
+      menu.classList.add(
+        "visible"
+      );
+
+
+      welcome.classList.add(
+        "hidden"
+      );
+
+
+      setTimeout(function () {
+
+        welcome.style.display =
+          "none";
+
+      }, 500);
+
+    }
+
+
+
+    /* =====================================
+       SİPARİŞ GEÇMİŞİ
+       app.js'deki fonksiyonlar
+       hazır değilse bile buton hata vermez.
+    ===================================== */
+
+    function openOrderHistory() {
+
+      const modal =
+        document.getElementById(
+          "orderHistoryModal"
+        );
+
+      if (!modal) {
+        return;
       }
-    ).join("");
 
+      modal.classList.remove(
+        "hidden"
+      );
 
-  document.getElementById(
-    "myOrdersTotal"
-  ).textContent =
-    "₺" +
-    total.toFixed(2);
+      if (
+        typeof loadOrderHistory ===
+        "function"
+      ) {
 
-}
+        loadOrderHistory();
 
+      } else {
 
-/* =====================================================
-   MODALS
-===================================================== */
+        document.getElementById(
+          "orderHistoryContent"
+        ).innerHTML = `
+          <p>
+            Sipariş geçmişi hazırlanıyor...
+          </p>
+        `;
+      }
 
-function openCart() {
+    }
 
-  document.getElementById(
-    "cartModal"
-  ).classList.remove(
-    "hidden"
-  );
 
-  renderCart();
+    function closeOrderHistory() {
 
-}
+      const modal =
+        document.getElementById(
+          "orderHistoryModal"
+        );
 
+      if (!modal) {
+        return;
+      }
 
-function closeCart() {
+      modal.classList.add(
+        "hidden"
+      );
 
-  document.getElementById(
-    "cartModal"
-  ).classList.add(
-    "hidden"
-  );
+    }
 
-}
+  </script>
 
-
-/* =====================================================
-   CATEGORY
-===================================================== */
-
-function scrollToCategory(
-  category
-) {
-
-  const element =
-    document.getElementById(
-      "cat-" +
-      slug(category)
-    );
-
-
-  if (element) {
-
-    element.scrollIntoView({
-
-      behavior:
-        "smooth",
-
-      block:
-        "start"
-
-    });
-
-  }
-
-}
-
-
-/* =====================================================
-   HELPERS
-===================================================== */
-
-function slug(
-  text
-) {
-
-  return String(
-    text || ""
-  )
-    .toLowerCase()
-    .replace(
-      /[^a-z0-9çğıöşü]+/g,
-      "-"
-    );
-
-}
-
-
-function esc(
-  text
-) {
-
-  return String(
-    text ?? ""
-  ).replace(
-    /[&<>"']/g,
-    character => ({
-
-      "&":
-        "&amp;",
-
-      "<":
-        "&lt;",
-
-      ">":
-        "&gt;",
-
-      '"':
-        "&quot;",
-
-      "'":
-        "&#39;"
-
-    })[character]
-  );
-
-}
-
-
-function escAttr(
-  text
-) {
-
-  return esc(text);
-
-}
-
-
-/* =====================================================
-   MRX
-===================================================== */
-
-function openMRXMenu() {
-
-  const welcome =
-    document.getElementById(
-      "mrxWelcome"
-    );
-
-  const menu =
-    document.getElementById(
-      "mainMenuContent"
-    );
-
-
-  menu.classList.add(
-    "visible"
-  );
-
-
-  welcome.classList.add(
-    "hidden"
-  );
-
-
-  setTimeout(
-    () => {
-
-      welcome.style.display =
-        "none";
-
-    },
-    500
-  );
-
-}
-
-
-/* =====================================================
-   INIT
-===================================================== */
-
-renderCategories();
-
-renderMenu();
-
-renderCart();
-
-</script>
 
 </body>
 
