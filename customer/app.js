@@ -1,6 +1,4 @@
-
 const SUPABASE_URL = "https://dppqwgsawarkyzzonzyu.supabase.co";
-alert("APP.JS ÇALIŞIYOR");
 const SUPABASE_ANON_KEY = "sb_publishable_fhNovHoi8Xgh1jScRsdrgQ_ZCe6I4tP";
 
 const db = supabase.createClient(
@@ -8,7 +6,7 @@ const db = supabase.createClient(
   SUPABASE_ANON_KEY
 );
 
-const params = new URLSearchParams(location.search);
+const params = new URLSearchParams(window.location.search);
 const tableNumber = params.get("table");
 
 let products = [];
@@ -17,6 +15,8 @@ let cart = [];
 document.addEventListener("DOMContentLoaded", init);
 
 async function init() {
+  console.log("APP JS BAŞLADI");
+
   if (!tableNumber) {
     showNotice(
       "Masa bilgisi bulunamadı. Lütfen masadaki QR kodu okutun."
@@ -24,8 +24,11 @@ async function init() {
     return;
   }
 
-  document.getElementById("tableBadge").textContent =
-    `Masa ${tableNumber}`;
+  const tableBadge = document.getElementById("tableBadge");
+
+  if (tableBadge) {
+    tableBadge.textContent = `Masa ${tableNumber}`;
+  }
 
   await loadRestaurant();
   await loadProducts();
@@ -38,125 +41,182 @@ async function init() {
 async function loadRestaurant() {
   const { data, error } = await db
     .from("restaurant_settings")
-    .select("*")
+    .select("name")
     .limit(1)
     .maybeSingle();
 
   if (error) {
-    console.error("Restaurant error:", error);
+    console.error("RESTAURANT ERROR:", error);
     return;
   }
 
-  if (data?.name) {
-    document.getElementById("restaurantName").textContent =
-      data.name;
+  if (data && data.name) {
+    const restaurantName =
+      document.getElementById("restaurantName");
+
+    if (restaurantName) {
+      restaurantName.textContent = data.name;
+    }
   }
 }
 
 async function loadProducts() {
-  console.log("Ürünler yükleniyor...");
+  console.log("ÜRÜNLER YÜKLENİYOR...");
 
   const { data, error } = await db
     .from("products")
-    .select("id, name, description, category, price, is_active, sort_order")
+    .select(
+      "id, name, description, category, price, is_active, sort_order"
+    )
     .eq("is_active", true)
-    .order("sort_order", { ascending: true });
+    .order("sort_order", {
+      ascending: true
+    });
 
   if (error) {
     console.error("PRODUCTS ERROR:", error);
-    showNotice("Menü yüklenemedi: " + error.message);
+
+    showNotice(
+      "Menü yüklenemedi: " + error.message
+    );
+
     products = [];
     return;
   }
 
   console.log("SUPABASE ÜRÜNLER:", data);
 
-  products = Array.isArray(data) ? data : [];
+  products = Array.isArray(data)
+    ? data
+    : [];
 
   if (products.length === 0) {
     showNotice("Aktif ürün bulunamadı.");
   }
-}
 }
 
 function categories() {
   return [
     ...new Set(
       products
-        .map(p => p.category)
+        .map(product => product.category)
         .filter(Boolean)
     )
   ];
 }
 
 function renderCategories() {
-  const el = document.getElementById("categories");
+  const element =
+    document.getElementById("categories");
 
-  if (!el) return;
-
-  el.innerHTML = categories()
-    .map(
-      (c, i) =>
-        `<button
-          class="category ${i === 0 ? "active" : ""}"
-          onclick="scrollToCategory('${escAttr(c)}')"
-        >
-          ${esc(c)}
-        </button>`
-    )
-    .join("");
-}
-
-function renderMenu() {
-  const menu = document.getElementById("menu");
-
-  if (!menu) return;
-
-  if (!products.length) {
-    menu.innerHTML =
-      "<p>Henüz ürün bulunmuyor.</p>";
+  if (!element) {
+    console.error(
+      "categories elementi bulunamadı."
+    );
     return;
   }
 
-  menu.innerHTML = categories()
-    .map(
-      c => `
-        <section id="cat-${slug(c)}">
-          <h2 class="category-title">
-            ${esc(c)}
-          </h2>
+  const categoryList = categories();
 
-          ${products
-            .filter(p => p.category === c)
-            .map(productHTML)
-            .join("")}
-        </section>
+  element.innerHTML = categoryList
+    .map(
+      (category, index) => `
+        <button
+          class="category ${
+            index === 0 ? "active" : ""
+          }"
+          onclick="scrollToCategory('${escAttr(
+            category
+          )}')"
+        >
+          ${esc(category)}
+        </button>
       `
     )
     .join("");
 }
 
-function productHTML(p) {
+function renderMenu() {
+  const menu =
+    document.getElementById("menu");
+
+  if (!menu) {
+    console.error(
+      "menu elementi bulunamadı."
+    );
+    return;
+  }
+
+  if (!products.length) {
+    menu.innerHTML = `
+      <div style="
+        background:#fff;
+        padding:20px;
+        border-radius:15px;
+        margin-top:20px;
+      ">
+        <strong>Menüde ürün bulunamadı.</strong>
+      </div>
+    `;
+    return;
+  }
+
+  const categoryList = categories();
+
+  menu.innerHTML = categoryList
+    .map(category => {
+      const categoryProducts =
+        products.filter(
+          product =>
+            product.category === category
+        );
+
+      return `
+        <section id="cat-${slug(category)}">
+
+          <h2 class="category-title">
+            ${esc(category)}
+          </h2>
+
+          ${categoryProducts
+            .map(productHTML)
+            .join("")}
+
+        </section>
+      `;
+    })
+    .join("");
+}
+
+function productHTML(product) {
   return `
     <article class="product">
 
       <div class="product-info">
 
-        <h3>${esc(p.name)}</h3>
+        <h3>
+          ${esc(product.name)}
+        </h3>
 
         <p>
-          ${esc(p.description || "")}
+          ${esc(
+            product.description || ""
+          )}
         </p>
 
         <div class="price">
-          ₺${Number(p.price || 0).toFixed(2)}
+          ₺${Number(
+            product.price || 0
+          ).toFixed(2)}
         </div>
 
       </div>
 
       <button
         class="add"
-        onclick="addToCart('${escAttr(p.id)}')"
+        onclick="addToCart('${escAttr(
+          product.id
+        )}')"
       >
         Ekle
       </button>
@@ -166,23 +226,35 @@ function productHTML(p) {
 }
 
 function addToCart(id) {
-  const p = products.find(
-    x => String(x.id) === String(id)
-  );
+  const product =
+    products.find(
+      product =>
+        String(product.id) ===
+        String(id)
+    );
 
-  if (!p) return;
+  if (!product) {
+    console.error(
+      "Ürün bulunamadı:",
+      id
+    );
+    return;
+  }
 
-  const existing = cart.find(
-    x => String(x.id) === String(id)
-  );
+  const existing =
+    cart.find(
+      item =>
+        String(item.id) ===
+        String(id)
+    );
 
   if (existing) {
-    existing.qty++;
+    existing.qty += 1;
   } else {
     cart.push({
-      id: p.id,
-      name: p.name,
-      price: Number(p.price || 0),
+      id: product.id,
+      name: product.name,
+      price: Number(product.price || 0),
       qty: 1,
       note: ""
     });
@@ -192,18 +264,25 @@ function addToCart(id) {
   openCart();
 }
 
-function changeQty(id, delta) {
-  const item = cart.find(
-    x => String(x.id) === String(id)
-  );
+function changeQty(id, amount) {
+  const item =
+    cart.find(
+      item =>
+        String(item.id) ===
+        String(id)
+    );
 
-  if (!item) return;
+  if (!item) {
+    return;
+  }
 
-  item.qty += delta;
+  item.qty += amount;
 
   if (item.qty <= 0) {
     cart = cart.filter(
-      x => String(x.id) !== String(id)
+      item =>
+        String(item.id) !==
+        String(id)
     );
   }
 
@@ -211,9 +290,12 @@ function changeQty(id, delta) {
 }
 
 function updateItemNote(id, value) {
-  const item = cart.find(
-    x => String(x.id) === String(id)
-  );
+  const item =
+    cart.find(
+      item =>
+        String(item.id) ===
+        String(id)
+    );
 
   if (item) {
     item.note = value;
@@ -222,88 +304,121 @@ function updateItemNote(id, value) {
 
 function renderCart() {
   const cartCount =
-    document.getElementById("cartCount");
+    document.getElementById(
+      "cartCount"
+    );
 
   const cartTotal =
-    document.getElementById("cartTotal");
+    document.getElementById(
+      "cartTotal"
+    );
 
   const cartItems =
-    document.getElementById("cartItems");
+    document.getElementById(
+      "cartItems"
+    );
 
-  if (!cartCount || !cartTotal || !cartItems) {
+  if (
+    !cartCount ||
+    !cartTotal ||
+    !cartItems
+  ) {
     return;
   }
 
-  const count = cart.reduce(
-    (sum, x) => sum + x.qty,
-    0
-  );
+  const count =
+    cart.reduce(
+      (total, item) =>
+        total + item.qty,
+      0
+    );
 
-  const total = cart.reduce(
-    (sum, x) => sum + x.price * x.qty,
-    0
-  );
+  const total =
+    cart.reduce(
+      (sum, item) =>
+        sum +
+        item.price *
+          item.qty,
+      0
+    );
 
-  cartCount.textContent = count;
+  cartCount.textContent =
+    count;
 
   cartTotal.textContent =
-    "₺" + total.toFixed(2);
+    "₺" +
+    total.toFixed(2);
 
   if (!cart.length) {
     cartItems.innerHTML =
       "<p>Sepet boş.</p>";
+
     return;
   }
 
-  cartItems.innerHTML = cart
-    .map(
-      x => `
-        <div class="cart-row">
+  cartItems.innerHTML =
+    cart
+      .map(
+        item => `
+          <div class="cart-row">
 
-          <div class="cart-main">
-            <strong>
-              ${esc(x.name)}
-            </strong>
+            <div class="cart-main">
 
-            <strong>
-              ₺${(x.price * x.qty).toFixed(2)}
-            </strong>
-          </div>
+              <strong>
+                ${esc(item.name)}
+              </strong>
 
-          <div class="qty">
+              <strong>
+                ₺${(
+                  item.price *
+                  item.qty
+                ).toFixed(2)}
+              </strong>
 
-            <button
-              onclick="changeQty('${escAttr(x.id)}', -1)"
+            </div>
+
+            <div class="qty">
+
+              <button
+                onclick="changeQty(
+                  '${escAttr(item.id)}',
+                  -1
+                )"
+              >
+                −
+              </button>
+
+              <span>
+                ${item.qty}
+              </span>
+
+              <button
+                onclick="changeQty(
+                  '${escAttr(item.id)}',
+                  1
+                )"
+              >
+                +
+              </button>
+
+            </div>
+
+            <input
+              class="item-note"
+              value="${escAttr(
+                item.note
+              )}"
+              placeholder="Bu ürün için not..."
+              oninput="updateItemNote(
+                '${escAttr(item.id)}',
+                this.value
+              )"
             >
-              −
-            </button>
-
-            <span>
-              ${x.qty}
-            </span>
-
-            <button
-              onclick="changeQty('${escAttr(x.id)}', 1)"
-            >
-              +
-            </button>
 
           </div>
-
-          <input
-            class="item-note"
-            value="${escAttr(x.note)}"
-            placeholder="Bu ürün için not..."
-            oninput="updateItemNote(
-              '${escAttr(x.id)}',
-              this.value
-            )"
-          >
-
-        </div>
-      `
-    )
-    .join("");
+        `
+      )
+      .join("");
 }
 
 async function placeOrder() {
@@ -313,24 +428,33 @@ async function placeOrder() {
   }
 
   const button =
-    document.querySelector(".primary");
+    document.querySelector(
+      ".primary"
+    );
 
   if (button) {
     button.disabled = true;
-    button.textContent = "Gönderiliyor...";
+    button.textContent =
+      "Gönderiliyor...";
   }
 
-  const total = cart.reduce(
-    (sum, x) => sum + x.price * x.qty,
-    0
-  );
+  const total =
+    cart.reduce(
+      (sum, item) =>
+        sum +
+        item.price *
+          item.qty,
+      0
+    );
 
-  const orderNoteElement =
-    document.getElementById("orderNote");
+  const noteElement =
+    document.getElementById(
+      "orderNote"
+    );
 
-  const orderNote =
-    orderNoteElement
-      ? orderNoteElement.value.trim()
+  const customerNote =
+    noteElement
+      ? noteElement.value.trim()
       : "";
 
   const {
@@ -339,18 +463,29 @@ async function placeOrder() {
   } = await db
     .from("orders")
     .insert({
-      table_number: String(tableNumber),
+      table_number:
+        String(tableNumber),
+
       status: "new",
+
       total: total,
-      customer_note: orderNote || null
+
+      customer_note:
+        customerNote || null
     })
     .select()
     .single();
 
   if (error) {
-    console.error("Order error:", error);
+    console.error(
+      "ORDER ERROR:",
+      error
+    );
 
-    alert("Sipariş gönderilemedi.");
+    alert(
+      "Sipariş gönderilemedi: " +
+        error.message
+    );
 
     if (button) {
       button.disabled = false;
@@ -361,28 +496,41 @@ async function placeOrder() {
     return;
   }
 
-  const items = cart.map(x => ({
-    order_id: order.id,
-    product_id: x.id,
-    product_name: x.name,
-    quantity: x.qty,
-    unit_price: x.price,
-    note: x.note || null
-  }));
+  const orderItems =
+    cart.map(item => ({
+      order_id: order.id,
 
-  const { error: itemError } =
-    await db
-      .from("order_items")
-      .insert(items);
+      product_id:
+        item.id,
 
-  if (itemError) {
+      product_name:
+        item.name,
+
+      quantity:
+        item.qty,
+
+      unit_price:
+        item.price,
+
+      note:
+        item.note || null
+    }));
+
+  const {
+    error: itemsError
+  } = await db
+    .from("order_items")
+    .insert(orderItems);
+
+  if (itemsError) {
     console.error(
-      "Order items error:",
-      itemError
+      "ORDER ITEMS ERROR:",
+      itemsError
     );
 
     alert(
-      "Sipariş ürünleri kaydedilemedi."
+      "Sipariş ürünleri kaydedilemedi: " +
+        itemsError.message
     );
 
     if (button) {
@@ -396,8 +544,8 @@ async function placeOrder() {
 
   cart = [];
 
-  if (orderNoteElement) {
-    orderNoteElement.value = "";
+  if (noteElement) {
+    noteElement.value = "";
   }
 
   renderCart();
@@ -416,28 +564,43 @@ async function placeOrder() {
 
 function openCart() {
   const modal =
-    document.getElementById("cartModal");
+    document.getElementById(
+      "cartModal"
+    );
 
-  if (!modal) return;
+  if (!modal) {
+    return;
+  }
 
-  modal.classList.remove("hidden");
+  modal.classList.remove(
+    "hidden"
+  );
 
   renderCart();
 }
 
 function closeCart() {
   const modal =
-    document.getElementById("cartModal");
+    document.getElementById(
+      "cartModal"
+    );
 
-  if (!modal) return;
+  if (!modal) {
+    return;
+  }
 
-  modal.classList.add("hidden");
+  modal.classList.add(
+    "hidden"
+  );
 }
 
-function scrollToCategory(category) {
+function scrollToCategory(
+  category
+) {
   const element =
     document.getElementById(
-      "cat-" + slug(category)
+      "cat-" +
+        slug(category)
     );
 
   if (element) {
@@ -450,12 +613,19 @@ function scrollToCategory(category) {
 
 function showNotice(text) {
   const notice =
-    document.getElementById("notice");
+    document.getElementById(
+      "notice"
+    );
 
-  if (!notice) return;
+  if (!notice) {
+    return;
+  }
 
   notice.textContent = text;
-  notice.classList.remove("hidden");
+
+  notice.classList.remove(
+    "hidden"
+  );
 }
 
 function slug(text) {
@@ -471,13 +641,13 @@ function esc(text) {
   return String(text ?? "")
     .replace(
       /[&<>"']/g,
-      m => ({
+      character => ({
         "&": "&amp;",
         "<": "&lt;",
         ">": "&gt;",
         '"': "&quot;",
         "'": "&#39;"
-      }[m])
+      })[character]
     );
 }
 
