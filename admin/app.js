@@ -1,5 +1,8 @@
-const SUPABASE_URL = "https://dppqwqsawarkyzzonzyu.supabase.co";
-const SUPABASE_ANON_KEY = "sb_publishable_fhNovHoi8Xgh1jScRsdrgQ_ZCe6I4tP";
+const SUPABASE_URL =
+  "https://dppqwqsawarkyzzonzyu.supabase.co";
+
+const SUPABASE_ANON_KEY =
+  "sb_publishable_fhNovHoi8Xgh1jScRsdrgQ_ZCe6I4tP";
 
 const db = supabase.createClient(
   SUPABASE_URL,
@@ -9,103 +12,213 @@ const db = supabase.createClient(
 let orders = [];
 let realtimeStarted = false;
 
-document.addEventListener("DOMContentLoaded", init);
+document.addEventListener(
+  "DOMContentLoaded",
+  init
+);
 
 async function init() {
   console.log("ADMIN APP BAŞLADI");
 
-  const {
-    data: { session },
-    error
-  } = await db.auth.getSession();
+  try {
+    const {
+      data: { session },
+      error
+    } = await db.auth.getSession();
 
-  if (error) {
-    console.error("SESSION ERROR:", error);
-    showLoginError(
-      "Oturum kontrolü başarısız: " + error.message
+    if (error) {
+      console.error(
+        "SESSION ERROR:",
+        error
+      );
+
+      showLoginError(
+        "Oturum kontrolü başarısız: " +
+        error.message
+      );
+
+      return;
+    }
+
+    if (session) {
+      await showApp();
+    }
+
+  } catch (error) {
+    console.error(
+      "SESSION NETWORK ERROR:",
+      error
     );
-    return;
-  }
 
-  if (session) {
-    await showApp();
+    showLoginError(
+      "Bağlantı hatası: " +
+      (error.message || "Load failed")
+    );
   }
 }
 
+
+/* =========================
+   LOGIN
+========================= */
+
 async function login() {
   const email =
-    document.getElementById("email").value.trim();
+    document
+      .getElementById("email")
+      .value
+      .trim();
 
   const password =
-    document.getElementById("password").value;
+    document
+      .getElementById("password")
+      .value;
 
   if (!email || !password) {
-    showLoginError("E-posta ve şifre gerekli.");
+    showLoginError(
+      "E-posta ve şifre gerekli."
+    );
+
     return;
   }
 
   showLoginError("");
 
   const button =
-    document.querySelector("#loginView button");
+    document.querySelector(
+      "#loginView button"
+    );
 
   if (button) {
     button.disabled = true;
-    button.textContent = "Giriş yapılıyor...";
+    button.textContent =
+      "Giriş yapılıyor...";
   }
 
-  const { data, error } =
-    await db.auth.signInWithPassword({
-      email,
-      password
-    });
+  console.log(
+    "LOGIN BAŞLIYOR"
+  );
 
-  if (error) {
-    console.error("LOGIN ERROR:", error);
+  console.log(
+    "SUPABASE URL:",
+    SUPABASE_URL
+  );
+
+  try {
+
+    const result =
+      await db.auth.signInWithPassword({
+        email: email,
+        password: password
+      });
+
+    console.log(
+      "AUTH SONUCU:",
+      result
+    );
+
+    if (result.error) {
+
+      console.error(
+        "AUTH ERROR:",
+        result.error
+      );
+
+      showLoginError(
+        "Giriş başarısız: " +
+        result.error.message
+      );
+
+      if (button) {
+        button.disabled = false;
+        button.textContent =
+          "Giriş Yap";
+      }
+
+      return;
+    }
+
+    console.log(
+      "LOGIN BAŞARILI:",
+      result.data.user
+    );
+
+    await showApp();
+
+  } catch (error) {
+
+    console.error(
+      "LOGIN NETWORK ERROR:",
+      error
+    );
+
+    console.error(
+      "ERROR NAME:",
+      error.name
+    );
+
+    console.error(
+      "ERROR MESSAGE:",
+      error.message
+    );
 
     showLoginError(
-      "Giriş başarısız: " + error.message
+      "Bağlantı hatası: " +
+      (error.message || "Load failed")
     );
 
     if (button) {
       button.disabled = false;
-      button.textContent = "Giriş Yap";
+      button.textContent =
+        "Giriş Yap";
     }
-
-    return;
   }
-
-  console.log(
-    "LOGIN BAŞARILI:",
-    data.user
-  );
-
-  await showApp();
 }
+
+
+/* =========================
+   LOGOUT
+========================= */
 
 async function logout() {
   await db.auth.signOut();
+
   location.reload();
 }
 
+
+/* =========================
+   APP
+========================= */
+
 async function showApp() {
+
   const loginView =
-    document.getElementById("loginView");
+    document.getElementById(
+      "loginView"
+    );
 
   const appView =
-    document.getElementById("appView");
+    document.getElementById(
+      "appView"
+    );
 
   if (loginView) {
-    loginView.classList.add("hidden");
+    loginView.classList.add(
+      "hidden"
+    );
   }
 
   if (appView) {
-    appView.classList.remove("hidden");
+    appView.classList.remove(
+      "hidden"
+    );
   }
 
   await loadOrders();
 
   if (!realtimeStarted) {
+
     realtimeStarted = true;
 
     db.channel("orders-live")
@@ -119,6 +232,7 @@ async function showApp() {
         () => loadOrders()
       )
       .subscribe();
+
 
     db.channel("items-live")
       .on(
@@ -134,7 +248,13 @@ async function showApp() {
   }
 }
 
+
+/* =========================
+   ORDERS
+========================= */
+
 async function loadOrders() {
+
   console.log(
     "SİPARİŞLER YÜKLENİYOR..."
   );
@@ -146,24 +266,36 @@ async function loadOrders() {
         *,
         order_items (*)
       `)
-      .order("created_at", {
-        ascending: false
-      });
+      .order(
+        "created_at",
+        {
+          ascending: false
+        }
+      );
 
   if (error) {
+
     console.error(
       "ORDERS ERROR:",
       error
     );
 
     const ordersElement =
-      document.getElementById("orders");
+      document.getElementById(
+        "orders"
+      );
 
     if (ordersElement) {
+
       ordersElement.innerHTML = `
         <div class="order">
-          <strong>Siparişler yüklenemedi.</strong>
-          <p>${esc(error.message)}</p>
+          <strong>
+            Siparişler yüklenemedi.
+          </strong>
+
+          <p>
+            ${esc(error.message)}
+          </p>
         </div>
       `;
     }
@@ -181,7 +313,13 @@ async function loadOrders() {
   render();
 }
 
+
+/* =========================
+   RENDER
+========================= */
+
 function render() {
+
   const newOrders =
     orders.filter(
       order =>
@@ -203,8 +341,10 @@ function render() {
   const activeOrders =
     orders.filter(
       order =>
-        order.status !== "completed"
+        order.status !==
+        "completed"
     );
+
 
   const newCount =
     document.getElementById(
@@ -226,6 +366,7 @@ function render() {
       "orders"
     );
 
+
   if (newCount) {
     newCount.textContent =
       newOrders.length;
@@ -241,19 +382,25 @@ function render() {
       readyOrders.length;
   }
 
+
   if (!ordersElement) {
     return;
   }
 
+
   if (!activeOrders.length) {
+
     ordersElement.innerHTML = `
       <div class="order">
-        <strong>Aktif sipariş yok.</strong>
+        <strong>
+          Aktif sipariş yok.
+        </strong>
       </div>
     `;
 
     return;
   }
+
 
   ordersElement.innerHTML =
     activeOrders
@@ -261,33 +408,50 @@ function render() {
       .join("");
 }
 
+
+/* =========================
+   ORDER HTML
+========================= */
+
 function orderHTML(order) {
+
   const items =
     (order.order_items || [])
       .map(item => {
+
         const itemTotal =
-          Number(item.quantity || 0) *
-          Number(item.unit_price || 0);
+          Number(
+            item.quantity || 0
+          ) *
+          Number(
+            item.unit_price || 0
+          );
+
 
         return `
           <div class="item">
 
             <div class="item-top">
+
               <span>
                 ${item.quantity} ×
-                ${esc(item.product_name)}
+                ${esc(
+                  item.product_name
+                )}
               </span>
 
               <span>
                 ₺${itemTotal.toFixed(2)}
               </span>
+
             </div>
 
             ${
               item.note
                 ? `
                   <div class="note">
-                    Not: ${esc(item.note)}
+                    Not:
+                    ${esc(item.note)}
                   </div>
                 `
                 : ""
@@ -298,16 +462,28 @@ function orderHTML(order) {
       })
       .join("");
 
+
   const statusNames = {
+
     new: "Yeni",
-    preparing: "Hazırlanıyor",
-    ready: "Hazır",
-    completed: "Tamamlandı"
+
+    preparing:
+      "Hazırlanıyor",
+
+    ready:
+      "Hazır",
+
+    completed:
+      "Tamamlandı"
   };
 
+
   const statusName =
-    statusNames[order.status] ||
+    statusNames[
+      order.status
+    ] ||
     order.status;
+
 
   const time =
     order.created_at
@@ -322,17 +498,21 @@ function orderHTML(order) {
         )
       : "";
 
+
   return `
-    <article class="order ${
-      order.status === "new"
-        ? "new"
-        : ""
-    }">
+    <article
+      class="order ${
+        order.status === "new"
+          ? "new"
+          : ""
+      }"
+    >
 
       <div class="order-head">
 
         <div class="table">
-          Masa ${esc(
+          Masa
+          ${esc(
             order.table_number
           )}
         </div>
@@ -343,28 +523,39 @@ function orderHTML(order) {
 
       </div>
 
-      <div class="status ${esc(
-        order.status
-      )}">
+
+      <div
+        class="status ${esc(
+          order.status
+        )}"
+      >
         ${esc(statusName)}
       </div>
 
+
       ${items}
+
 
       ${
         order.customer_note
           ? `
-            <div class="customer-note">
+            <div
+              class="customer-note"
+            >
+
               <strong>
                 Sipariş notu:
               </strong>
+
               ${esc(
                 order.customer_note
               )}
+
             </div>
           `
           : ""
       }
+
 
       <div class="actions">
         ${buttons(order)}
@@ -374,8 +565,17 @@ function orderHTML(order) {
   `;
 }
 
+
+/* =========================
+   BUTTONS
+========================= */
+
 function buttons(order) {
-  if (order.status === "new") {
+
+  if (
+    order.status === "new"
+  ) {
+
     return `
       <button
         onclick="setStatus(
@@ -388,9 +588,12 @@ function buttons(order) {
     `;
   }
 
+
   if (
-    order.status === "preparing"
+    order.status ===
+    "preparing"
   ) {
+
     return `
       <button
         onclick="setStatus(
@@ -403,7 +606,11 @@ function buttons(order) {
     `;
   }
 
-  if (order.status === "ready") {
+
+  if (
+    order.status === "ready"
+  ) {
+
     return `
       <button
         onclick="setStatus(
@@ -416,22 +623,34 @@ function buttons(order) {
     `;
   }
 
+
   return "";
 }
+
+
+/* =========================
+   STATUS
+========================= */
 
 async function setStatus(
   id,
   status
 ) {
+
   const { error } =
     await db
       .from("orders")
       .update({
         status
       })
-      .eq("id", id);
+      .eq(
+        "id",
+        id
+      );
+
 
   if (error) {
+
     console.error(
       "STATUS ERROR:",
       error
@@ -445,10 +664,19 @@ async function setStatus(
     return;
   }
 
+
   await loadOrders();
 }
 
-function showLoginError(message) {
+
+/* =========================
+   ERROR
+========================= */
+
+function showLoginError(
+  message
+) {
+
   const element =
     document.getElementById(
       "loginError"
@@ -460,20 +688,32 @@ function showLoginError(message) {
   }
 }
 
+
+/* =========================
+   ESCAPE
+========================= */
+
 function esc(value) {
+
   return String(
     value ?? ""
   ).replace(
     /[&<>"']/g,
     character => ({
+
       "&": "&amp;",
+
       "<": "&lt;",
+
       ">": "&gt;",
+
       '"': "&quot;",
+
       "'": "&#39;"
     })[character]
   );
 }
+
 
 function escAttr(value) {
   return esc(value);
