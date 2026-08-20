@@ -1,0 +1,9 @@
+{
+  "name": "QR Sipariş Admin",
+  "short_name": "QR Admin",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#f6f6f3",
+  "theme_color": "#111111",
+  "id": "/qr-siparis/admin/"
+}
