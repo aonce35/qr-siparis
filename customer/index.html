@@ -1,7 +1,9 @@
 <!doctype html>
 <html lang="tr">
+
 <head>
   <meta charset="UTF-8">
+
   <meta
     name="viewport"
     content="width=device-width, initial-scale=1"
@@ -9,9 +11,13 @@
 
   <title>MRX</title>
 
-  <link rel="stylesheet" href="style.css">
+  <link
+    rel="stylesheet"
+    href="style.css"
+  >
 
   <style>
+
     /* =========================
        MRX WELCOME SCREEN
     ========================= */
@@ -27,12 +33,15 @@
       align-items: center;
       justify-content: center;
 
-      padding: 30px;
+      padding: 28px;
+
+      box-sizing: border-box;
 
       transition:
-        opacity 0.5s ease,
-        visibility 0.5s ease;
+        opacity 0.45s ease,
+        visibility 0.45s ease;
     }
+
 
     #mrxWelcome.hidden {
       opacity: 0;
@@ -40,9 +49,10 @@
       pointer-events: none;
     }
 
+
     .mrx-welcome-content {
       width: 100%;
-      max-width: 420px;
+      max-width: 380px;
 
       text-align: center;
 
@@ -50,6 +60,9 @@
       flex-direction: column;
       align-items: center;
     }
+
+
+    /* MRX */
 
     .mrx-logo {
       margin: 0;
@@ -59,87 +72,130 @@
       font-family:
         -apple-system,
         BlinkMacSystemFont,
+        "SF Pro Display",
         "Helvetica Neue",
         Arial,
         sans-serif;
 
-      font-size: 64px;
-      font-weight: 800;
+      font-size: 62px;
+      font-weight: 700;
 
-      letter-spacing: 12px;
+      letter-spacing: 8px;
 
       line-height: 1;
     }
 
-    .mrx-slogan {
-      margin: 28px 0 42px;
 
-      color: #999;
+    /* SLOGAN */
+
+    .mrx-slogan {
+      margin: 25px 0 42px;
+
+      color: #fff;
 
       font-family:
         -apple-system,
         BlinkMacSystemFont,
+        "SF Pro Text",
         "Helvetica Neue",
         Arial,
         sans-serif;
 
-      font-size: 16px;
+      font-size: 17px;
       font-weight: 400;
 
-      letter-spacing: 0.3px;
+      letter-spacing: 0.2px;
+
+      line-height: 1.5;
     }
+
+
+    /* BUTTON */
 
     .mrx-menu-button {
       width: 100%;
       max-width: 280px;
 
-      border: 1px solid #333;
-      border-radius: 14px;
+      box-sizing: border-box;
+
+      padding: 17px 24px;
+
+      border: 1px solid #fff;
+      border-radius: 12px;
 
       background: #fff;
       color: #000;
 
-      padding: 17px 24px;
+      font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "SF Pro Text",
+        "Helvetica Neue",
+        Arial,
+        sans-serif;
 
       font-size: 16px;
       font-weight: 600;
 
+      letter-spacing: 0;
+
       cursor: pointer;
 
+      -webkit-tap-highlight-color:
+        transparent;
+
       transition:
-        transform 0.2s ease,
-        background 0.2s ease;
+        transform 0.15s ease,
+        opacity 0.15s ease;
     }
+
 
     .mrx-menu-button:active {
       transform: scale(0.97);
+      opacity: 0.85;
     }
 
+
+    /* FOOTER */
+
     .mrx-footer {
-      margin-top: 55px;
+      margin-top: 48px;
 
-      color: #444;
+      color: #666;
 
-      font-size: 11px;
+      font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "SF Pro Text",
+        "Helvetica Neue",
+        Arial,
+        sans-serif;
+
+      font-size: 10px;
+
       letter-spacing: 2px;
     }
 
 
     /* =========================
-       MENU HIDDEN INITIALLY
+       MENU
     ========================= */
 
     #mainMenuContent {
       display: none;
     }
 
+
     #mainMenuContent.visible {
       display: block;
     }
+
   </style>
 </head>
 
+
 <body>
+
 
   <!-- =========================
        MRX WELCOME
@@ -153,9 +209,11 @@
         MRX
       </h1>
 
+
       <p class="mrx-slogan">
         Yeni nesil sipariş deneyimi.
       </p>
+
 
       <button
         class="mrx-menu-button"
@@ -163,6 +221,7 @@
       >
         Menüyü Gör →
       </button>
+
 
       <div class="mrx-footer">
         POWERED BY MRX
@@ -173,8 +232,9 @@
   </section>
 
 
+
   <!-- =========================
-       EXISTING MENU
+       MEVCUT MENÜ SİSTEMİ
   ========================= -->
 
   <div id="mainMenuContent">
@@ -193,6 +253,7 @@
 
       </div>
 
+
       <div
         class="table-badge"
         id="tableBadge"
@@ -210,10 +271,12 @@
         class="notice hidden"
       ></div>
 
+
       <div
         id="categories"
         class="categories"
       ></div>
+
 
       <section
         id="menu"
@@ -223,16 +286,20 @@
     </main>
 
 
+
     <button
       id="cartButton"
       class="cart-button"
       onclick="openCart()"
     >
       Sepet
+
       <span id="cartCount">
         0
       </span>
+
     </button>
+
 
 
     <div
@@ -248,6 +315,7 @@
             Sepet
           </h2>
 
+
           <button
             onclick="closeCart()"
           >
@@ -257,7 +325,9 @@
         </div>
 
 
-        <div id="cartItems"></div>
+        <div
+          id="cartItems"
+        ></div>
 
 
         <div class="order-summary">
@@ -276,6 +346,7 @@
         <label class="label">
           Sipariş notu
         </label>
+
 
         <textarea
           id="orderNote"
@@ -297,17 +368,24 @@
   </div>
 
 
+
   <!-- =========================
        SCRIPTS
   ========================= -->
 
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script
+    src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
+  ></script>
 
-  <script src="./app.js?v=2"></script>
+
+  <script
+    src="./app.js?v=2"
+  ></script>
+
 
 
   <!-- =========================
-       MRX LOGIC
+       MRX OPEN MENU
   ========================= -->
 
   <script>
@@ -324,29 +402,29 @@
           "mainMenuContent"
         );
 
+
       menu.classList.add(
         "visible"
       );
+
 
       welcome.classList.add(
         "hidden"
       );
 
-      /*
-        Animasyon bittikten sonra
-        welcome ekranını tamamen kaldır.
-      */
 
-      setTimeout(() => {
+      setTimeout(function () {
 
         welcome.style.display =
           "none";
 
-      }, 550);
+      }, 500);
 
     }
 
   </script>
 
+
 </body>
+
 </html>
