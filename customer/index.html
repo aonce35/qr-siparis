@@ -806,21 +806,33 @@ textarea::placeholder {
 ===================================================== */
 
 .my-order {
-  margin-bottom: 12px;
+  margin-bottom: 14px;
 
-  padding: 15px;
+  padding: 16px;
 
   border:
-    1px solid #e5e5e5;
+    1px solid #e4e4e4;
 
-  border-radius: 14px;
+  border-radius: 16px;
 
   background: #fafafa;
+}
+
+.my-order.active-order {
+  background: #fff;
+
+  border:
+    1px solid #111;
+
+  box-shadow:
+    0 4px 16px
+    rgba(0,0,0,.08);
 }
 
 .my-order-head {
   display: flex;
 
+  align-items: center;
   justify-content: space-between;
 
   margin-bottom: 10px;
@@ -832,24 +844,165 @@ textarea::placeholder {
 
 .my-order-head strong {
   color: #111;
+
+  font-size: 15px;
 }
+
+
+/* =====================================================
+   STATUS
+===================================================== */
 
 .my-order-status {
   display: inline-block;
 
-  margin-bottom: 12px;
+  margin-bottom: 15px;
 
-  padding: 6px 9px;
+  padding:
+    7px
+    10px;
 
-  border-radius: 8px;
+  border-radius: 9px;
 
   background: #eee;
 
   color: #333;
 
   font-size: 12px;
+  font-weight: 700;
+}
+
+
+/* Active status */
+
+.my-order-status.new {
+  background: #f1f1f1;
+  color: #222;
+}
+
+.my-order-status.preparing {
+  background: #f1f1f1;
+  color: #111;
+}
+
+.my-order-status.ready {
+  background: #111;
+  color: #fff;
+}
+
+.my-order-status.completed {
+  background: #e8e8e8;
+  color: #777;
+}
+
+
+/* =====================================================
+   PROGRESS
+===================================================== */
+
+.order-progress {
+  position: relative;
+
+  display: flex;
+
+  justify-content: space-between;
+
+  margin:
+    8px
+    4px
+    20px;
+}
+
+.order-progress::before {
+  content: "";
+
+  position: absolute;
+
+  left: 9px;
+  right: 9px;
+  top: 9px;
+
+  height: 2px;
+
+  background: #ddd;
+}
+
+.progress-line {
+  position: absolute;
+
+  left: 9px;
+  top: 9px;
+
+  height: 2px;
+
+  background: #111;
+
+  transition:
+    width .35s ease;
+}
+
+.progress-step {
+  position: relative;
+
+  z-index: 2;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  gap: 6px;
+
+  width: 25%;
+
+  color: #aaa;
+
+  font-size: 10px;
+
+  text-align: center;
+}
+
+.progress-dot {
+  width: 19px;
+  height: 19px;
+
+  border:
+    2px solid #ddd;
+
+  border-radius: 50%;
+
+  background: #fff;
+}
+
+.progress-step.done {
+  color: #111;
+
   font-weight: 600;
 }
+
+.progress-step.done
+.progress-dot {
+  border-color: #111;
+
+  background: #111;
+}
+
+.progress-step.current
+.progress-dot {
+  border-color: #111;
+
+  background: #fff;
+
+  box-shadow:
+    0 0 0 4px
+    rgba(0,0,0,.08);
+}
+
+
+/* =====================================================
+   ORDER ITEMS
+===================================================== */
 
 .my-order-items {
   display: flex;
@@ -864,7 +1017,9 @@ textarea::placeholder {
 
   gap: 10px;
 
-  padding: 7px 0;
+  padding:
+    8px
+    0;
 
   border-bottom:
     1px solid #eee;
@@ -877,6 +1032,11 @@ textarea::placeholder {
 .my-order-item strong {
   color: #111;
 }
+
+
+/* =====================================================
+   ORDER TOTAL
+===================================================== */
 
 .my-order-total {
   display: flex;
@@ -898,6 +1058,11 @@ textarea::placeholder {
 
   font-size: 17px;
 }
+
+
+/* =====================================================
+   GRAND TOTAL
+===================================================== */
 
 .my-orders-grand-total {
   display: flex;
@@ -927,6 +1092,14 @@ textarea::placeholder {
   text-align: center;
 
   color: #777;
+}
+
+.my-orders-empty strong {
+  display: block;
+
+  margin-bottom: 8px;
+
+  color: #111;
 }
 
 
@@ -963,6 +1136,11 @@ textarea::placeholder {
 
     min-width: 180px;
   }
+
+  .progress-step {
+    font-size: 9px;
+  }
+
 }
 
 </style>
@@ -1036,8 +1214,6 @@ textarea::placeholder {
 </header>
 
 
-<!-- MY ORDERS -->
-
 <div class="my-orders-button-wrapper">
 
   <button
@@ -1072,22 +1248,28 @@ textarea::placeholder {
 </main>
 
 
-<!-- CART -->
+<!-- =====================================================
+     CART BUTTON
+===================================================== -->
 
 <button
   id="cartButton"
   class="cart-button"
   onclick="openCart()"
 >
+
   Sepet
 
   <span id="cartCount">
     0
   </span>
+
 </button>
 
 
-<!-- CART MODAL -->
+<!-- =====================================================
+     CART MODAL
+===================================================== -->
 
 <div
   id="cartModal"
@@ -1150,7 +1332,9 @@ textarea::placeholder {
 </div>
 
 
-<!-- MY ORDERS MODAL -->
+<!-- =====================================================
+     MY ORDERS MODAL
+===================================================== -->
 
 <div
   id="myOrdersModal"
@@ -1203,10 +1387,6 @@ textarea::placeholder {
 </div>
 
 
-<!-- =====================================================
-     SUPABASE
-===================================================== -->
-
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 
@@ -1230,7 +1410,7 @@ const db =
 
 
 /* =====================================================
-   CUSTOMER
+   CUSTOMER ID
 ===================================================== */
 
 let customerId =
@@ -1247,6 +1427,7 @@ if (!customerId) {
     "mrx_customer_id",
     customerId
   );
+
 }
 
 
@@ -1294,14 +1475,15 @@ async function init() {
   }
 
 
-  const tableBadge =
+  const badge =
     document.getElementById(
       "tableBadge"
     );
 
-  if (tableBadge) {
 
-    tableBadge.textContent =
+  if (badge) {
+
+    badge.textContent =
       `Masa ${tableNumber}`;
 
   }
@@ -1341,6 +1523,7 @@ async function loadRestaurant() {
   if (error) {
 
     console.error(
+      "RESTAURANT ERROR:",
       error
     );
 
@@ -1353,10 +1536,18 @@ async function loadRestaurant() {
     data.name
   ) {
 
-    document.getElementById(
-      "restaurantName"
-    ).textContent =
-      data.name;
+    const element =
+      document.getElementById(
+        "restaurantName"
+      );
+
+
+    if (element) {
+
+      element.textContent =
+        data.name;
+
+    }
 
   }
 
@@ -1392,6 +1583,7 @@ async function loadProducts() {
   if (error) {
 
     console.error(
+      "PRODUCT ERROR:",
       error
     );
 
@@ -1439,32 +1631,30 @@ function renderCategories() {
     );
 
 
-  const list =
-    getCategories();
-
-
   element.innerHTML =
-    list.map(
-      (
-        category,
-        index
-      ) => `
+    getCategories()
+      .map(
+        (
+          category,
+          index
+        ) => `
 
-        <button
-          class="${
-            index === 0
-              ? "active"
-              : ""
-          }"
-          onclick="scrollToCategory('${escAttr(
-            category
-          )}')"
-        >
-          ${esc(category)}
-        </button>
+          <button
+            class="${
+              index === 0
+                ? "active"
+                : ""
+            }"
+            onclick="scrollToCategory('${escAttr(
+              category
+            )}')"
+          >
+            ${esc(category)}
+          </button>
 
-      `
-    ).join("");
+        `
+      )
+      .join("");
 
 }
 
@@ -1481,42 +1671,42 @@ function renderMenu() {
     );
 
 
-  const list =
-    getCategories();
-
-
   menu.innerHTML =
-    list.map(
-      category => {
+    getCategories()
+      .map(
+        category => {
 
-        const categoryProducts =
-          products.filter(
-            p =>
-              p.category ===
-              category
-          );
+          const categoryProducts =
+            products.filter(
+              p =>
+                p.category ===
+                category
+            );
 
 
-        return `
+          return `
 
-          <section
-            id="cat-${slug(category)}"
-          >
+            <section
+              id="cat-${slug(category)}"
+            >
 
-            <h2 class="category-title">
-              ${esc(category)}
-            </h2>
+              <h2
+                class="category-title"
+              >
+                ${esc(category)}
+              </h2>
 
-            ${categoryProducts
-              .map(productHTML)
-              .join("")}
+              ${categoryProducts
+                .map(productHTML)
+                .join("")}
 
-          </section>
+            </section>
 
-        `;
+          `;
 
-      }
-    ).join("");
+        }
+      )
+      .join("");
 
 }
 
@@ -1569,9 +1759,7 @@ function productHTML(
    CART
 ===================================================== */
 
-function addToCart(
-  id
-) {
+function addToCart(id) {
 
   const product =
     products.find(
@@ -1744,68 +1932,70 @@ function renderCart() {
 
 
   container.innerHTML =
-    cart.map(
-      item => `
+    cart
+      .map(
+        item => `
 
-        <div class="cart-row">
+          <div class="cart-row">
 
-          <div class="cart-main">
+            <div class="cart-main">
 
-            <strong>
-              ${esc(item.name)}
-            </strong>
+              <strong>
+                ${esc(item.name)}
+              </strong>
 
-            <strong>
-              ₺${(
-                item.price *
-                item.qty
-              ).toFixed(2)}
-            </strong>
+              <strong>
+                ₺${(
+                  item.price *
+                  item.qty
+                ).toFixed(2)}
+              </strong>
+
+            </div>
+
+
+            <div class="qty">
+
+              <button
+                onclick="changeQty(
+                  '${escAttr(item.id)}',
+                  -1
+                )"
+              >
+                −
+              </button>
+
+              <span>
+                ${item.qty}
+              </span>
+
+              <button
+                onclick="changeQty(
+                  '${escAttr(item.id)}',
+                  1
+                )"
+              >
+                +
+              </button>
+
+            </div>
+
+
+            <input
+              class="item-note"
+              value="${escAttr(item.note)}"
+              placeholder="Bu ürün için not..."
+              oninput="updateItemNote(
+                '${escAttr(item.id)}',
+                this.value
+              )"
+            >
 
           </div>
 
-
-          <div class="qty">
-
-            <button
-              onclick="changeQty(
-                '${escAttr(item.id)}',
-                -1
-              )"
-            >
-              −
-            </button>
-
-            <span>
-              ${item.qty}
-            </span>
-
-            <button
-              onclick="changeQty(
-                '${escAttr(item.id)}',
-                1
-              )"
-            >
-              +
-            </button>
-
-          </div>
-
-
-          <input
-            class="item-note"
-            value="${escAttr(item.note)}"
-            placeholder="Bu ürün için not..."
-            oninput="updateItemNote(
-              '${escAttr(item.id)}',
-              this.value
-            )"
-          >
-
-        </div>
-
-      `
-    ).join("");
+        `
+      )
+      .join("");
 
 }
 
@@ -1890,6 +2080,7 @@ async function placeOrder() {
   if (error) {
 
     console.error(
+      "ORDER ERROR:",
       error
     );
 
@@ -1945,6 +2136,11 @@ async function placeOrder() {
 
 
   if (itemsError) {
+
+    console.error(
+      "ITEM ERROR:",
+      itemsError
+    );
 
     alert(
       "Sipariş ürünleri kaydedilemedi: " +
@@ -2018,6 +2214,152 @@ function closeMyOrders() {
 }
 
 
+/* =====================================================
+   STATUS PROGRESS
+===================================================== */
+
+function getProgressStatus(
+  status
+) {
+
+  const orderStatus = {
+
+    new: 0,
+
+    preparing: 1,
+
+    ready: 2,
+
+    completed: 3
+
+  };
+
+
+  return (
+    orderStatus[status] ??
+    0
+  );
+
+}
+
+
+function progressHTML(
+  status
+) {
+
+  const current =
+    getProgressStatus(
+      status
+    );
+
+
+  const steps = [
+
+    {
+      key:
+        "new",
+
+      label:
+        "Alındı"
+    },
+
+    {
+      key:
+        "preparing",
+
+      label:
+        "Hazırlanıyor"
+    },
+
+    {
+      key:
+        "ready",
+
+      label:
+        "Hazır"
+    },
+
+    {
+      key:
+        "completed",
+
+      label:
+        "Tamamlandı"
+    }
+
+  ];
+
+
+  const lineWidth =
+    current === 0
+      ? 0
+      : (current / 3) * 100;
+
+
+  return `
+
+    <div class="order-progress">
+
+      <div
+        class="progress-line"
+        style="width:${lineWidth}%"
+      ></div>
+
+      ${steps
+        .map(
+          (
+            step,
+            index
+          ) => {
+
+            const done =
+              index <= current
+                ? "done"
+                : "";
+
+            const currentClass =
+              index === current
+                ? "current"
+                : "";
+
+
+            return `
+
+              <div
+                class="
+                  progress-step
+                  ${done}
+                  ${currentClass}
+                "
+              >
+
+                <div
+                  class="progress-dot"
+                ></div>
+
+                <span>
+                  ${step.label}
+                </span>
+
+              </div>
+
+            `;
+
+          }
+        )
+        .join("")}
+
+    </div>
+
+  `;
+
+}
+
+
+/* =====================================================
+   LOAD MY ORDERS
+===================================================== */
+
 async function loadMyOrders() {
 
   const container =
@@ -2069,10 +2411,12 @@ async function loadMyOrders() {
 
 
     container.innerHTML = `
+
       <p>
         Sipariş geçmişi yüklenemedi:
         ${esc(error.message)}
       </p>
+
     `;
 
     return;
@@ -2085,7 +2429,10 @@ async function loadMyOrders() {
   ) {
 
     container.innerHTML = `
-      <div class="my-orders-empty">
+
+      <div
+        class="my-orders-empty"
+      >
 
         <strong>
           Henüz siparişiniz yok.
@@ -2096,6 +2443,7 @@ async function loadMyOrders() {
         </p>
 
       </div>
+
     `;
 
 
@@ -2103,6 +2451,7 @@ async function loadMyOrders() {
       "myOrdersTotal"
     ).textContent =
       "₺0";
+
 
     return;
   }
@@ -2113,149 +2462,197 @@ async function loadMyOrders() {
 
 
   container.innerHTML =
-    data.map(
-      order => {
+    data
+      .map(
+        (
+          order,
+          index
+        ) => {
 
-        const total =
-          Number(
-            order.total || 0
-          );
-
-
-        grandTotal +=
-          total;
-
-
-        const time =
-          new Date(
-            order.created_at
-          ).toLocaleTimeString(
-            "tr-TR",
-            {
-              hour:
-                "2-digit",
-              minute:
-                "2-digit"
-            }
-          );
+          const total =
+            Number(
+              order.total || 0
+            );
 
 
-        const statusNames = {
-
-          new:
-            "Yeni",
-
-          preparing:
-            "Hazırlanıyor",
-
-          ready:
-            "Hazır",
-
-          completed:
-            "Tamamlandı"
-
-        };
+          grandTotal +=
+            total;
 
 
-        const statusName =
-          statusNames[
-            order.status
-          ] ||
-          order.status;
+          const date =
+            new Date(
+              order.created_at
+            );
 
 
-        const items =
-          (
-            order.order_items ||
-            []
-          ).map(
-            item => `
+          const time =
+            date.toLocaleTimeString(
+              "tr-TR",
+              {
+                hour:
+                  "2-digit",
+
+                minute:
+                  "2-digit"
+              }
+            );
+
+
+          const statusNames = {
+
+            new:
+              "Yeni",
+
+            preparing:
+              "Hazırlanıyor",
+
+            ready:
+              "Hazır",
+
+            completed:
+              "Tamamlandı"
+
+          };
+
+
+          const statusName =
+            statusNames[
+              order.status
+            ] ||
+            order.status;
+
+
+          const isActive =
+            order.status !==
+            "completed";
+
+
+          const items =
+            (
+              order.order_items ||
+              []
+            )
+              .map(
+                item => `
+
+                  <div
+                    class="my-order-item"
+                  >
+
+                    <span>
+                      ${item.quantity} ×
+                      ${esc(
+                        item.product_name
+                      )}
+                    </span>
+
+                    <strong>
+                      ₺${(
+                        Number(
+                          item.unit_price ||
+                          0
+                        ) *
+                        Number(
+                          item.quantity ||
+                          0
+                        )
+                      ).toFixed(2)}
+                    </strong>
+
+                  </div>
+
+                `
+              )
+              .join("");
+
+
+          return `
+
+            <article
+              class="
+                my-order
+                ${
+                  isActive
+                    ? "active-order"
+                    : ""
+                }
+              "
+            >
 
               <div
-                class="my-order-item"
+                class="my-order-head"
+              >
+
+                <strong>
+                  ${
+                    isActive
+                      ? "Aktif Sipariş"
+                      : "Sipariş"
+                  }
+                </strong>
+
+                <span>
+                  ${time}
+                </span>
+
+              </div>
+
+
+              <div
+                class="
+                  my-order-status
+                  ${esc(
+                    order.status
+                  )}
+                "
+              >
+
+                ${esc(
+                  statusName
+                )}
+
+              </div>
+
+
+              ${
+                isActive
+                  ? progressHTML(
+                      order.status
+                    )
+                  : ""
+              }
+
+
+              <div
+                class="my-order-items"
+              >
+
+                ${items}
+
+              </div>
+
+
+              <div
+                class="my-order-total"
               >
 
                 <span>
-                  ${item.quantity} ×
-                  ${esc(
-                    item.product_name
-                  )}
+                  Toplam
                 </span>
 
                 <strong>
-                  ₺${(
-                    Number(
-                      item.unit_price ||
-                      0
-                    ) *
-                    Number(
-                      item.quantity ||
-                      0
-                    )
-                  ).toFixed(2)}
+                  ₺${total.toFixed(2)}
                 </strong>
 
               </div>
 
-            `
-          ).join("");
+            </article>
 
+          `;
 
-        return `
-
-          <article
-            class="my-order"
-          >
-
-            <div
-              class="my-order-head"
-            >
-
-              <strong>
-                Sipariş
-              </strong>
-
-              <span>
-                ${time}
-              </span>
-
-            </div>
-
-
-            <div
-              class="my-order-status"
-            >
-              ${esc(
-                statusName
-              )}
-            </div>
-
-
-            <div>
-              ${items}
-            </div>
-
-
-            <div
-              class="my-order-total"
-            >
-
-              <span>
-                Toplam
-              </span>
-
-              <strong>
-                ₺${total.toFixed(2)}
-              </strong>
-
-            </div>
-
-          </article>
-
-        `;
-
-      }
-    ).join("");
+        }
+      )
+      .join("");
 
 
   document.getElementById(
@@ -2296,7 +2693,7 @@ function closeCart() {
 
 
 /* =====================================================
-   CATEGORY
+   CATEGORY SCROLL
 ===================================================== */
 
 function scrollToCategory(
@@ -2313,11 +2710,13 @@ function scrollToCategory(
   if (element) {
 
     element.scrollIntoView({
+
       behavior:
         "smooth",
 
       block:
         "start"
+
     });
 
   }
@@ -2416,7 +2815,7 @@ function escAttr(
 
 
 /* =====================================================
-   MRX OPEN MENU
+   MRX MENU
 ===================================================== */
 
 function openMRXMenu() {
