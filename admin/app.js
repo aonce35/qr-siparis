@@ -399,3 +399,45 @@ function esc(value) {
 function escAttr(value) {
   return esc(value);
 }
+async function enableNotifications() {
+  const button = document.getElementById("enableNotifications");
+
+  if (!("Notification" in window)) {
+    alert("Bu cihaz bildirimleri desteklemiyor.");
+    return;
+  }
+
+  if (!("serviceWorker" in navigator)) {
+    alert("Bu tarayıcı Service Worker desteklemiyor.");
+    return;
+  }
+
+  try {
+    const permission = await Notification.requestPermission();
+
+    if (permission !== "granted") {
+      alert("Bildirim izni verilmedi.");
+      return;
+    }
+
+    const registration =
+      await navigator.serviceWorker.register(
+        "./service-worker.js"
+      );
+
+    console.log(
+      "Service Worker hazır:",
+      registration
+    );
+
+    if (button) {
+      button.textContent = "🔔 Bildirimler Açık";
+      button.disabled = true;
+    }
+
+    alert("Bildirimler açıldı!");
+  } catch (error) {
+    console.error("Bildirim hatası:", error);
+    alert("Bildirimler açılamadı: " + error.message);
+  }
+}
