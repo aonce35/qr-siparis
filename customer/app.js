@@ -28,7 +28,7 @@ async function loadRestaurant(){
 }
 
 async function loadProducts(){
-  const {data,error} = await db.from("products").select("*").eq("is_active",true).order("sort_order");
+  const {data,error} = await db.from("products").select("*").order("sort_order");
   if(error){ showNotice("Menü yüklenemedi."); console.error(error); return; }
   products = data || [];
 }
