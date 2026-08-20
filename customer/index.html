@@ -2,46 +2,351 @@
 <html lang="tr">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>QR Menü</title>
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1"
+  >
+
+  <title>MRX</title>
+
   <link rel="stylesheet" href="style.css">
+
+  <style>
+    /* =========================
+       MRX WELCOME SCREEN
+    ========================= */
+
+    #mrxWelcome {
+      position: fixed;
+      inset: 0;
+      z-index: 99999;
+
+      background: #000;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      padding: 30px;
+
+      transition:
+        opacity 0.5s ease,
+        visibility 0.5s ease;
+    }
+
+    #mrxWelcome.hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .mrx-welcome-content {
+      width: 100%;
+      max-width: 420px;
+
+      text-align: center;
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .mrx-logo {
+      margin: 0;
+
+      color: #fff;
+
+      font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Helvetica Neue",
+        Arial,
+        sans-serif;
+
+      font-size: 64px;
+      font-weight: 800;
+
+      letter-spacing: 12px;
+
+      line-height: 1;
+    }
+
+    .mrx-slogan {
+      margin: 28px 0 42px;
+
+      color: #999;
+
+      font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Helvetica Neue",
+        Arial,
+        sans-serif;
+
+      font-size: 16px;
+      font-weight: 400;
+
+      letter-spacing: 0.3px;
+    }
+
+    .mrx-menu-button {
+      width: 100%;
+      max-width: 280px;
+
+      border: 1px solid #333;
+      border-radius: 14px;
+
+      background: #fff;
+      color: #000;
+
+      padding: 17px 24px;
+
+      font-size: 16px;
+      font-weight: 600;
+
+      cursor: pointer;
+
+      transition:
+        transform 0.2s ease,
+        background 0.2s ease;
+    }
+
+    .mrx-menu-button:active {
+      transform: scale(0.97);
+    }
+
+    .mrx-footer {
+      margin-top: 55px;
+
+      color: #444;
+
+      font-size: 11px;
+      letter-spacing: 2px;
+    }
+
+
+    /* =========================
+       MENU HIDDEN INITIALLY
+    ========================= */
+
+    #mainMenuContent {
+      display: none;
+    }
+
+    #mainMenuContent.visible {
+      display: block;
+    }
+  </style>
 </head>
+
 <body>
-  <header class="topbar">
-    <div>
-      <div class="eyebrow">QR MENÜ</div>
-      <h1 id="restaurantName">Menü</h1>
-    </div>
-    <div class="table-badge" id="tableBadge">Masa</div>
-  </header>
 
-  <main>
-    <div id="notice" class="notice hidden"></div>
-    <div id="categories" class="categories"></div>
-    <section id="menu" class="menu"></section>
-  </main>
+  <!-- =========================
+       MRX WELCOME
+  ========================= -->
 
-  <button id="cartButton" class="cart-button" onclick="openCart()">
-    Sepet <span id="cartCount">0</span>
-  </button>
+  <section id="mrxWelcome">
 
-  <div id="cartModal" class="modal hidden">
-    <div class="modal-card">
-      <div class="modal-head">
-        <h2>Sepet</h2>
-        <button onclick="closeCart()">×</button>
+    <div class="mrx-welcome-content">
+
+      <h1 class="mrx-logo">
+        MRX
+      </h1>
+
+      <p class="mrx-slogan">
+        Yeni nesil sipariş deneyimi.
+      </p>
+
+      <button
+        class="mrx-menu-button"
+        onclick="openMRXMenu()"
+      >
+        Menüyü Gör →
+      </button>
+
+      <div class="mrx-footer">
+        POWERED BY MRX
       </div>
-      <div id="cartItems"></div>
-      <div class="order-summary">
-        <span>Toplam</span><strong id="cartTotal">₺0</strong>
-      </div>
-      <label class="label">Sipariş notu</label>
-      <textarea id="orderNote" placeholder="Örn. Soğansız, sos ayrı, acele değil..."></textarea>
-      <button class="primary" onclick="placeOrder()">Siparişi Gönder</button>
+
     </div>
+
+  </section>
+
+
+  <!-- =========================
+       EXISTING MENU
+  ========================= -->
+
+  <div id="mainMenuContent">
+
+    <header class="topbar">
+
+      <div>
+
+        <div class="eyebrow">
+          QR MENÜ
+        </div>
+
+        <h1 id="restaurantName">
+          Menü
+        </h1>
+
+      </div>
+
+      <div
+        class="table-badge"
+        id="tableBadge"
+      >
+        Masa
+      </div>
+
+    </header>
+
+
+    <main>
+
+      <div
+        id="notice"
+        class="notice hidden"
+      ></div>
+
+      <div
+        id="categories"
+        class="categories"
+      ></div>
+
+      <section
+        id="menu"
+        class="menu"
+      ></section>
+
+    </main>
+
+
+    <button
+      id="cartButton"
+      class="cart-button"
+      onclick="openCart()"
+    >
+      Sepet
+      <span id="cartCount">
+        0
+      </span>
+    </button>
+
+
+    <div
+      id="cartModal"
+      class="modal hidden"
+    >
+
+      <div class="modal-card">
+
+        <div class="modal-head">
+
+          <h2>
+            Sepet
+          </h2>
+
+          <button
+            onclick="closeCart()"
+          >
+            ×
+          </button>
+
+        </div>
+
+
+        <div id="cartItems"></div>
+
+
+        <div class="order-summary">
+
+          <span>
+            Toplam
+          </span>
+
+          <strong id="cartTotal">
+            ₺0
+          </strong>
+
+        </div>
+
+
+        <label class="label">
+          Sipariş notu
+        </label>
+
+        <textarea
+          id="orderNote"
+          placeholder="Örn. Soğansız, sos ayrı, acele değil..."
+        ></textarea>
+
+
+        <button
+          class="primary"
+          onclick="placeOrder()"
+        >
+          Siparişi Gönder
+        </button>
+
+      </div>
+
+    </div>
+
   </div>
 
+
+  <!-- =========================
+       SCRIPTS
+  ========================= -->
+
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
   <script src="./app.js?v=2"></script>
+
+
+  <!-- =========================
+       MRX LOGIC
+  ========================= -->
+
+  <script>
+
+    function openMRXMenu() {
+
+      const welcome =
+        document.getElementById(
+          "mrxWelcome"
+        );
+
+      const menu =
+        document.getElementById(
+          "mainMenuContent"
+        );
+
+      menu.classList.add(
+        "visible"
+      );
+
+      welcome.classList.add(
+        "hidden"
+      );
+
+      /*
+        Animasyon bittikten sonra
+        welcome ekranını tamamen kaldır.
+      */
+
+      setTimeout(() => {
+
+        welcome.style.display =
+          "none";
+
+      }, 550);
+
+    }
+
+  </script>
+
 </body>
 </html>
