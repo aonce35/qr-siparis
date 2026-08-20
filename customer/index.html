@@ -1,666 +1,390 @@
-/* =====================================================
-   MRX QR SİPARİŞ — DARK THEME
-===================================================== */
+<!doctype html>
+<html lang="tr">
 
-* {
-  box-sizing: border-box;
-}
+<head>
+  <meta charset="UTF-8">
 
-html {
-  background: #000;
-  color: #fff;
-  scroll-behavior: smooth;
-}
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1"
+  >
 
-body {
-  margin: 0;
-  min-height: 100vh;
+  <title>MRX</title>
 
-  background: #000;
-  color: #fff;
+  <link
+    rel="stylesheet"
+    href="style.css"
+  >
 
-  font-family:
-    -apple-system,
-    BlinkMacSystemFont,
-    "SF Pro Text",
-    "Helvetica Neue",
-    Arial,
-    sans-serif;
+  <style>
 
-  -webkit-font-smoothing: antialiased;
-}
+    /* =========================
+       MRX WELCOME SCREEN
+    ========================= */
 
+    #mrxWelcome {
+      position: fixed;
+      inset: 0;
+      z-index: 99999;
 
-/* =====================================================
-   TOPBAR
-===================================================== */
+      background: #000;
 
-.topbar {
-  position: sticky;
-  top: 0;
-  z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: center;
 
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+      padding: 28px;
+      box-sizing: border-box;
 
-  padding: 20px 18px 16px;
+      transition:
+        opacity 0.45s ease,
+        visibility 0.45s ease;
+    }
 
-  background: #000;
-  color: #fff;
+    #mrxWelcome.hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
 
-  border-bottom: 1px solid #1d1d1d;
-}
+    .mrx-welcome-content {
+      width: 100%;
+      max-width: 380px;
 
-.eyebrow {
-  margin-bottom: 5px;
+      text-align: center;
 
-  color: #777;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
 
-  font-size: 10px;
-  font-weight: 600;
+    .mrx-logo {
+      margin: 0;
 
-  letter-spacing: 2px;
-  text-transform: uppercase;
-}
+      color: #fff;
 
-#restaurantName {
-  margin: 0;
+      font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "SF Pro Display",
+        "Helvetica Neue",
+        Arial,
+        sans-serif;
 
-  color: #fff;
+      font-size: 62px;
+      font-weight: 700;
 
-  font-size: 25px;
-  font-weight: 700;
+      letter-spacing: 8px;
 
-  letter-spacing: -0.5px;
-}
+      line-height: 1;
+    }
 
-.table-badge {
-  padding: 8px 12px;
+    .mrx-slogan {
+      margin: 25px 0 42px;
 
-  border-radius: 10px;
+      color: #fff;
 
-  background: #fff;
-  color: #000;
+      font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "SF Pro Text",
+        "Helvetica Neue",
+        Arial,
+        sans-serif;
 
-  font-size: 13px;
-  font-weight: 600;
+      font-size: 17px;
+      font-weight: 400;
 
-  white-space: nowrap;
-}
+      letter-spacing: 0.2px;
+      line-height: 1.5;
+    }
 
+    .mrx-menu-button {
+      width: 100%;
+      max-width: 280px;
 
-/* =====================================================
-   MAIN
-===================================================== */
+      box-sizing: border-box;
 
-main {
-  width: 100%;
-  max-width: 700px;
+      padding: 17px 24px;
 
-  margin: 0 auto;
+      border: 1px solid #fff;
+      border-radius: 12px;
 
-  padding: 18px 16px 120px;
+      background: #fff;
+      color: #000;
 
-  background: #000;
-}
+      font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "SF Pro Text",
+        "Helvetica Neue",
+        Arial,
+        sans-serif;
 
+      font-size: 16px;
+      font-weight: 600;
 
-/* =====================================================
-   NOTICE
-===================================================== */
+      cursor: pointer;
 
-.notice {
-  margin-bottom: 18px;
+      -webkit-tap-highlight-color: transparent;
 
-  padding: 13px 15px;
+      transition:
+        transform 0.15s ease,
+        opacity 0.15s ease;
+    }
 
-  border: 1px solid #292929;
-  border-radius: 12px;
+    .mrx-menu-button:active {
+      transform: scale(0.97);
+      opacity: 0.85;
+    }
 
-  background: #111;
-  color: #fff;
+    .mrx-footer {
+      margin-top: 48px;
 
-  font-size: 14px;
-}
+      color: #666;
 
-.hidden {
-  display: none !important;
-}
+      font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "SF Pro Text",
+        "Helvetica Neue",
+        Arial,
+        sans-serif;
 
+      font-size: 10px;
 
-/* =====================================================
-   CATEGORIES
-===================================================== */
+      letter-spacing: 2px;
+    }
 
-.categories {
-  display: flex;
+    /* =========================
+       MENU
+    ========================= */
 
-  gap: 8px;
+    #mainMenuContent {
+      display: none;
+    }
 
-  margin-bottom: 20px;
+    #mainMenuContent.visible {
+      display: block;
+    }
 
-  overflow-x: auto;
+  </style>
+</head>
 
-  padding-bottom: 4px;
 
-  scrollbar-width: none;
-}
+<body>
 
-.categories::-webkit-scrollbar {
-  display: none;
-}
 
-.categories button {
-  flex: 0 0 auto;
+  <!-- =========================
+       MRX WELCOME
+  ========================= -->
 
-  padding: 10px 15px;
+  <section id="mrxWelcome">
 
-  border: 1px solid #292929;
-  border-radius: 999px;
+    <div class="mrx-welcome-content">
 
-  background: #111;
-  color: #aaa;
+      <h1 class="mrx-logo">
+        MRX
+      </h1>
 
-  font-family: inherit;
+      <p class="mrx-slogan">
+        Yeni nesil sipariş deneyimi.
+      </p>
 
-  font-size: 13px;
-  font-weight: 600;
+      <button
+        class="mrx-menu-button"
+        onclick="openMRXMenu()"
+      >
+        Menüyü Gör →
+      </button>
 
-  cursor: pointer;
-}
+      <div class="mrx-footer">
+        POWERED BY MRX
+      </div>
 
-.categories button.active,
-.categories button.selected {
-  background: #fff;
-  color: #000;
+    </div>
 
-  border-color: #fff;
-}
+  </section>
 
 
-/* =====================================================
-   MENU
-===================================================== */
+  <!-- =========================
+       MEVCUT MENÜ SİSTEMİ
+  ========================= -->
 
-.menu {
-  display: flex;
-  flex-direction: column;
+  <div id="mainMenuContent">
 
-  gap: 12px;
+    <header class="topbar">
 
-  background: #000;
-}
+      <div>
 
+        <div class="eyebrow">
+          QR MENÜ
+        </div>
 
-/* =====================================================
-   PRODUCT CARDS
-===================================================== */
+        <h1 id="restaurantName">
+          Menü
+        </h1>
 
-/* Olası tüm ürün class'larını yakalıyoruz */
+      </div>
 
-.menu > div,
-.menu > article,
-.menu-item,
-.product,
-.product-card,
-.item-card,
-.food-card {
-  position: relative;
+      <div
+        class="table-badge"
+        id="tableBadge"
+      >
+        Masa
+      </div>
 
-  padding: 16px;
+    </header>
 
-  border: 1px solid #242424;
-  border-radius: 16px;
 
-  background: #111;
-  color: #fff;
+    <main>
 
-  overflow: hidden;
-}
+      <div
+        id="notice"
+        class="notice hidden"
+      ></div>
 
+      <div
+        id="categories"
+        class="categories"
+      ></div>
 
-/* Ürün başlıkları */
+      <section
+        id="menu"
+        class="menu"
+      ></section>
 
-.menu h2,
-.menu h3,
-.menu h4,
-.product h2,
-.product h3,
-.product h4,
-.product-card h2,
-.product-card h3,
-.product-card h4,
-.menu-item h2,
-.menu-item h3,
-.menu-item h4 {
-  margin-top: 0;
+    </main>
 
-  color: #fff;
 
-  font-weight: 650;
+    <button
+      id="cartButton"
+      class="cart-button"
+      onclick="openCart()"
+    >
+      Sepet
 
-  letter-spacing: -0.2px;
-}
+      <span id="cartCount">
+        0
+      </span>
 
+    </button>
 
-/* Ürün açıklamaları */
 
-.menu p,
-.product p,
-.product-card p,
-.menu-item p {
-  color: #999;
+    <div
+      id="cartModal"
+      class="modal hidden"
+    >
 
-  line-height: 1.5;
-}
+      <div class="modal-card">
 
+        <div class="modal-head">
 
-/* Fiyat */
+          <h2>
+            Sepet
+          </h2>
 
-.menu strong,
-.product strong,
-.product-card strong,
-.menu-item strong {
-  color: #fff;
-}
+          <button
+            onclick="closeCart()"
+          >
+            ×
+          </button>
 
+        </div>
 
-/* =====================================================
-   BUTTONS
-===================================================== */
 
-button {
-  font-family: inherit;
-}
+        <div id="cartItems"></div>
 
 
-/* Ürün ekleme butonları */
+        <div class="order-summary">
 
-.menu button,
-.product button,
-.product-card button,
-.menu-item button {
-  border: 1px solid #fff;
-  border-radius: 10px;
+          <span>
+            Toplam
+          </span>
 
-  background: #fff;
-  color: #000;
+          <strong id="cartTotal">
+            ₺0
+          </strong>
 
-  padding: 9px 13px;
+        </div>
 
-  font-size: 13px;
-  font-weight: 600;
 
-  cursor: pointer;
-}
+        <label class="label">
+          Sipariş notu
+        </label>
 
-.menu button:active,
-.product button:active,
-.product-card button:active,
-.menu-item button:active {
-  transform: scale(0.97);
-}
 
+        <textarea
+          id="orderNote"
+          placeholder="Örn. Soğansız, sos ayrı, acele değil..."
+        ></textarea>
 
-/* =====================================================
-   CART BUTTON
-===================================================== */
 
-.cart-button {
-  position: fixed;
+        <button
+          class="primary"
+          onclick="placeOrder()"
+        >
+          Siparişi Gönder
+        </button>
 
-  left: 50%;
-  bottom: 20px;
+      </div>
 
-  transform: translateX(-50%);
+    </div>
 
-  z-index: 500;
+  </div>
 
-  min-width: 190px;
 
-  padding: 15px 22px;
+  <!-- =========================
+       SCRIPTS
+  ========================= -->
 
-  border: 1px solid #fff;
-  border-radius: 14px;
+  <script
+    src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
+  ></script>
 
-  background: #fff;
-  color: #000;
+  <script
+    src="./app.js?v=2"
+  ></script>
 
-  box-shadow:
-    0 8px 30px rgba(0, 0, 0, 0.5);
 
-  font-family: inherit;
+  <!-- =========================
+       MRX OPEN MENU
+  ========================= -->
 
-  font-size: 15px;
-  font-weight: 700;
+  <script>
 
-  cursor: pointer;
-}
+    function openMRXMenu() {
 
-.cart-button:active {
-  transform:
-    translateX(-50%)
-    scale(0.97);
-}
+      const welcome =
+        document.getElementById(
+          "mrxWelcome"
+        );
 
-#cartCount {
-  display: inline-flex;
+      const menu =
+        document.getElementById(
+          "mainMenuContent"
+        );
 
-  align-items: center;
-  justify-content: center;
+      menu.classList.add(
+        "visible"
+      );
 
-  min-width: 21px;
-  height: 21px;
+      welcome.classList.add(
+        "hidden"
+      );
 
-  margin-left: 6px;
+      setTimeout(function () {
 
-  padding: 0 5px;
+        welcome.style.display =
+          "none";
 
-  border-radius: 999px;
+      }, 500);
 
-  background: #000;
-  color: #fff;
+    }
 
-  font-size: 11px;
-}
+  </script>
 
 
-/* =====================================================
-   MODAL
-===================================================== */
+</body>
 
-.modal {
-  position: fixed;
-
-  inset: 0;
-
-  z-index: 1000;
-
-  display: flex;
-
-  align-items: flex-end;
-  justify-content: center;
-
-  padding: 15px;
-
-  background:
-    rgba(0, 0, 0, 0.78);
-
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-}
-
-
-/* =====================================================
-   CART CARD
-===================================================== */
-
-.modal-card {
-  width: 100%;
-  max-width: 600px;
-
-  max-height: 88vh;
-
-  overflow-y: auto;
-
-  padding: 20px;
-
-  border: 1px solid #292929;
-  border-radius: 22px 22px 16px 16px;
-
-  background: #111;
-  color: #fff;
-
-  box-shadow:
-    0 -10px 40px rgba(0, 0, 0, 0.5);
-}
-
-
-/* =====================================================
-   MODAL HEADER
-===================================================== */
-
-.modal-head {
-  display: flex;
-
-  align-items: center;
-  justify-content: space-between;
-
-  margin-bottom: 18px;
-}
-
-.modal-head h2 {
-  margin: 0;
-
-  color: #fff;
-
-  font-size: 22px;
-}
-
-.modal-head button {
-  width: 34px;
-  height: 34px;
-
-  border: 0;
-  border-radius: 50%;
-
-  background: #222;
-  color: #fff;
-
-  font-size: 23px;
-
-  cursor: pointer;
-}
-
-
-/* =====================================================
-   CART ITEMS
-===================================================== */
-
-#cartItems {
-  display: flex;
-  flex-direction: column;
-
-  gap: 10px;
-
-  margin-bottom: 18px;
-}
-
-#cartItems > div {
-  padding: 13px;
-
-  border: 1px solid #292929;
-  border-radius: 12px;
-
-  background: #181818;
-  color: #fff;
-}
-
-
-/* =====================================================
-   ORDER SUMMARY
-===================================================== */
-
-.order-summary {
-  display: flex;
-
-  align-items: center;
-  justify-content: space-between;
-
-  padding: 16px 0;
-
-  border-top: 1px solid #292929;
-  border-bottom: 1px solid #292929;
-
-  margin-bottom: 18px;
-
-  color: #aaa;
-}
-
-.order-summary strong {
-  color: #fff;
-
-  font-size: 20px;
-}
-
-
-/* =====================================================
-   LABEL
-===================================================== */
-
-.label {
-  display: block;
-
-  margin-bottom: 8px;
-
-  color: #fff;
-
-  font-size: 13px;
-  font-weight: 600;
-}
-
-
-/* =====================================================
-   TEXTAREA
-===================================================== */
-
-textarea {
-  width: 100%;
-
-  min-height: 95px;
-
-  resize: vertical;
-
-  padding: 13px;
-
-  border: 1px solid #292929;
-  border-radius: 12px;
-
-  outline: none;
-
-  background: #000;
-  color: #fff;
-
-  font-family: inherit;
-  font-size: 14px;
-
-  margin-bottom: 14px;
-}
-
-textarea:focus {
-  border-color: #666;
-}
-
-textarea::placeholder {
-  color: #666;
-}
-
-
-/* =====================================================
-   PRIMARY BUTTON
-===================================================== */
-
-.primary {
-  width: 100%;
-
-  padding: 15px;
-
-  border: 1px solid #fff;
-  border-radius: 12px;
-
-  background: #fff;
-  color: #000;
-
-  font-family: inherit;
-
-  font-size: 15px;
-  font-weight: 700;
-
-  cursor: pointer;
-}
-
-.primary:active {
-  transform: scale(0.98);
-}
-
-
-/* =====================================================
-   MOBILE
-===================================================== */
-
-@media (max-width: 600px) {
-
-  .topbar {
-    padding:
-      17px
-      16px
-      14px;
-  }
-
-  #restaurantName {
-    font-size: 23px;
-  }
-
-  main {
-    padding:
-      16px
-      14px
-      115px;
-  }
-
-  .menu > div,
-  .menu > article,
-  .menu-item,
-  .product,
-  .product-card,
-  .item-card,
-  .food-card {
-    padding: 14px;
-  }
-
-  .cart-button {
-    bottom: 17px;
-
-    min-width: 180px;
-  }
-}
-
-
-/* =====================================================
-   SAFE DARK OVERRIDES
-===================================================== */
-
-body,
-main,
-.menu,
-.categories {
-  background-color: #000 !important;
-}
-
-.topbar {
-  background-color: #000 !important;
-}
-
-.menu *,
-.categories * {
-  color-scheme: dark;
-}
-
-
-/* =====================================================
-   SCROLLBAR
-===================================================== */
-
-::-webkit-scrollbar {
-  width: 5px;
-}
-
-::-webkit-scrollbar-track {
-  background: #000;
-}
-
-::-webkit-scrollbar-thumb {
-  background: #333;
-  border-radius: 10px;
-}
+</html>
