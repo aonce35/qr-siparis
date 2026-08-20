@@ -1,4 +1,4 @@
-const SUPABASE_URL = "https://dppqwgsawarkyzzonzyu.supabase.co";
+const SUPABASE_URL = "https://dppqwqsawarkyzzonzyu.supabase.co";
 const SUPABASE_ANON_KEY = "sb_publishable_fhNovHoi8Xgh1jScRsdrgQ_ZCe6I4tP";
 
 const db = supabase.createClient(
@@ -21,7 +21,9 @@ async function init() {
 
   if (error) {
     console.error("SESSION ERROR:", error);
-    showLoginError("Oturum kontrolü başarısız: " + error.message);
+    showLoginError(
+      "Oturum kontrolü başarısız: " + error.message
+    );
     return;
   }
 
@@ -31,8 +33,11 @@ async function init() {
 }
 
 async function login() {
-  const email = document.getElementById("email").value.trim();
-  const password = document.getElementById("password").value;
+  const email =
+    document.getElementById("email").value.trim();
+
+  const password =
+    document.getElementById("password").value;
 
   if (!email || !password) {
     showLoginError("E-posta ve şifre gerekli.");
@@ -41,17 +46,19 @@ async function login() {
 
   showLoginError("");
 
-  const button = document.querySelector("#loginView button");
+  const button =
+    document.querySelector("#loginView button");
 
   if (button) {
     button.disabled = true;
     button.textContent = "Giriş yapılıyor...";
   }
 
-  const { data, error } = await db.auth.signInWithPassword({
-    email,
-    password
-  });
+  const { data, error } =
+    await db.auth.signInWithPassword({
+      email,
+      password
+    });
 
   if (error) {
     console.error("LOGIN ERROR:", error);
@@ -68,7 +75,10 @@ async function login() {
     return;
   }
 
-  console.log("LOGIN BAŞARILI:", data.user);
+  console.log(
+    "LOGIN BAŞARILI:",
+    data.user
+  );
 
   await showApp();
 }
@@ -79,8 +89,11 @@ async function logout() {
 }
 
 async function showApp() {
-  const loginView = document.getElementById("loginView");
-  const appView = document.getElementById("appView");
+  const loginView =
+    document.getElementById("loginView");
+
+  const appView =
+    document.getElementById("appView");
 
   if (loginView) {
     loginView.classList.add("hidden");
@@ -122,20 +135,26 @@ async function showApp() {
 }
 
 async function loadOrders() {
-  console.log("SİPARİŞLER YÜKLENİYOR...");
+  console.log(
+    "SİPARİŞLER YÜKLENİYOR..."
+  );
 
-  const { data, error } = await db
-    .from("orders")
-    .select(`
-      *,
-      order_items (*)
-    `)
-    .order("created_at", {
-      ascending: false
-    });
+  const { data, error } =
+    await db
+      .from("orders")
+      .select(`
+        *,
+        order_items (*)
+      `)
+      .order("created_at", {
+        ascending: false
+      });
 
   if (error) {
-    console.error("ORDERS ERROR:", error);
+    console.error(
+      "ORDERS ERROR:",
+      error
+    );
 
     const ordersElement =
       document.getElementById("orders");
@@ -154,50 +173,72 @@ async function loadOrders() {
 
   orders = data || [];
 
-  console.log("YÜKLENEN SİPARİŞLER:", orders);
+  console.log(
+    "YÜKLENEN SİPARİŞLER:",
+    orders
+  );
 
   render();
 }
 
 function render() {
-  const newOrders = orders.filter(
-    order => order.status === "new"
-  );
+  const newOrders =
+    orders.filter(
+      order =>
+        order.status === "new"
+    );
 
-  const preparingOrders = orders.filter(
-    order => order.status === "preparing"
-  );
+  const preparingOrders =
+    orders.filter(
+      order =>
+        order.status === "preparing"
+    );
 
-  const readyOrders = orders.filter(
-    order => order.status === "ready"
-  );
+  const readyOrders =
+    orders.filter(
+      order =>
+        order.status === "ready"
+    );
 
-  const activeOrders = orders.filter(
-    order => order.status !== "completed"
-  );
+  const activeOrders =
+    orders.filter(
+      order =>
+        order.status !== "completed"
+    );
 
   const newCount =
-    document.getElementById("newCount");
+    document.getElementById(
+      "newCount"
+    );
 
   const prepCount =
-    document.getElementById("prepCount");
+    document.getElementById(
+      "prepCount"
+    );
 
   const readyCount =
-    document.getElementById("readyCount");
+    document.getElementById(
+      "readyCount"
+    );
 
   const ordersElement =
-    document.getElementById("orders");
+    document.getElementById(
+      "orders"
+    );
 
   if (newCount) {
-    newCount.textContent = newOrders.length;
+    newCount.textContent =
+      newOrders.length;
   }
 
   if (prepCount) {
-    prepCount.textContent = preparingOrders.length;
+    prepCount.textContent =
+      preparingOrders.length;
   }
 
   if (readyCount) {
-    readyCount.textContent = readyOrders.length;
+    readyCount.textContent =
+      readyOrders.length;
   }
 
   if (!ordersElement) {
@@ -215,44 +256,47 @@ function render() {
   }
 
   ordersElement.innerHTML =
-    activeOrders.map(orderHTML).join("");
+    activeOrders
+      .map(orderHTML)
+      .join("");
 }
 
 function orderHTML(order) {
-  const items = (order.order_items || [])
-    .map(item => {
-      const itemTotal =
-        Number(item.quantity || 0) *
-        Number(item.unit_price || 0);
+  const items =
+    (order.order_items || [])
+      .map(item => {
+        const itemTotal =
+          Number(item.quantity || 0) *
+          Number(item.unit_price || 0);
 
-      return `
-        <div class="item">
+        return `
+          <div class="item">
 
-          <div class="item-top">
-            <span>
-              ${item.quantity} ×
-              ${esc(item.product_name)}
-            </span>
+            <div class="item-top">
+              <span>
+                ${item.quantity} ×
+                ${esc(item.product_name)}
+              </span>
 
-            <span>
-              ₺${itemTotal.toFixed(2)}
-            </span>
+              <span>
+                ₺${itemTotal.toFixed(2)}
+              </span>
+            </div>
+
+            ${
+              item.note
+                ? `
+                  <div class="note">
+                    Not: ${esc(item.note)}
+                  </div>
+                `
+                : ""
+            }
+
           </div>
-
-          ${
-            item.note
-              ? `
-                <div class="note">
-                  Not: ${esc(item.note)}
-                </div>
-              `
-              : ""
-          }
-
-        </div>
-      `;
-    })
-    .join("");
+        `;
+      })
+      .join("");
 
   const statusNames = {
     new: "Yeni",
@@ -262,27 +306,35 @@ function orderHTML(order) {
   };
 
   const statusName =
-    statusNames[order.status] || order.status;
+    statusNames[order.status] ||
+    order.status;
 
-  const time = order.created_at
-    ? new Date(order.created_at).toLocaleTimeString(
-        "tr-TR",
-        {
-          hour: "2-digit",
-          minute: "2-digit"
-        }
-      )
-    : "";
+  const time =
+    order.created_at
+      ? new Date(
+          order.created_at
+        ).toLocaleTimeString(
+          "tr-TR",
+          {
+            hour: "2-digit",
+            minute: "2-digit"
+          }
+        )
+      : "";
 
   return `
     <article class="order ${
-      order.status === "new" ? "new" : ""
+      order.status === "new"
+        ? "new"
+        : ""
     }">
 
       <div class="order-head">
 
         <div class="table">
-          Masa ${esc(order.table_number)}
+          Masa ${esc(
+            order.table_number
+          )}
         </div>
 
         <div class="time">
@@ -291,7 +343,9 @@ function orderHTML(order) {
 
       </div>
 
-      <div class="status ${esc(order.status)}">
+      <div class="status ${esc(
+        order.status
+      )}">
         ${esc(statusName)}
       </div>
 
@@ -301,8 +355,12 @@ function orderHTML(order) {
         order.customer_note
           ? `
             <div class="customer-note">
-              <strong>Sipariş notu:</strong>
-              ${esc(order.customer_note)}
+              <strong>
+                Sipariş notu:
+              </strong>
+              ${esc(
+                order.customer_note
+              )}
             </div>
           `
           : ""
@@ -320,17 +378,25 @@ function buttons(order) {
   if (order.status === "new") {
     return `
       <button
-        onclick="setStatus('${escAttr(order.id)}','preparing')"
+        onclick="setStatus(
+          '${escAttr(order.id)}',
+          'preparing'
+        )"
       >
         Hazırlamaya Al
       </button>
     `;
   }
 
-  if (order.status === "preparing") {
+  if (
+    order.status === "preparing"
+  ) {
     return `
       <button
-        onclick="setStatus('${escAttr(order.id)}','ready')"
+        onclick="setStatus(
+          '${escAttr(order.id)}',
+          'ready'
+        )"
       >
         Hazır
       </button>
@@ -340,7 +406,10 @@ function buttons(order) {
   if (order.status === "ready") {
     return `
       <button
-        onclick="setStatus('${escAttr(order.id)}','completed')"
+        onclick="setStatus(
+          '${escAttr(order.id)}',
+          'completed'
+        )"
       >
         Tamamlandı
       </button>
@@ -350,16 +419,23 @@ function buttons(order) {
   return "";
 }
 
-async function setStatus(id, status) {
-  const { error } = await db
-    .from("orders")
-    .update({
-      status
-    })
-    .eq("id", id);
+async function setStatus(
+  id,
+  status
+) {
+  const { error } =
+    await db
+      .from("orders")
+      .update({
+        status
+      })
+      .eq("id", id);
 
   if (error) {
-    console.error("STATUS ERROR:", error);
+    console.error(
+      "STATUS ERROR:",
+      error
+    );
 
     alert(
       "Durum değiştirilemedi: " +
@@ -374,15 +450,20 @@ async function setStatus(id, status) {
 
 function showLoginError(message) {
   const element =
-    document.getElementById("loginError");
+    document.getElementById(
+      "loginError"
+    );
 
   if (element) {
-    element.textContent = message || "";
+    element.textContent =
+      message || "";
   }
 }
 
 function esc(value) {
-  return String(value ?? "").replace(
+  return String(
+    value ?? ""
+  ).replace(
     /[&<>"']/g,
     character => ({
       "&": "&amp;",
@@ -396,145 +477,4 @@ function esc(value) {
 
 function escAttr(value) {
   return esc(value);
-}
-
-async function enableNotifications() {
-  if (!("Notification" in window)) {
-    alert("Bu cihaz bildirimleri desteklemiyor.");
-    return;
-  }
-
-  if (!("serviceWorker" in navigator)) {
-    alert("Service Worker desteklenmiyor.");
-    return;
-  }
-
-  try {
-    const permission =
-      await Notification.requestPermission();
-
-    if (permission !== "granted") {
-      alert("Bildirim izni verilmedi.");
-      return;
-    }
-
-    const registration =
-      await navigator.serviceWorker.register(
-        "./service-worker.js"
-      );
-
-    const publicKey =
-      "BPsCSbvdu2cl_jaRVXQ9K3zN7AN_4V6iBCRhu1MZIgFbHXfOFMCYlcYFDLGeXhm1XoHTglW20HR_uXLTE7KLR_g";
-
-    let subscription =
-      await registration.pushManager.getSubscription();
-
-    if (!subscription) {
-      subscription =
-        await registration.pushManager.subscribe({
-          userVisibleOnly: true,
-          applicationServerKey:
-            urlBase64ToUint8Array(publicKey)
-        });
-    }
-
-    const {
-      data: { user }
-    } = await db.auth.getUser();
-
-    if (!user) {
-      alert("Önce admin hesabıyla giriş yap.");
-      return;
-    }
-
-    const json = subscription.toJSON();
-
-    if (!json.endpoint || !json.keys) {
-      throw new Error(
-        "Push aboneliği bilgileri alınamadı."
-      );
-    }
-
-    const { error } =
-      await db
-        .from("push_subscriptions")
-        .upsert(
-          {
-            user_id: user.id,
-            endpoint: json.endpoint,
-            p256dh: json.keys.p256dh,
-            auth: json.keys.auth
-          },
-          {
-            onConflict: "endpoint"
-          }
-        );
-
-    if (error) {
-      console.error(
-        "PUSH DATABASE ERROR:",
-        error
-      );
-
-      alert(
-        "Bildirim kaydedilemedi: " +
-        error.message
-      );
-
-      return;
-    }
-
-    const button =
-      document.getElementById(
-        "enableNotifications"
-      );
-
-    if (button) {
-      button.textContent =
-        "🔔 Bildirimler Açık";
-
-      button.disabled = true;
-    }
-
-    alert(
-      "Bildirimler başarıyla açıldı!"
-    );
-
-  } catch (error) {
-    console.error(
-      "PUSH ERROR:",
-      error
-    );
-
-    alert(
-      "Bildirim kurulamadı: " +
-      error.message
-    );
-  }
-}
-
-function urlBase64ToUint8Array(
-  base64String
-) {
-  const padding =
-    "=".repeat(
-      (4 -
-        (base64String.length % 4)) %
-        4
-    );
-
-  const base64 =
-    (base64String + padding)
-      .replace(/-/g, "+")
-      .replace(/_/g, "/");
-
-  const rawData =
-    window.atob(base64);
-
-  return Uint8Array.from(
-    [...rawData].map(
-      char =>
-        char.charCodeAt(0)
-    )
-  );
 }
