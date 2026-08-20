@@ -2,7 +2,6 @@
 <html lang="tr">
 
 <head>
-
   <meta charset="UTF-8">
 
   <meta
@@ -14,44 +13,62 @@
 
   <link
     rel="stylesheet"
-    href="./style.css?v=200"
+    href="style.css?v=200"
   >
 
   <style>
 
     /* =====================================
-       MARKUS ANA SAYFA
+       MARKUS RENKLERİ
     ===================================== */
+
+    :root {
+      --markus-green: #07553f;
+      --markus-dark: #064936;
+      --markus-cream: #f7f2e9;
+      --markus-gold: #b79668;
+      --markus-line: #d9d1c5;
+      --markus-text: #164c3d;
+      --markus-muted: #77736c;
+    }
+
 
     * {
       box-sizing: border-box;
     }
 
+
     html {
-      background: #f3eee5;
+      background: var(--markus-cream);
     }
+
 
     body {
       margin: 0;
+
       min-height: 100vh;
 
-      background: #f3eee5;
-      color: #174f3b;
+      background: var(--markus-cream);
+
+      color: var(--markus-text);
 
       font-family:
-        Georgia,
-        "Times New Roman",
-        serif;
+        -apple-system,
+        BlinkMacSystemFont,
+        "SF Pro Text",
+        "Helvetica Neue",
+        Arial,
+        sans-serif;
 
       -webkit-font-smoothing: antialiased;
     }
 
 
     /* =====================================
-       MARKUS GİRİŞ
+       MRX / MARKUS GİRİŞ EKRANI
     ===================================== */
 
-    #markusWelcome {
+    #mrxWelcome {
 
       position: fixed;
 
@@ -62,31 +79,30 @@
       display: flex;
 
       align-items: center;
+
       justify-content: center;
 
-      padding: 30px;
+      padding: 28px;
 
-      background: #f3eee5;
+      background: var(--markus-cream);
 
       transition:
-        opacity .45s ease,
-        visibility .45s ease;
-
+        opacity 0.45s ease,
+        visibility 0.45s ease;
     }
 
 
-    #markusWelcome.hidden {
+    #mrxWelcome.hidden {
 
       opacity: 0;
 
       visibility: hidden;
 
       pointer-events: none;
-
     }
 
 
-    .markus-welcome {
+    .mrx-welcome-content {
 
       width: 100%;
 
@@ -99,103 +115,172 @@
       flex-direction: column;
 
       align-items: center;
-
     }
 
 
-    /* Logo */
+    /* =====================================
+       MARKUS LOGO
+    ===================================== */
 
     .markus-logo {
 
-      width: 150px;
+      width: 235px;
 
-      height: 150px;
+      height: 235px;
 
-      border-radius: 50%;
-
-      display: flex;
-
-      align-items: center;
-
-      justify-content: center;
-
-      border: 1px solid #c9c2b5;
-
-      background: #f8f4ed;
-
-      color: #174f3b;
-
-      font-size: 28px;
-
-      font-weight: 700;
-
-      letter-spacing: 2px;
-
-    }
-
-
-    .markus-logo-small {
-
-      width: 90px;
-
-      height: 90px;
+      border: 1.5px solid #c9c1b6;
 
       border-radius: 50%;
 
       display: flex;
 
+      flex-direction: column;
+
       align-items: center;
 
       justify-content: center;
 
-      border: 1px solid #c9c2b5;
+      position: relative;
 
-      background: #f8f4ed;
+      background:
+        rgba(255,255,255,0.16);
 
-      color: #174f3b;
-
-      font-size: 19px;
-
-      font-weight: 700;
-
-      letter-spacing: 1px;
-
+      margin-bottom: 50px;
     }
 
 
-    .markus-open-button {
+    .markus-sun {
 
-      margin-top: 42px;
+      width: 34px;
+
+      height: 34px;
+
+      border-radius: 50%;
+
+      background: var(--markus-gold);
+
+      margin-bottom: 16px;
+
+      position: relative;
+    }
+
+
+    .markus-sun::before {
+
+      content: "";
+
+      position: absolute;
+
+      inset: -9px;
+
+      border-radius: 50%;
+
+      border: 2px dotted var(--markus-gold);
+
+      opacity: 0.75;
+    }
+
+
+    .markus-name {
+
+      color: var(--markus-green);
+
+      font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+      font-size: 31px;
+
+      font-weight: 600;
+
+      letter-spacing: 5px;
+
+      line-height: 1;
+
+      margin-left: 5px;
+    }
+
+
+    .markus-foodbar {
+
+      margin-top: 11px;
+
+      color: var(--markus-gold);
+
+      font-size: 12px;
+
+      font-weight: 600;
+
+      letter-spacing: 3px;
+    }
+
+
+    .markus-waves {
+
+      margin-top: 17px;
+
+      color: var(--markus-green);
+
+      font-size: 25px;
+
+      letter-spacing: -4px;
+
+      line-height: 0.6;
+    }
+
+
+    /* =====================================
+       MENÜYÜ GÖR
+    ===================================== */
+
+    .mrx-menu-button {
 
       width: 100%;
 
-      max-width: 280px;
+      max-width: 340px;
 
-      padding: 16px 24px;
+      padding: 17px 24px;
 
-      border: 1px solid #174f3b;
+      border: none;
 
-      border-radius: 8px;
+      border-radius: 12px;
 
-      background: #174f3b;
+      background: var(--markus-green);
 
-      color: #fff;
+      color: white;
 
       font-family: inherit;
 
       font-size: 16px;
 
-      font-weight: 600;
+      font-weight: 700;
 
       cursor: pointer;
 
+      transition:
+        transform 0.15s ease,
+        opacity 0.15s ease;
     }
 
 
-    .markus-open-button:active {
+    .mrx-menu-button:active {
 
-      transform: scale(.98);
+      transform: scale(0.97);
 
+      opacity: 0.85;
+    }
+
+
+    .mrx-footer {
+
+      margin-top: 38px;
+
+      color: #777;
+
+      font-size: 10px;
+
+      letter-spacing: 2px;
     }
 
 
@@ -203,36 +288,154 @@
        MENÜ
     ===================================== */
 
-    #mainMarkusMenu {
+    #mainMenuContent {
 
       display: none;
 
       min-height: 100vh;
 
-      background: #f3eee5;
+      background: var(--markus-cream);
 
+      color: var(--markus-text);
     }
 
 
-    #mainMarkusMenu.visible {
+    #mainMenuContent.visible {
 
       display: block;
-
     }
 
 
     /* =====================================
-       HEADER
+       TOPBAR
     ===================================== */
 
-    .markus-header {
+    #mainMenuContent .topbar {
 
-      padding: 20px 18px 18px;
+      position: relative;
 
-      background: #f3eee5;
+      display: flex;
 
-      border-bottom:
-        1px solid #c9c2b5;
+      flex-direction: column;
+
+      align-items: center;
+
+      padding: 25px 18px 20px;
+
+      background: var(--markus-cream) !important;
+
+      border: none !important;
+    }
+
+
+    #mainMenuContent .topbar > div:first-child {
+
+      display: none;
+    }
+
+
+    /* =====================================
+       MENÜDEKİ MARKUS LOGOSU
+    ===================================== */
+
+    .menu-markus-logo {
+
+      width: 150px;
+
+      height: 150px;
+
+      border: 1px solid #c9c1b6;
+
+      border-radius: 50%;
+
+      display: flex;
+
+      flex-direction: column;
+
+      align-items: center;
+
+      justify-content: center;
+
+      background:
+        rgba(255,255,255,0.18);
+
+      margin-bottom: 14px;
+    }
+
+
+    .menu-markus-logo .markus-sun {
+
+      width: 23px;
+
+      height: 23px;
+
+      margin-bottom: 10px;
+    }
+
+
+    .menu-markus-logo .markus-name {
+
+      font-size: 20px;
+
+      letter-spacing: 3px;
+    }
+
+
+    .menu-markus-logo .markus-foodbar {
+
+      font-size: 8px;
+
+      margin-top: 7px;
+
+      letter-spacing: 2px;
+    }
+
+
+    .menu-markus-logo .markus-waves {
+
+      font-size: 17px;
+
+      margin-top: 10px;
+    }
+
+
+    /* =====================================
+       MASA
+    ===================================== */
+
+    #mainMenuContent .table-badge {
+
+      position: absolute;
+
+      right: 18px;
+
+      top: 28px;
+
+      padding: 10px 14px;
+
+      border-radius: 11px;
+
+      background: var(--markus-green) !important;
+
+      color: #fff !important;
+
+      font-size: 13px;
+
+      font-weight: 700;
+    }
+
+
+    /* =====================================
+       SİPARİŞLERİM
+    ===================================== */
+
+    .orders-history-button {
+
+      width: calc(100% - 32px);
+
+      margin: 0 16px 20px;
+
+      padding: 15px 17px;
 
       display: flex;
 
@@ -240,54 +443,29 @@
 
       justify-content: space-between;
 
-    }
+      border: 1.5px solid var(--markus-green);
 
+      border-radius: 13px;
 
-    .markus-brand {
+      background: transparent;
 
-      display: flex;
+      color: var(--markus-green);
 
-      align-items: center;
+      font-family: inherit;
 
-      gap: 12px;
-
-    }
-
-
-    .markus-brand-name {
-
-      color: #174f3b;
-
-      font-size: 23px;
+      font-size: 15px;
 
       font-weight: 700;
 
-      letter-spacing: 1px;
-
+      cursor: pointer;
     }
 
 
-    .markus-table {
+    .orders-history-button .arrow {
 
-      padding: 9px 13px;
+      font-size: 22px;
 
-      border-radius: 8px;
-
-      background: #174f3b;
-
-      color: #fff;
-
-      font-family:
-        -apple-system,
-        BlinkMacSystemFont,
-        "Helvetica Neue",
-        Arial,
-        sans-serif;
-
-      font-size: 13px;
-
-      font-weight: 600;
-
+      line-height: 1;
     }
 
 
@@ -295,289 +473,242 @@
        MAIN
     ===================================== */
 
-    #mainMarkusMenu main {
+    #mainMenuContent main {
 
-      width: 100%;
-
-      max-width: 720px;
+      max-width: 700px;
 
       margin: 0 auto;
 
       padding:
-        22px
-        16px
-        130px;
+        0 16px 120px;
 
+      background:
+        var(--markus-cream) !important;
     }
 
 
     /* =====================================
-       NOTICE
+       KATEGORİLER
     ===================================== */
 
-    .notice {
-
-      margin-bottom: 18px;
-
-      padding: 13px 15px;
-
-      border:
-        1px solid #bdb5a8;
-
-      border-radius: 10px;
-
-      background: #eee8dd;
-
-      color: #174f3b;
-
-      font-family:
-        -apple-system,
-        BlinkMacSystemFont,
-        "Helvetica Neue",
-        Arial,
-        sans-serif;
-
-      font-size: 14px;
-
-    }
-
-
-    .hidden {
-
-      display: none !important;
-
-    }
-
-
-    /* =====================================
-       CATEGORIES
-    ===================================== */
-
-    .categories {
+    #mainMenuContent .categories {
 
       display: flex;
 
       gap: 8px;
 
-      margin-bottom: 30px;
-
       overflow-x: auto;
-
-      padding-bottom: 5px;
 
       scrollbar-width: none;
 
+      padding:
+        0 0 7px;
+
+      margin-bottom: 22px;
+
+      background:
+        transparent !important;
     }
 
 
-    .categories::-webkit-scrollbar {
-
+    #mainMenuContent .categories::-webkit-scrollbar {
       display: none;
-
     }
 
 
-    .categories button {
-
-      flex: 0 0 auto;
-
-      padding: 10px 16px;
-
-      border:
-        1px solid #c6beb1;
-
-      border-radius: 999px;
-
-      background: transparent;
-
-      color: #174f3b;
-
-      font-family: inherit;
-
-      font-size: 13px;
-
-      font-weight: 600;
-
-    }
-
-
-    .categories button.active,
-    .categories button.selected {
-
-      background: #174f3b;
-
-      color: #fff;
-
-      border-color: #174f3b;
-
-    }
-
-
-    /* =====================================
-       MENU
-    ===================================== */
-
-    .menu {
-
-      display: flex;
-
-      flex-direction: column;
-
-      gap: 30px;
-
-      background: transparent;
-
-    }
-
-
-    .menu section {
-
-      scroll-margin-top: 20px;
-
-    }
-
-
-    .category-title {
-
-      margin:
-        10px
-        0
-        15px;
-
-      color: #174f3b;
-
-      font-size: 27px;
-
-      font-weight: 700;
-
-      text-align: center;
-
-    }
-
-
-    /* =====================================
-       PRODUCT
-    ===================================== */
-
-    .product {
-
-      position: relative;
-
-      display: flex;
-
-      align-items: flex-end;
-
-      justify-content: space-between;
-
-      gap: 15px;
-
-      margin-bottom: 10px;
-
-      padding: 17px;
-
-      border:
-        1px solid #d5cec2;
-
-      border-radius: 12px;
-
-      background: #f8f4ed;
-
-    }
-
-
-    .product-info {
-
-      min-width: 0;
-
-      flex: 1;
-
-    }
-
-
-    .product h3 {
-
-      margin:
-        0
-        0
-        5px;
-
-      color: #174f3b;
-
-      font-size: 19px;
-
-      font-weight: 700;
-
-    }
-
-
-    .product p {
-
-      margin:
-        0
-        0
-        8px;
-
-      color: #66776e;
-
-      font-family:
-        -apple-system,
-        BlinkMacSystemFont,
-        "Helvetica Neue",
-        Arial,
-        sans-serif;
-
-      font-size: 12px;
-
-      line-height: 1.45;
-
-    }
-
-
-    .price {
-
-      color: #174f3b;
-
-      font-family:
-        -apple-system,
-        BlinkMacSystemFont,
-        "Helvetica Neue",
-        Arial,
-        sans-serif;
-
-      font-size: 16px;
-
-      font-weight: 700;
-
-    }
-
-
-    .product .add {
+    #mainMenuContent .categories button {
 
       flex: 0 0 auto;
 
       padding: 10px 15px;
 
-      border: 0;
+      border: 1px solid #d5cec3 !important;
 
-      border-radius: 8px;
+      border-radius: 999px;
 
-      background: #174f3b;
+      background: #fff !important;
 
-      color: #fff;
+      color: var(--markus-green) !important;
 
-      font-family:
-        -apple-system,
-        BlinkMacSystemFont,
-        "Helvetica Neue",
-        Arial,
-        sans-serif;
+      font-family: inherit;
 
       font-size: 13px;
 
-      font-weight: 600;
+      font-weight: 650;
 
-      cursor: pointer;
+      white-space: nowrap;
+    }
 
+
+    #mainMenuContent .categories button.active,
+    #mainMenuContent .categories button.selected {
+
+      background:
+        var(--markus-green) !important;
+
+      color: white !important;
+
+      border-color:
+        var(--markus-green) !important;
+    }
+
+
+    /* =====================================
+       MENÜ
+    ===================================== */
+
+    #mainMenuContent .menu {
+
+      display: flex;
+
+      flex-direction: column;
+
+      gap: 25px;
+
+      background:
+        transparent !important;
+    }
+
+
+    #mainMenuContent .menu > section {
+
+      background: transparent;
+    }
+
+
+    /* =====================================
+       KATEGORİ BAŞLIKLARI
+    ===================================== */
+
+    #mainMenuContent .category-title {
+
+      margin:
+        5px 0 12px;
+
+      color:
+        var(--markus-green) !important;
+
+      font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+      font-size: 25px;
+
+      font-weight: 700;
+    }
+
+
+    /* =====================================
+       ÜRÜN KARTLARI
+    ===================================== */
+
+    #mainMenuContent .product {
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: space-between;
+
+      gap: 14px;
+
+      padding: 16px;
+
+      margin-bottom: 9px;
+
+      border:
+        1px solid var(--markus-line) !important;
+
+      border-radius: 14px;
+
+      background:
+        rgba(255,255,255,0.35) !important;
+
+      color:
+        var(--markus-text) !important;
+    }
+
+
+    #mainMenuContent .product-info {
+
+      min-width: 0;
+
+      flex: 1;
+    }
+
+
+    #mainMenuContent .product h3 {
+
+      margin:
+        0 0 6px;
+
+      color:
+        var(--markus-green) !important;
+
+      font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+      font-size: 17px;
+
+      font-weight: 700;
+    }
+
+
+    #mainMenuContent .product p {
+
+      margin:
+        0 0 8px;
+
+      color:
+        #777 !important;
+
+      font-size: 13px;
+
+      line-height: 1.4;
+    }
+
+
+    #mainMenuContent .price {
+
+      color:
+        var(--markus-green) !important;
+
+      font-size: 15px;
+
+      font-weight: 750;
+    }
+
+
+    /* =====================================
+       EKLE
+    ===================================== */
+
+    #mainMenuContent .product .add {
+
+      flex: 0 0 auto;
+
+      padding:
+        11px 15px;
+
+      border:
+        1px solid var(--markus-green) !important;
+
+      border-radius: 10px;
+
+      background:
+        var(--markus-green) !important;
+
+      color:
+        #fff !important;
+
+      font-family: inherit;
+
+      font-size: 13px;
+
+      font-weight: 700;
     }
 
 
@@ -585,9 +716,11 @@
        SEPET
     ===================================== */
 
-    .cart-button {
+    #mainMenuContent .cart-button {
 
       position: fixed;
+
+      z-index: 500;
 
       left: 50%;
 
@@ -596,41 +729,36 @@
       transform:
         translateX(-50%);
 
-      z-index: 500;
+      width: calc(100% - 34px);
 
-      min-width: 200px;
+      max-width: 580px;
 
-      padding: 15px 22px;
+      padding: 15px;
 
-      border: 0;
+      border:
+        1px solid var(--markus-green) !important;
 
-      border-radius: 12px;
+      border-radius: 13px;
 
-      background: #174f3b;
+      background:
+        var(--markus-green) !important;
 
-      color: #fff;
+      color:
+        #fff !important;
 
-      box-shadow:
-        0 8px 25px
-        rgba(0,0,0,.18);
-
-      font-family:
-        -apple-system,
-        BlinkMacSystemFont,
-        "Helvetica Neue",
-        Arial,
-        sans-serif;
+      font-family: inherit;
 
       font-size: 15px;
 
       font-weight: 700;
 
-      cursor: pointer;
-
+      box-shadow:
+        0 8px 25px
+        rgba(0,0,0,0.12);
     }
 
 
-    #cartCount {
+    #mainMenuContent #cartCount {
 
       display: inline-flex;
 
@@ -638,318 +766,119 @@
 
       justify-content: center;
 
-      min-width: 21px;
+      min-width: 23px;
 
-      height: 21px;
+      height: 23px;
 
       margin-left: 6px;
 
-      padding: 0 6px;
+      border-radius: 50%;
 
-      border-radius: 999px;
+      background: #fff !important;
 
-      background: #fff;
-
-      color: #174f3b;
+      color:
+        var(--markus-green) !important;
 
       font-size: 11px;
-
     }
 
 
     /* =====================================
-       MODAL
+       SEPET MODAL
     ===================================== */
 
-    .modal {
-
-      position: fixed;
-
-      inset: 0;
-
-      z-index: 1000;
-
-      display: flex;
-
-      align-items: flex-end;
-
-      justify-content: center;
-
-      padding: 14px;
+    #mainMenuContent .modal {
 
       background:
-        rgba(23,79,59,.25);
-
-      backdrop-filter:
-        blur(7px);
-
+        rgba(20,30,25,0.45);
     }
 
 
-    .modal-card {
+    #mainMenuContent .modal-card {
 
-      width: 100%;
+      background:
+        var(--markus-cream) !important;
 
-      max-width: 600px;
+      color:
+        var(--markus-text) !important;
 
-      max-height: 88vh;
-
-      overflow-y: auto;
-
-      padding: 21px;
+      border:
+        1px solid var(--markus-line) !important;
 
       border-radius:
-        20px
-        20px
-        14px
-        14px;
-
-      background: #f8f4ed;
-
-      color: #174f3b;
-
-      border:
-        1px solid #d5cec2;
-
-      box-shadow:
-        0 -10px 40px
-        rgba(0,0,0,.15);
-
+        22px 22px 16px 16px;
     }
 
 
-    .modal-head {
+    #mainMenuContent .modal-card h2 {
 
-      display: flex;
+      color:
+        var(--markus-green) !important;
 
-      align-items: center;
-
-      justify-content: space-between;
-
-      margin-bottom: 18px;
-
+      font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
     }
 
 
-    .modal-head h2 {
+    #mainMenuContent .modal-head button {
 
-      margin: 0;
+      background:
+        var(--markus-green) !important;
 
-      color: #174f3b;
-
-      font-size: 25px;
-
+      color: white !important;
     }
 
 
-    .modal-head button {
+    #mainMenuContent #cartItems > div {
 
-      width: 36px;
+      background:
+        #fff !important;
 
-      height: 36px;
+      color:
+        var(--markus-text) !important;
 
-      border: 0;
-
-      border-radius: 50%;
-
-      background: #174f3b;
-
-      color: #fff;
-
-      font-size: 22px;
-
+      border-color:
+        var(--markus-line) !important;
     }
 
 
-    #cartItems {
+    #mainMenuContent .order-summary {
 
-      display: flex;
-
-      flex-direction: column;
-
-      gap: 10px;
-
-      margin-bottom: 18px;
-
+      border-color:
+        var(--markus-line) !important;
     }
 
 
-    #cartItems > div {
+    #mainMenuContent .order-summary strong {
 
-      padding: 14px;
-
-      border:
-        1px solid #d5cec2;
-
-      border-radius: 11px;
-
-      background: #fff;
-
+      color:
+        var(--markus-green) !important;
     }
 
 
-    .cart-main {
+    #mainMenuContent textarea {
 
-      display: flex;
+      background: #fff !important;
 
-      align-items: center;
+      color:
+        var(--markus-text) !important;
 
-      justify-content: space-between;
-
-      gap: 10px;
-
-      color: #174f3b;
-
+      border-color:
+        var(--markus-line) !important;
     }
 
 
-    .qty {
+    #mainMenuContent .primary {
 
-      display: flex;
+      background:
+        var(--markus-green) !important;
 
-      align-items: center;
+      color: #fff !important;
 
-      gap: 10px;
-
-      margin-top: 10px;
-
-    }
-
-
-    .qty button {
-
-      width: 30px;
-
-      height: 30px;
-
-      border: 0;
-
-      border-radius: 50%;
-
-      background: #174f3b;
-
-      color: #fff;
-
-    }
-
-
-    .item-note {
-
-      width: 100%;
-
-      margin-top: 10px;
-
-      padding: 10px;
-
-      border:
-        1px solid #d5cec2;
-
-      border-radius: 8px;
-
-      background: #f8f4ed;
-
-      color: #174f3b;
-
-      font-family: inherit;
-
-    }
-
-
-    .order-summary {
-
-      display: flex;
-
-      justify-content: space-between;
-
-      padding: 16px 0;
-
-      margin-bottom: 17px;
-
-      border-top:
-        1px solid #d5cec2;
-
-      border-bottom:
-        1px solid #d5cec2;
-
-      color: #66776e;
-
-    }
-
-
-    .order-summary strong {
-
-      color: #174f3b;
-
-      font-size: 20px;
-
-    }
-
-
-    .label {
-
-      display: block;
-
-      margin-bottom: 7px;
-
-      color: #174f3b;
-
-      font-size: 13px;
-
-      font-weight: 700;
-
-    }
-
-
-    textarea {
-
-      width: 100%;
-
-      min-height: 90px;
-
-      padding: 12px;
-
-      margin-bottom: 13px;
-
-      resize: vertical;
-
-      border:
-        1px solid #d5cec2;
-
-      border-radius: 10px;
-
-      background: #fff;
-
-      color: #174f3b;
-
-      font-family: inherit;
-
-      font-size: 14px;
-
-      outline: none;
-
-    }
-
-
-    .primary {
-
-      width: 100%;
-
-      padding: 15px;
-
-      border: 0;
-
-      border-radius: 10px;
-
-      background: #174f3b;
-
-      color: #fff;
-
-      font-family: inherit;
-
-      font-size: 15px;
-
-      font-weight: 700;
-
+      border-color:
+        var(--markus-green) !important;
     }
 
 
@@ -961,52 +890,53 @@
 
       .markus-logo {
 
+        width: 220px;
+
+        height: 220px;
+
+        margin-bottom: 45px;
+      }
+
+
+      .markus-name {
+
+        font-size: 29px;
+      }
+
+
+      .menu-markus-logo {
+
         width: 135px;
 
         height: 135px;
-
-        font-size: 25px;
-
       }
 
 
-      .markus-brand-name {
+      #mainMenuContent .table-badge {
 
-        font-size: 21px;
+        top: 24px;
 
+        right: 15px;
       }
 
 
-      #mainMarkusMenu main {
+      #mainMenuContent main {
 
-        padding:
-          18px
-          14px
-          120px;
+        padding-left: 14px;
 
+        padding-right: 14px;
       }
 
 
-      .product {
+      .orders-history-button {
 
-        padding: 15px;
+        width:
+          calc(100% - 28px);
 
+        margin-left: 14px;
+
+        margin-right: 14px;
       }
-
-
-      .product h3 {
-
-        font-size: 18px;
-
-      }
-
-
-      .category-title {
-
-        font-size: 25px;
-
-      }
-
     }
 
   </style>
@@ -1021,21 +951,46 @@
        MARKUS GİRİŞ EKRANI
   ===================================== -->
 
-  <section id="markusWelcome">
+  <section id="mrxWelcome">
 
-    <div class="markus-welcome">
+    <div class="mrx-welcome-content">
+
+
+      <!-- MARKUS LOGO -->
 
       <div class="markus-logo">
-        MARKUS
+
+        <div class="markus-sun"></div>
+
+        <div class="markus-name">
+          MARKUS
+        </div>
+
+        <div class="markus-foodbar">
+          FOODBAR
+        </div>
+
+        <div class="markus-waves">
+          ≋≋≋
+        </div>
+
       </div>
 
 
+      <!-- BUTON -->
+
       <button
-        class="markus-open-button"
-        onclick="openMarkusMenu()"
+        class="mrx-menu-button"
+        onclick="openMRXMenu()"
       >
         Menüyü Gör →
       </button>
+
+
+      <div class="mrx-footer">
+        POWERED BY MRX
+      </div>
+
 
     </div>
 
@@ -1044,37 +999,75 @@
 
 
   <!-- =====================================
-       MARKUS MENÜ
+       ANA MENÜ
   ===================================== -->
 
-  <div id="mainMarkusMenu">
+  <div id="mainMenuContent">
 
 
-    <header class="markus-header">
+    <header class="topbar">
 
-      <div class="markus-brand">
 
-        <div class="markus-logo-small">
+      <!-- MARKUS LOGO -->
+
+      <div class="menu-markus-logo">
+
+        <div class="markus-sun"></div>
+
+        <div class="markus-name">
           MARKUS
         </div>
 
-        <div class="markus-brand-name">
+        <div class="markus-foodbar">
           FOODBAR
+        </div>
+
+        <div class="markus-waves">
+          ≋≋≋
         </div>
 
       </div>
 
 
+      <!-- MASA -->
+
       <div
-        class="markus-table"
+        class="table-badge"
         id="tableBadge"
       >
         Masa
       </div>
 
+
     </header>
 
 
+
+    <!-- =====================================
+         SİPARİŞLERİM
+    ===================================== -->
+
+    <button
+      id="ordersHistoryButton"
+      class="orders-history-button"
+      onclick="openOrderHistory()"
+    >
+
+      <span>
+        Siparişlerim
+      </span>
+
+      <span class="arrow">
+        ›
+      </span>
+
+    </button>
+
+
+
+    <!-- =====================================
+         MENÜ
+    ===================================== -->
 
     <main>
 
@@ -1101,7 +1094,9 @@
 
 
 
-    <!-- SEPET -->
+    <!-- =====================================
+         SEPET
+    ===================================== -->
 
     <button
       id="cartButton"
@@ -1119,7 +1114,9 @@
 
 
 
-    <!-- SEPET MODAL -->
+    <!-- =====================================
+         SEPET MODALI
+    ===================================== -->
 
     <div
       id="cartModal"
@@ -1134,6 +1131,7 @@
           <h2>
             Sepet
           </h2>
+
 
           <button
             onclick="closeCart()"
@@ -1155,9 +1153,7 @@
             Toplam
           </span>
 
-          <strong
-            id="cartTotal"
-          >
+          <strong id="cartTotal">
             ₺0
           </strong>
 
@@ -1188,6 +1184,46 @@
     </div>
 
 
+    <!-- =====================================
+         SİPARİŞ GEÇMİŞİ MODALI
+    ===================================== -->
+
+    <div
+      id="orderHistoryModal"
+      class="modal hidden"
+    >
+
+      <div class="modal-card">
+
+        <div class="modal-head">
+
+          <h2>
+            Siparişlerim
+          </h2>
+
+          <button
+            onclick="closeOrderHistory()"
+          >
+            ×
+          </button>
+
+        </div>
+
+
+        <div id="orderHistoryContent">
+
+          <p>
+            Sipariş geçmişiniz yükleniyor...
+          </p>
+
+        </div>
+
+
+      </div>
+
+    </div>
+
+
   </div>
 
 
@@ -1201,30 +1237,26 @@
   ></script>
 
 
-  <!-- MARKUS JS -->
-
-  <script
-    src="./markus.js?v=4"
-  ></script>
+  <script src="./markus.js?v=1"></script>
 
 
 
   <!-- =====================================
-       MARKUS MENÜ AÇ
+       MARKUS MENÜ AÇMA
   ===================================== -->
 
   <script>
 
-    function openMarkusMenu() {
+    function openMRXMenu() {
 
       const welcome =
         document.getElementById(
-          "markusWelcome"
+          "mrxWelcome"
         );
 
       const menu =
         document.getElementById(
-          "mainMarkusMenu"
+          "mainMenuContent"
         );
 
 
@@ -1238,14 +1270,72 @@
       );
 
 
-      setTimeout(
-        function() {
+      setTimeout(function () {
 
-          welcome.style.display =
-            "none";
+        welcome.style.display =
+          "none";
 
-        },
-        500
+      }, 500);
+
+    }
+
+
+
+    /* =====================================
+       SİPARİŞ GEÇMİŞİ
+       app.js'deki fonksiyonlar
+       hazır değilse bile buton hata vermez.
+    ===================================== */
+
+    function openOrderHistory() {
+
+      const modal =
+        document.getElementById(
+          "orderHistoryModal"
+        );
+
+      if (!modal) {
+        return;
+      }
+
+      modal.classList.remove(
+        "hidden"
+      );
+
+      if (
+        typeof loadOrderHistory ===
+        "function"
+      ) {
+
+        loadOrderHistory();
+
+      } else {
+
+        document.getElementById(
+          "orderHistoryContent"
+        ).innerHTML = `
+          <p>
+            Sipariş geçmişi hazırlanıyor...
+          </p>
+        `;
+      }
+
+    }
+
+
+    function closeOrderHistory() {
+
+      const modal =
+        document.getElementById(
+          "orderHistoryModal"
+        );
+
+      if (!modal) {
+        return;
+      }
+
+      modal.classList.add(
+        "hidden"
       );
 
     }
