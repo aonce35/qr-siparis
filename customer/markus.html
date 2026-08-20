@@ -2,6 +2,7 @@
 <html lang="tr">
 
 <head>
+
   <meta charset="UTF-8">
 
   <meta
@@ -13,62 +14,44 @@
 
   <link
     rel="stylesheet"
-    href="style.css?v=200"
+    href="./style.css?v=200"
   >
 
   <style>
 
     /* =====================================
-       MARKUS RENKLERİ
+       MARKUS ANA SAYFA
     ===================================== */
-
-    :root {
-      --markus-green: #07553f;
-      --markus-dark: #064936;
-      --markus-cream: #f7f2e9;
-      --markus-gold: #b79668;
-      --markus-line: #d9d1c5;
-      --markus-text: #164c3d;
-      --markus-muted: #77736c;
-    }
-
 
     * {
       box-sizing: border-box;
     }
 
-
     html {
-      background: var(--markus-cream);
+      background: #f3eee5;
     }
-
 
     body {
       margin: 0;
-
       min-height: 100vh;
 
-      background: var(--markus-cream);
-
-      color: var(--markus-text);
+      background: #f3eee5;
+      color: #174f3b;
 
       font-family:
-        -apple-system,
-        BlinkMacSystemFont,
-        "SF Pro Text",
-        "Helvetica Neue",
-        Arial,
-        sans-serif;
+        Georgia,
+        "Times New Roman",
+        serif;
 
       -webkit-font-smoothing: antialiased;
     }
 
 
     /* =====================================
-       MRX / MARKUS GİRİŞ EKRANI
+       MARKUS GİRİŞ
     ===================================== */
 
-    #mrxWelcome {
+    #markusWelcome {
 
       position: fixed;
 
@@ -79,30 +62,31 @@
       display: flex;
 
       align-items: center;
-
       justify-content: center;
 
-      padding: 28px;
+      padding: 30px;
 
-      background: var(--markus-cream);
+      background: #f3eee5;
 
       transition:
-        opacity 0.45s ease,
-        visibility 0.45s ease;
+        opacity .45s ease,
+        visibility .45s ease;
+
     }
 
 
-    #mrxWelcome.hidden {
+    #markusWelcome.hidden {
 
       opacity: 0;
 
       visibility: hidden;
 
       pointer-events: none;
+
     }
 
 
-    .mrx-welcome-content {
+    .markus-welcome {
 
       width: 100%;
 
@@ -115,172 +99,103 @@
       flex-direction: column;
 
       align-items: center;
+
     }
 
 
-    /* =====================================
-       MARKUS LOGO
-    ===================================== */
+    /* Logo */
 
     .markus-logo {
 
-      width: 235px;
+      width: 150px;
 
-      height: 235px;
-
-      border: 1.5px solid #c9c1b6;
+      height: 150px;
 
       border-radius: 50%;
 
       display: flex;
 
-      flex-direction: column;
+      align-items: center;
+
+      justify-content: center;
+
+      border: 1px solid #c9c2b5;
+
+      background: #f8f4ed;
+
+      color: #174f3b;
+
+      font-size: 28px;
+
+      font-weight: 700;
+
+      letter-spacing: 2px;
+
+    }
+
+
+    .markus-logo-small {
+
+      width: 90px;
+
+      height: 90px;
+
+      border-radius: 50%;
+
+      display: flex;
 
       align-items: center;
 
       justify-content: center;
 
-      position: relative;
+      border: 1px solid #c9c2b5;
 
-      background:
-        rgba(255,255,255,0.16);
+      background: #f8f4ed;
 
-      margin-bottom: 50px;
+      color: #174f3b;
+
+      font-size: 19px;
+
+      font-weight: 700;
+
+      letter-spacing: 1px;
+
     }
 
 
-    .markus-sun {
+    .markus-open-button {
 
-      width: 34px;
-
-      height: 34px;
-
-      border-radius: 50%;
-
-      background: var(--markus-gold);
-
-      margin-bottom: 16px;
-
-      position: relative;
-    }
-
-
-    .markus-sun::before {
-
-      content: "";
-
-      position: absolute;
-
-      inset: -9px;
-
-      border-radius: 50%;
-
-      border: 2px dotted var(--markus-gold);
-
-      opacity: 0.75;
-    }
-
-
-    .markus-name {
-
-      color: var(--markus-green);
-
-      font-family:
-        Georgia,
-        "Times New Roman",
-        serif;
-
-      font-size: 31px;
-
-      font-weight: 600;
-
-      letter-spacing: 5px;
-
-      line-height: 1;
-
-      margin-left: 5px;
-    }
-
-
-    .markus-foodbar {
-
-      margin-top: 11px;
-
-      color: var(--markus-gold);
-
-      font-size: 12px;
-
-      font-weight: 600;
-
-      letter-spacing: 3px;
-    }
-
-
-    .markus-waves {
-
-      margin-top: 17px;
-
-      color: var(--markus-green);
-
-      font-size: 25px;
-
-      letter-spacing: -4px;
-
-      line-height: 0.6;
-    }
-
-
-    /* =====================================
-       MENÜYÜ GÖR
-    ===================================== */
-
-    .mrx-menu-button {
+      margin-top: 42px;
 
       width: 100%;
 
-      max-width: 340px;
+      max-width: 280px;
 
-      padding: 17px 24px;
+      padding: 16px 24px;
 
-      border: none;
+      border: 1px solid #174f3b;
 
-      border-radius: 12px;
+      border-radius: 8px;
 
-      background: var(--markus-green);
+      background: #174f3b;
 
-      color: white;
+      color: #fff;
 
       font-family: inherit;
 
       font-size: 16px;
 
-      font-weight: 700;
+      font-weight: 600;
 
       cursor: pointer;
 
-      transition:
-        transform 0.15s ease,
-        opacity 0.15s ease;
     }
 
 
-    .mrx-menu-button:active {
+    .markus-open-button:active {
 
-      transform: scale(0.97);
+      transform: scale(.98);
 
-      opacity: 0.85;
-    }
-
-
-    .mrx-footer {
-
-      margin-top: 38px;
-
-      color: #777;
-
-      font-size: 10px;
-
-      letter-spacing: 2px;
     }
 
 
@@ -288,154 +203,36 @@
        MENÜ
     ===================================== */
 
-    #mainMenuContent {
+    #mainMarkusMenu {
 
       display: none;
 
       min-height: 100vh;
 
-      background: var(--markus-cream);
+      background: #f3eee5;
 
-      color: var(--markus-text);
     }
 
 
-    #mainMenuContent.visible {
+    #mainMarkusMenu.visible {
 
       display: block;
+
     }
 
 
     /* =====================================
-       TOPBAR
+       HEADER
     ===================================== */
 
-    #mainMenuContent .topbar {
+    .markus-header {
 
-      position: relative;
+      padding: 20px 18px 18px;
 
-      display: flex;
+      background: #f3eee5;
 
-      flex-direction: column;
-
-      align-items: center;
-
-      padding: 25px 18px 20px;
-
-      background: var(--markus-cream) !important;
-
-      border: none !important;
-    }
-
-
-    #mainMenuContent .topbar > div:first-child {
-
-      display: none;
-    }
-
-
-    /* =====================================
-       MENÜDEKİ MARKUS LOGOSU
-    ===================================== */
-
-    .menu-markus-logo {
-
-      width: 150px;
-
-      height: 150px;
-
-      border: 1px solid #c9c1b6;
-
-      border-radius: 50%;
-
-      display: flex;
-
-      flex-direction: column;
-
-      align-items: center;
-
-      justify-content: center;
-
-      background:
-        rgba(255,255,255,0.18);
-
-      margin-bottom: 14px;
-    }
-
-
-    .menu-markus-logo .markus-sun {
-
-      width: 23px;
-
-      height: 23px;
-
-      margin-bottom: 10px;
-    }
-
-
-    .menu-markus-logo .markus-name {
-
-      font-size: 20px;
-
-      letter-spacing: 3px;
-    }
-
-
-    .menu-markus-logo .markus-foodbar {
-
-      font-size: 8px;
-
-      margin-top: 7px;
-
-      letter-spacing: 2px;
-    }
-
-
-    .menu-markus-logo .markus-waves {
-
-      font-size: 17px;
-
-      margin-top: 10px;
-    }
-
-
-    /* =====================================
-       MASA
-    ===================================== */
-
-    #mainMenuContent .table-badge {
-
-      position: absolute;
-
-      right: 18px;
-
-      top: 28px;
-
-      padding: 10px 14px;
-
-      border-radius: 11px;
-
-      background: var(--markus-green) !important;
-
-      color: #fff !important;
-
-      font-size: 13px;
-
-      font-weight: 700;
-    }
-
-
-    /* =====================================
-       SİPARİŞLERİM
-    ===================================== */
-
-    .orders-history-button {
-
-      width: calc(100% - 32px);
-
-      margin: 0 16px 20px;
-
-      padding: 15px 17px;
+      border-bottom:
+        1px solid #c9c2b5;
 
       display: flex;
 
@@ -443,29 +240,54 @@
 
       justify-content: space-between;
 
-      border: 1.5px solid var(--markus-green);
-
-      border-radius: 13px;
-
-      background: transparent;
-
-      color: var(--markus-green);
-
-      font-family: inherit;
-
-      font-size: 15px;
-
-      font-weight: 700;
-
-      cursor: pointer;
     }
 
 
-    .orders-history-button .arrow {
+    .markus-brand {
 
-      font-size: 22px;
+      display: flex;
 
-      line-height: 1;
+      align-items: center;
+
+      gap: 12px;
+
+    }
+
+
+    .markus-brand-name {
+
+      color: #174f3b;
+
+      font-size: 23px;
+
+      font-weight: 700;
+
+      letter-spacing: 1px;
+
+    }
+
+
+    .markus-table {
+
+      padding: 9px 13px;
+
+      border-radius: 8px;
+
+      background: #174f3b;
+
+      color: #fff;
+
+      font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Helvetica Neue",
+        Arial,
+        sans-serif;
+
+      font-size: 13px;
+
+      font-weight: 600;
+
     }
 
 
@@ -473,242 +295,289 @@
        MAIN
     ===================================== */
 
-    #mainMenuContent main {
+    #mainMarkusMenu main {
 
-      max-width: 700px;
+      width: 100%;
+
+      max-width: 720px;
 
       margin: 0 auto;
 
       padding:
-        0 16px 120px;
+        22px
+        16px
+        130px;
 
-      background:
-        var(--markus-cream) !important;
     }
 
 
     /* =====================================
-       KATEGORİLER
+       NOTICE
     ===================================== */
 
-    #mainMenuContent .categories {
+    .notice {
+
+      margin-bottom: 18px;
+
+      padding: 13px 15px;
+
+      border:
+        1px solid #bdb5a8;
+
+      border-radius: 10px;
+
+      background: #eee8dd;
+
+      color: #174f3b;
+
+      font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Helvetica Neue",
+        Arial,
+        sans-serif;
+
+      font-size: 14px;
+
+    }
+
+
+    .hidden {
+
+      display: none !important;
+
+    }
+
+
+    /* =====================================
+       CATEGORIES
+    ===================================== */
+
+    .categories {
 
       display: flex;
 
       gap: 8px;
 
+      margin-bottom: 30px;
+
       overflow-x: auto;
+
+      padding-bottom: 5px;
 
       scrollbar-width: none;
 
-      padding:
-        0 0 7px;
-
-      margin-bottom: 22px;
-
-      background:
-        transparent !important;
     }
 
 
-    #mainMenuContent .categories::-webkit-scrollbar {
+    .categories::-webkit-scrollbar {
+
       display: none;
+
     }
 
 
-    #mainMenuContent .categories button {
+    .categories button {
 
       flex: 0 0 auto;
 
-      padding: 10px 15px;
+      padding: 10px 16px;
 
-      border: 1px solid #d5cec3 !important;
+      border:
+        1px solid #c6beb1;
 
       border-radius: 999px;
 
-      background: #fff !important;
+      background: transparent;
 
-      color: var(--markus-green) !important;
+      color: #174f3b;
 
       font-family: inherit;
 
       font-size: 13px;
 
-      font-weight: 650;
+      font-weight: 600;
 
-      white-space: nowrap;
     }
 
 
-    #mainMenuContent .categories button.active,
-    #mainMenuContent .categories button.selected {
+    .categories button.active,
+    .categories button.selected {
 
-      background:
-        var(--markus-green) !important;
+      background: #174f3b;
 
-      color: white !important;
+      color: #fff;
 
-      border-color:
-        var(--markus-green) !important;
+      border-color: #174f3b;
+
     }
 
 
     /* =====================================
-       MENÜ
+       MENU
     ===================================== */
 
-    #mainMenuContent .menu {
+    .menu {
 
       display: flex;
 
       flex-direction: column;
 
-      gap: 25px;
-
-      background:
-        transparent !important;
-    }
-
-
-    #mainMenuContent .menu > section {
+      gap: 30px;
 
       background: transparent;
+
     }
 
 
-    /* =====================================
-       KATEGORİ BAŞLIKLARI
-    ===================================== */
+    .menu section {
 
-    #mainMenuContent .category-title {
+      scroll-margin-top: 20px;
+
+    }
+
+
+    .category-title {
 
       margin:
-        5px 0 12px;
+        10px
+        0
+        15px;
 
-      color:
-        var(--markus-green) !important;
+      color: #174f3b;
 
-      font-family:
-        Georgia,
-        "Times New Roman",
-        serif;
-
-      font-size: 25px;
+      font-size: 27px;
 
       font-weight: 700;
+
+      text-align: center;
+
     }
 
 
     /* =====================================
-       ÜRÜN KARTLARI
+       PRODUCT
     ===================================== */
 
-    #mainMenuContent .product {
+    .product {
+
+      position: relative;
 
       display: flex;
 
-      align-items: center;
+      align-items: flex-end;
 
       justify-content: space-between;
 
-      gap: 14px;
+      gap: 15px;
 
-      padding: 16px;
+      margin-bottom: 10px;
 
-      margin-bottom: 9px;
+      padding: 17px;
 
       border:
-        1px solid var(--markus-line) !important;
+        1px solid #d5cec2;
 
-      border-radius: 14px;
+      border-radius: 12px;
 
-      background:
-        rgba(255,255,255,0.35) !important;
+      background: #f8f4ed;
 
-      color:
-        var(--markus-text) !important;
     }
 
 
-    #mainMenuContent .product-info {
+    .product-info {
 
       min-width: 0;
 
       flex: 1;
+
     }
 
 
-    #mainMenuContent .product h3 {
+    .product h3 {
 
       margin:
-        0 0 6px;
+        0
+        0
+        5px;
 
-      color:
-        var(--markus-green) !important;
+      color: #174f3b;
 
-      font-family:
-        Georgia,
-        "Times New Roman",
-        serif;
-
-      font-size: 17px;
+      font-size: 19px;
 
       font-weight: 700;
+
     }
 
 
-    #mainMenuContent .product p {
+    .product p {
 
       margin:
-        0 0 8px;
+        0
+        0
+        8px;
 
-      color:
-        #777 !important;
+      color: #66776e;
 
-      font-size: 13px;
+      font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Helvetica Neue",
+        Arial,
+        sans-serif;
 
-      line-height: 1.4;
+      font-size: 12px;
+
+      line-height: 1.45;
+
     }
 
 
-    #mainMenuContent .price {
+    .price {
 
-      color:
-        var(--markus-green) !important;
+      color: #174f3b;
 
-      font-size: 15px;
+      font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Helvetica Neue",
+        Arial,
+        sans-serif;
 
-      font-weight: 750;
+      font-size: 16px;
+
+      font-weight: 700;
+
     }
 
 
-    /* =====================================
-       EKLE
-    ===================================== */
-
-    #mainMenuContent .product .add {
+    .product .add {
 
       flex: 0 0 auto;
 
-      padding:
-        11px 15px;
+      padding: 10px 15px;
 
-      border:
-        1px solid var(--markus-green) !important;
+      border: 0;
 
-      border-radius: 10px;
+      border-radius: 8px;
 
-      background:
-        var(--markus-green) !important;
+      background: #174f3b;
 
-      color:
-        #fff !important;
+      color: #fff;
 
-      font-family: inherit;
+      font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Helvetica Neue",
+        Arial,
+        sans-serif;
 
       font-size: 13px;
 
-      font-weight: 700;
+      font-weight: 600;
+
+      cursor: pointer;
+
     }
 
 
@@ -716,11 +585,9 @@
        SEPET
     ===================================== */
 
-    #mainMenuContent .cart-button {
+    .cart-button {
 
       position: fixed;
-
-      z-index: 500;
 
       left: 50%;
 
@@ -729,36 +596,41 @@
       transform:
         translateX(-50%);
 
-      width: calc(100% - 34px);
+      z-index: 500;
 
-      max-width: 580px;
+      min-width: 200px;
 
-      padding: 15px;
+      padding: 15px 22px;
 
-      border:
-        1px solid var(--markus-green) !important;
+      border: 0;
 
-      border-radius: 13px;
+      border-radius: 12px;
 
-      background:
-        var(--markus-green) !important;
+      background: #174f3b;
 
-      color:
-        #fff !important;
+      color: #fff;
 
-      font-family: inherit;
+      box-shadow:
+        0 8px 25px
+        rgba(0,0,0,.18);
+
+      font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Helvetica Neue",
+        Arial,
+        sans-serif;
 
       font-size: 15px;
 
       font-weight: 700;
 
-      box-shadow:
-        0 8px 25px
-        rgba(0,0,0,0.12);
+      cursor: pointer;
+
     }
 
 
-    #mainMenuContent #cartCount {
+    #cartCount {
 
       display: inline-flex;
 
@@ -766,119 +638,318 @@
 
       justify-content: center;
 
-      min-width: 23px;
+      min-width: 21px;
 
-      height: 23px;
+      height: 21px;
 
       margin-left: 6px;
 
-      border-radius: 50%;
+      padding: 0 6px;
 
-      background: #fff !important;
+      border-radius: 999px;
 
-      color:
-        var(--markus-green) !important;
+      background: #fff;
+
+      color: #174f3b;
 
       font-size: 11px;
+
     }
 
 
     /* =====================================
-       SEPET MODAL
+       MODAL
     ===================================== */
 
-    #mainMenuContent .modal {
+    .modal {
+
+      position: fixed;
+
+      inset: 0;
+
+      z-index: 1000;
+
+      display: flex;
+
+      align-items: flex-end;
+
+      justify-content: center;
+
+      padding: 14px;
 
       background:
-        rgba(20,30,25,0.45);
+        rgba(23,79,59,.25);
+
+      backdrop-filter:
+        blur(7px);
+
     }
 
 
-    #mainMenuContent .modal-card {
+    .modal-card {
 
-      background:
-        var(--markus-cream) !important;
+      width: 100%;
 
-      color:
-        var(--markus-text) !important;
+      max-width: 600px;
 
-      border:
-        1px solid var(--markus-line) !important;
+      max-height: 88vh;
+
+      overflow-y: auto;
+
+      padding: 21px;
 
       border-radius:
-        22px 22px 16px 16px;
+        20px
+        20px
+        14px
+        14px;
+
+      background: #f8f4ed;
+
+      color: #174f3b;
+
+      border:
+        1px solid #d5cec2;
+
+      box-shadow:
+        0 -10px 40px
+        rgba(0,0,0,.15);
+
     }
 
 
-    #mainMenuContent .modal-card h2 {
+    .modal-head {
 
-      color:
-        var(--markus-green) !important;
+      display: flex;
 
-      font-family:
-        Georgia,
-        "Times New Roman",
-        serif;
+      align-items: center;
+
+      justify-content: space-between;
+
+      margin-bottom: 18px;
+
     }
 
 
-    #mainMenuContent .modal-head button {
+    .modal-head h2 {
 
-      background:
-        var(--markus-green) !important;
+      margin: 0;
 
-      color: white !important;
+      color: #174f3b;
+
+      font-size: 25px;
+
     }
 
 
-    #mainMenuContent #cartItems > div {
+    .modal-head button {
 
-      background:
-        #fff !important;
+      width: 36px;
 
-      color:
-        var(--markus-text) !important;
+      height: 36px;
 
-      border-color:
-        var(--markus-line) !important;
+      border: 0;
+
+      border-radius: 50%;
+
+      background: #174f3b;
+
+      color: #fff;
+
+      font-size: 22px;
+
     }
 
 
-    #mainMenuContent .order-summary {
+    #cartItems {
 
-      border-color:
-        var(--markus-line) !important;
+      display: flex;
+
+      flex-direction: column;
+
+      gap: 10px;
+
+      margin-bottom: 18px;
+
     }
 
 
-    #mainMenuContent .order-summary strong {
+    #cartItems > div {
 
-      color:
-        var(--markus-green) !important;
+      padding: 14px;
+
+      border:
+        1px solid #d5cec2;
+
+      border-radius: 11px;
+
+      background: #fff;
+
     }
 
 
-    #mainMenuContent textarea {
+    .cart-main {
 
-      background: #fff !important;
+      display: flex;
 
-      color:
-        var(--markus-text) !important;
+      align-items: center;
 
-      border-color:
-        var(--markus-line) !important;
+      justify-content: space-between;
+
+      gap: 10px;
+
+      color: #174f3b;
+
     }
 
 
-    #mainMenuContent .primary {
+    .qty {
 
-      background:
-        var(--markus-green) !important;
+      display: flex;
 
-      color: #fff !important;
+      align-items: center;
 
-      border-color:
-        var(--markus-green) !important;
+      gap: 10px;
+
+      margin-top: 10px;
+
+    }
+
+
+    .qty button {
+
+      width: 30px;
+
+      height: 30px;
+
+      border: 0;
+
+      border-radius: 50%;
+
+      background: #174f3b;
+
+      color: #fff;
+
+    }
+
+
+    .item-note {
+
+      width: 100%;
+
+      margin-top: 10px;
+
+      padding: 10px;
+
+      border:
+        1px solid #d5cec2;
+
+      border-radius: 8px;
+
+      background: #f8f4ed;
+
+      color: #174f3b;
+
+      font-family: inherit;
+
+    }
+
+
+    .order-summary {
+
+      display: flex;
+
+      justify-content: space-between;
+
+      padding: 16px 0;
+
+      margin-bottom: 17px;
+
+      border-top:
+        1px solid #d5cec2;
+
+      border-bottom:
+        1px solid #d5cec2;
+
+      color: #66776e;
+
+    }
+
+
+    .order-summary strong {
+
+      color: #174f3b;
+
+      font-size: 20px;
+
+    }
+
+
+    .label {
+
+      display: block;
+
+      margin-bottom: 7px;
+
+      color: #174f3b;
+
+      font-size: 13px;
+
+      font-weight: 700;
+
+    }
+
+
+    textarea {
+
+      width: 100%;
+
+      min-height: 90px;
+
+      padding: 12px;
+
+      margin-bottom: 13px;
+
+      resize: vertical;
+
+      border:
+        1px solid #d5cec2;
+
+      border-radius: 10px;
+
+      background: #fff;
+
+      color: #174f3b;
+
+      font-family: inherit;
+
+      font-size: 14px;
+
+      outline: none;
+
+    }
+
+
+    .primary {
+
+      width: 100%;
+
+      padding: 15px;
+
+      border: 0;
+
+      border-radius: 10px;
+
+      background: #174f3b;
+
+      color: #fff;
+
+      font-family: inherit;
+
+      font-size: 15px;
+
+      font-weight: 700;
+
     }
 
 
@@ -890,53 +961,52 @@
 
       .markus-logo {
 
-        width: 220px;
-
-        height: 220px;
-
-        margin-bottom: 45px;
-      }
-
-
-      .markus-name {
-
-        font-size: 29px;
-      }
-
-
-      .menu-markus-logo {
-
         width: 135px;
 
         height: 135px;
+
+        font-size: 25px;
+
       }
 
 
-      #mainMenuContent .table-badge {
+      .markus-brand-name {
 
-        top: 24px;
+        font-size: 21px;
 
-        right: 15px;
       }
 
 
-      #mainMenuContent main {
+      #mainMarkusMenu main {
 
-        padding-left: 14px;
+        padding:
+          18px
+          14px
+          120px;
 
-        padding-right: 14px;
       }
 
 
-      .orders-history-button {
+      .product {
 
-        width:
-          calc(100% - 28px);
+        padding: 15px;
 
-        margin-left: 14px;
-
-        margin-right: 14px;
       }
+
+
+      .product h3 {
+
+        font-size: 18px;
+
+      }
+
+
+      .category-title {
+
+        font-size: 25px;
+
+      }
+
     }
 
   </style>
@@ -951,46 +1021,21 @@
        MARKUS GİRİŞ EKRANI
   ===================================== -->
 
-  <section id="mrxWelcome">
+  <section id="markusWelcome">
 
-    <div class="mrx-welcome-content">
-
-
-      <!-- MARKUS LOGO -->
+    <div class="markus-welcome">
 
       <div class="markus-logo">
-
-        <div class="markus-sun"></div>
-
-        <div class="markus-name">
-          MARKUS
-        </div>
-
-        <div class="markus-foodbar">
-          FOODBAR
-        </div>
-
-        <div class="markus-waves">
-          ≋≋≋
-        </div>
-
+        MARKUS
       </div>
 
 
-      <!-- BUTON -->
-
       <button
-        class="mrx-menu-button"
-        onclick="openMRXMenu()"
+        class="markus-open-button"
+        onclick="openMarkusMenu()"
       >
         Menüyü Gör →
       </button>
-
-
-      <div class="mrx-footer">
-        POWERED BY MRX
-      </div>
-
 
     </div>
 
@@ -999,75 +1044,37 @@
 
 
   <!-- =====================================
-       ANA MENÜ
+       MARKUS MENÜ
   ===================================== -->
 
-  <div id="mainMenuContent">
+  <div id="mainMarkusMenu">
 
 
-    <header class="topbar">
+    <header class="markus-header">
 
+      <div class="markus-brand">
 
-      <!-- MARKUS LOGO -->
-
-      <div class="menu-markus-logo">
-
-        <div class="markus-sun"></div>
-
-        <div class="markus-name">
+        <div class="markus-logo-small">
           MARKUS
         </div>
 
-        <div class="markus-foodbar">
+        <div class="markus-brand-name">
           FOODBAR
-        </div>
-
-        <div class="markus-waves">
-          ≋≋≋
         </div>
 
       </div>
 
 
-      <!-- MASA -->
-
       <div
-        class="table-badge"
+        class="markus-table"
         id="tableBadge"
       >
         Masa
       </div>
 
-
     </header>
 
 
-
-    <!-- =====================================
-         SİPARİŞLERİM
-    ===================================== -->
-
-    <button
-      id="ordersHistoryButton"
-      class="orders-history-button"
-      onclick="openOrderHistory()"
-    >
-
-      <span>
-        Siparişlerim
-      </span>
-
-      <span class="arrow">
-        ›
-      </span>
-
-    </button>
-
-
-
-    <!-- =====================================
-         MENÜ
-    ===================================== -->
 
     <main>
 
@@ -1094,9 +1101,7 @@
 
 
 
-    <!-- =====================================
-         SEPET
-    ===================================== -->
+    <!-- SEPET -->
 
     <button
       id="cartButton"
@@ -1114,9 +1119,7 @@
 
 
 
-    <!-- =====================================
-         SEPET MODALI
-    ===================================== -->
+    <!-- SEPET MODAL -->
 
     <div
       id="cartModal"
@@ -1131,7 +1134,6 @@
           <h2>
             Sepet
           </h2>
-
 
           <button
             onclick="closeCart()"
@@ -1153,7 +1155,9 @@
             Toplam
           </span>
 
-          <strong id="cartTotal">
+          <strong
+            id="cartTotal"
+          >
             ₺0
           </strong>
 
@@ -1184,46 +1188,6 @@
     </div>
 
 
-    <!-- =====================================
-         SİPARİŞ GEÇMİŞİ MODALI
-    ===================================== -->
-
-    <div
-      id="orderHistoryModal"
-      class="modal hidden"
-    >
-
-      <div class="modal-card">
-
-        <div class="modal-head">
-
-          <h2>
-            Siparişlerim
-          </h2>
-
-          <button
-            onclick="closeOrderHistory()"
-          >
-            ×
-          </button>
-
-        </div>
-
-
-        <div id="orderHistoryContent">
-
-          <p>
-            Sipariş geçmişiniz yükleniyor...
-          </p>
-
-        </div>
-
-
-      </div>
-
-    </div>
-
-
   </div>
 
 
@@ -1237,26 +1201,30 @@
   ></script>
 
 
-  <script src="./markus.js?v=1"></script>
+  <!-- MARKUS JS -->
+
+  <script
+    src="./markus.js?v=4"
+  ></script>
 
 
 
   <!-- =====================================
-       MARKUS MENÜ AÇMA
+       MARKUS MENÜ AÇ
   ===================================== -->
 
   <script>
 
-    function openMRXMenu() {
+    function openMarkusMenu() {
 
       const welcome =
         document.getElementById(
-          "mrxWelcome"
+          "markusWelcome"
         );
 
       const menu =
         document.getElementById(
-          "mainMenuContent"
+          "mainMarkusMenu"
         );
 
 
@@ -1270,72 +1238,14 @@
       );
 
 
-      setTimeout(function () {
+      setTimeout(
+        function() {
 
-        welcome.style.display =
-          "none";
+          welcome.style.display =
+            "none";
 
-      }, 500);
-
-    }
-
-
-
-    /* =====================================
-       SİPARİŞ GEÇMİŞİ
-       app.js'deki fonksiyonlar
-       hazır değilse bile buton hata vermez.
-    ===================================== */
-
-    function openOrderHistory() {
-
-      const modal =
-        document.getElementById(
-          "orderHistoryModal"
-        );
-
-      if (!modal) {
-        return;
-      }
-
-      modal.classList.remove(
-        "hidden"
-      );
-
-      if (
-        typeof loadOrderHistory ===
-        "function"
-      ) {
-
-        loadOrderHistory();
-
-      } else {
-
-        document.getElementById(
-          "orderHistoryContent"
-        ).innerHTML = `
-          <p>
-            Sipariş geçmişi hazırlanıyor...
-          </p>
-        `;
-      }
-
-    }
-
-
-    function closeOrderHistory() {
-
-      const modal =
-        document.getElementById(
-          "orderHistoryModal"
-        );
-
-      if (!modal) {
-        return;
-      }
-
-      modal.classList.add(
-        "hidden"
+        },
+        500
       );
 
     }
