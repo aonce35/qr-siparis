@@ -1,47 +1,27 @@
 <!doctype html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>QR Menü</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>QR Sipariş - Admin</title><link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header class="topbar">
-    <div>
-      <div class="eyebrow">QR MENÜ</div>
-      <h1 id="restaurantName">Menü</h1>
-    </div>
-    <div class="table-badge" id="tableBadge">Masa</div>
-  </header>
-
-  <main>
-    <div id="notice" class="notice hidden"></div>
-    <div id="categories" class="categories"></div>
-    <section id="menu" class="menu"></section>
-  </main>
-
-  <button id="cartButton" class="cart-button" onclick="openCart()">
-    Sepet <span id="cartCount">0</span>
-  </button>
-
-  <div id="cartModal" class="modal hidden">
-    <div class="modal-card">
-      <div class="modal-head">
-        <h2>Sepet</h2>
-        <button onclick="closeCart()">×</button>
-      </div>
-      <div id="cartItems"></div>
-      <div class="order-summary">
-        <span>Toplam</span><strong id="cartTotal">₺0</strong>
-      </div>
-      <label class="label">Sipariş notu</label>
-      <textarea id="orderNote" placeholder="Örn. Soğansız, sos ayrı, acele değil..."></textarea>
-      <button class="primary" onclick="placeOrder()">Siparişi Gönder</button>
-    </div>
+<div id="loginView" class="center">
+  <div class="login-card">
+    <h1>QR Sipariş</h1><p>Garson / Mekan Sahibi Paneli</p>
+    <input id="email" type="email" placeholder="E-posta">
+    <input id="password" type="password" placeholder="Şifre">
+    <button onclick="login()">Giriş Yap</button>
+    <div id="loginError"></div>
   </div>
+</div>
 
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="app.js"></script>
-</body>
-</html>
+<div id="appView" class="hidden">
+<header><div><span class="eyebrow">CANLI SİPARİŞLER</span><h1>Admin Paneli</h1></div><button class="logout" onclick="logout()">Çıkış</button></header>
+<main>
+  <div class="stats"><div><small>Yeni</small><strong id="newCount">0</strong></div><div><small>Hazırlanıyor</small><strong id="prepCount">0</strong></div><div><small>Hazır</small><strong id="readyCount">0</strong></div></div>
+  <div class="board" id="orders"></div>
+</main>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="app.js"></script>
+</body></html>
