@@ -1,4 +1,4 @@
-document.body.innerHTML = "<h1 style='font-size:40px;padding:30px'>Hoşgeldin ulaş polat kardeş</h1>";
+
 const SUPABASE_URL = "https://dppqwgsawarkyzzonzyu.supabase.co";
 alert("APP.JS ÇALIŞIYOR");
 const SUPABASE_ANON_KEY = "sb_publishable_fhNovHoi8Xgh1jScRsdrgQ_ZCe6I4tP";
