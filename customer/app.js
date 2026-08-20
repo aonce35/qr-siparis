@@ -54,20 +54,29 @@ async function loadRestaurant() {
 }
 
 async function loadProducts() {
+  console.log("Ürünler yükleniyor...");
+
   const { data, error } = await db
     .from("products")
-    .select("*")
-    .order("sort_order");
+    .select("id, name, description, category, price, is_active, sort_order")
+    .eq("is_active", true)
+    .order("sort_order", { ascending: true });
 
   if (error) {
-    console.error("Products error:", error);
-    showNotice("Menü yüklenemedi.");
+    console.error("PRODUCTS ERROR:", error);
+    showNotice("Menü yüklenemedi: " + error.message);
+    products = [];
     return;
   }
 
-  products = data || [];
+  console.log("SUPABASE ÜRÜNLER:", data);
 
-  console.log("Yüklenen ürünler:", products);
+  products = Array.isArray(data) ? data : [];
+
+  if (products.length === 0) {
+    showNotice("Aktif ürün bulunamadı.");
+  }
+}
 }
 
 function categories() {
