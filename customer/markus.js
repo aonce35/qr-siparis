@@ -1287,7 +1287,7 @@ async function placeOrder() {
           order.id,
 
         product_id:
-          item.id,
+          null,
 
         product_name:
           item.name,
