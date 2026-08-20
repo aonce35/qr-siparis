@@ -1,4 +1,4 @@
-const SUPABASE_URL = "https://dppqwqsawarkyzzonzyu.supabase.co";
+const SUPABASE_URL = "https://dppqwgsawarkyzzonzyu.supabase.co";
 const SUPABASE_ANON_KEY = "sb_publishable_fhNovHoi8Xgh1jScRsdrgQ_ZCe6I4tP";
 
 const db = supabase.createClient(
@@ -47,8 +47,6 @@ async function login() {
     button.disabled = true;
     button.textContent = "Giriş yapılıyor...";
   }
-
-  console.log("LOGIN DENENİYOR:", email);
 
   const { data, error } = await db.auth.signInWithPassword({
     email,
@@ -397,9 +395,9 @@ function esc(value) {
 }
 
 function escAttr(value) {
-
   return esc(value);
 }
+
 async function enableNotifications() {
   if (!("Notification" in window)) {
     alert("Bu cihaz bildirimleri desteklemiyor.");
@@ -412,7 +410,8 @@ async function enableNotifications() {
   }
 
   try {
-    const permission = await Notification.requestPermission();
+    const permission =
+      await Notification.requestPermission();
 
     if (permission !== "granted") {
       alert("Bildirim izni verilmedi.");
@@ -425,16 +424,23 @@ async function enableNotifications() {
       );
 
     const publicKey =
-      "BB4Orx_fUMsvyUD86qpErfHjT6CB9DixMiMqF9wYz9mZXkQzCzP7ne_MJbTmeWqZabO1kXjrUHTl1rfHTsJFms0";
+      "BPsCSbvdu2cl_jaRVXQ9K3zN7AN_4V6iBCRhu1MZIgFbHXfOFMCYlcYFDLGeXhm1XoHTglW20HR_uXLTE7KLR_g";
 
-    const subscription =
-      await registration.pushManager.subscribe({
-        userVisibleOnly: true,
-        applicationServerKey: urlBase64ToUint8Array(publicKey)
-      });
+    let subscription =
+      await registration.pushManager.getSubscription();
 
-    const { data: { user } } =
-      await db.auth.getUser();
+    if (!subscription) {
+      subscription =
+        await registration.pushManager.subscribe({
+          userVisibleOnly: true,
+          applicationServerKey:
+            urlBase64ToUint8Array(publicKey)
+        });
+    }
+
+    const {
+      data: { user }
+    } = await db.auth.getUser();
 
     if (!user) {
       alert("Önce admin hesabıyla giriş yap.");
@@ -443,43 +449,79 @@ async function enableNotifications() {
 
     const json = subscription.toJSON();
 
+    if (!json.endpoint || !json.keys) {
+      throw new Error(
+        "Push aboneliği bilgileri alınamadı."
+      );
+    }
+
     const { error } =
       await db
         .from("push_subscriptions")
-        .upsert({
-          user_id: user.id,
-          endpoint: json.endpoint,
-          p256dh: json.keys.p256dh,
-          auth: json.keys.auth
-        }, {
-          onConflict: "endpoint"
-        });
+        .upsert(
+          {
+            user_id: user.id,
+            endpoint: json.endpoint,
+            p256dh: json.keys.p256dh,
+            auth: json.keys.auth
+          },
+          {
+            onConflict: "endpoint"
+          }
+        );
 
     if (error) {
-      console.error(error);
-      alert("Bildirim kaydedilemedi: " + error.message);
+      console.error(
+        "PUSH DATABASE ERROR:",
+        error
+      );
+
+      alert(
+        "Bildirim kaydedilemedi: " +
+        error.message
+      );
+
       return;
     }
 
     const button =
-      document.getElementById("enableNotifications");
+      document.getElementById(
+        "enableNotifications"
+      );
 
     if (button) {
-      button.textContent = "🔔 Bildirimler Açık";
+      button.textContent =
+        "🔔 Bildirimler Açık";
+
       button.disabled = true;
     }
 
-    alert("Bildirimler başarıyla açıldı!");
+    alert(
+      "Bildirimler başarıyla açıldı!"
+    );
+
   } catch (error) {
-    console.error("PUSH ERROR:", error);
-    alert("Bildirim kurulamadı: " + error.message);
+    console.error(
+      "PUSH ERROR:",
+      error
+    );
+
+    alert(
+      "Bildirim kurulamadı: " +
+      error.message
+    );
   }
 }
 
-function urlBase64ToUint8Array(base64String) {
-  const padding = "=".repeat(
-    (4 - (base64String.length % 4)) % 4
-  );
+function urlBase64ToUint8Array(
+  base64String
+) {
+  const padding =
+    "=".repeat(
+      (4 -
+        (base64String.length % 4)) %
+        4
+    );
 
   const base64 =
     (base64String + padding)
@@ -491,8 +533,8 @@ function urlBase64ToUint8Array(base64String) {
 
   return Uint8Array.from(
     [...rawData].map(
-      char => char.charCodeAt(0)
+      char =>
+        char.charCodeAt(0)
     )
   );
 }
-
