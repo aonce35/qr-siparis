@@ -1,9 +1,7 @@
-```html
 <!doctype html>
 <html lang="tr">
 
 <head>
-
 <meta charset="UTF-8">
 
 <meta
@@ -59,13 +57,12 @@ input {
 
 
 /* =====================================================
-   MRX WELCOME
+   WELCOME
 ===================================================== */
 
 #mrxWelcome {
   position: fixed;
   inset: 0;
-
   z-index: 99999;
 
   display: flex;
@@ -155,12 +152,11 @@ input {
 
 
 /* =====================================================
-   LANGUAGE SELECTOR
+   LANGUAGE
 ===================================================== */
 
 .language-selector {
   position: relative;
-
   margin-top: 18px;
 
   display: flex;
@@ -188,11 +184,9 @@ input {
   justify-content: center;
 
   box-shadow:
-    0 4px 14px
-    rgba(0,0,0,.25);
+    0 4px 14px rgba(0,0,0,.25);
 
-  transition:
-    transform .15s ease;
+  transition: transform .15s ease;
 }
 
 .language-button:active {
@@ -218,8 +212,7 @@ input {
   background: #fff;
 
   box-shadow:
-    0 8px 30px
-    rgba(0,0,0,.3);
+    0 8px 30px rgba(0,0,0,.3);
 }
 
 .language-menu.visible {
@@ -251,14 +244,12 @@ input {
 
 
 /* =====================================================
-   MAIN MENU
+   MAIN
 ===================================================== */
 
 #mainMenuContent {
   display: none;
-
   min-height: 100vh;
-
   background: #f5f5f5;
 }
 
@@ -274,11 +265,9 @@ input {
 .topbar {
   position: sticky;
   top: 0;
-
   z-index: 100;
 
   display: flex;
-
   align-items: center;
   justify-content: space-between;
 
@@ -286,8 +275,7 @@ input {
 
   background: #fff;
 
-  border-bottom:
-    1px solid #e5e5e5;
+  border-bottom: 1px solid #e5e5e5;
 }
 
 .eyebrow {
@@ -329,25 +317,21 @@ input {
 
 
 /* =====================================================
-   MY ORDERS BUTTON
+   MY ORDERS
 ===================================================== */
 
 .my-orders-button-wrapper {
   padding: 12px 16px;
-
   background: #fff;
 }
 
 #myOrdersButton {
   display: block;
-
   width: 100%;
 
   padding: 13px 16px;
 
-  border:
-    1px solid #dedede;
-
+  border: 1px solid #dedede;
   border-radius: 12px;
 
   background: #fff;
@@ -361,17 +345,12 @@ input {
   cursor: pointer;
 
   box-shadow:
-    0 2px 8px
-    rgba(0,0,0,.04);
-}
-
-#myOrdersButton:active {
-  transform: scale(.99);
+    0 2px 8px rgba(0,0,0,.04);
 }
 
 
 /* =====================================================
-   MAIN
+   MAIN CONTENT
 ===================================================== */
 
 main {
@@ -398,13 +377,10 @@ main {
 
   padding: 13px 15px;
 
-  border:
-    1px solid #ddd;
-
+  border: 1px solid #ddd;
   border-radius: 12px;
 
   background: #fff;
-
   color: #222;
 
   font-size: 14px;
@@ -417,7 +393,6 @@ main {
 
 .categories {
   display: flex;
-
   gap: 8px;
 
   margin-bottom: 20px;
@@ -438,13 +413,10 @@ main {
 
   padding: 10px 15px;
 
-  border:
-    1px solid #ddd;
-
+  border: 1px solid #ddd;
   border-radius: 999px;
 
   background: #fff;
-
   color: #666;
 
   font-size: 13px;
@@ -456,7 +428,6 @@ main {
 .categories button.active {
   background: #111;
   color: #fff;
-
   border-color: #111;
 }
 
@@ -467,9 +438,7 @@ main {
 
 .menu {
   display: flex;
-
   flex-direction: column;
-
   gap: 12px;
 
   background: transparent;
@@ -498,7 +467,6 @@ main {
 
 .product {
   display: flex;
-
   align-items: center;
   justify-content: space-between;
 
@@ -508,16 +476,13 @@ main {
 
   padding: 16px;
 
-  border:
-    1px solid #e5e5e5;
-
+  border: 1px solid #e5e5e5;
   border-radius: 16px;
 
   background: #fff;
 
   box-shadow:
-    0 2px 8px
-    rgba(0,0,0,.035);
+    0 2px 8px rgba(0,0,0,.035);
 }
 
 .product-info {
@@ -526,10 +491,7 @@ main {
 }
 
 .product h3 {
-  margin:
-    0
-    0
-    5px;
+  margin: 0 0 5px;
 
   color: #111;
 
@@ -538,10 +500,7 @@ main {
 }
 
 .product p {
-  margin:
-    0
-    0
-    9px;
+  margin: 0 0 9px;
 
   color: #777;
 
@@ -560,13 +519,9 @@ main {
 .add {
   flex-shrink: 0;
 
-  padding:
-    9px
-    13px;
+  padding: 9px 13px;
 
-  border:
-    1px solid #111;
-
+  border: 1px solid #111;
   border-radius: 10px;
 
   background: #111;
@@ -580,7 +535,7 @@ main {
 
 
 /* =====================================================
-   CART BUTTON
+   CART
 ===================================================== */
 
 .cart-button {
@@ -589,28 +544,22 @@ main {
   left: 50%;
   bottom: 20px;
 
-  transform:
-    translateX(-50%);
+  transform: translateX(-50%);
 
   z-index: 500;
 
   min-width: 190px;
 
-  padding:
-    15px
-    22px;
+  padding: 15px 22px;
 
-  border:
-    1px solid #111;
-
+  border: 1px solid #111;
   border-radius: 14px;
 
   background: #111;
   color: #fff;
 
   box-shadow:
-    0 8px 25px
-    rgba(0,0,0,.18);
+    0 8px 25px rgba(0,0,0,.18);
 
   font-size: 15px;
   font-weight: 700;
@@ -629,9 +578,7 @@ main {
 
   margin-left: 6px;
 
-  padding:
-    0
-    5px;
+  padding: 0 5px;
 
   border-radius: 999px;
 
@@ -648,7 +595,6 @@ main {
 
 .modal {
   position: fixed;
-
   inset: 0;
 
   z-index: 1000;
@@ -660,8 +606,7 @@ main {
 
   padding: 15px;
 
-  background:
-    rgba(0,0,0,.55);
+  background: rgba(0,0,0,.55);
 
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
@@ -718,7 +663,6 @@ main {
   height: 34px;
 
   border: 0;
-
   border-radius: 50%;
 
   background: #f1f1f1;
@@ -731,7 +675,7 @@ main {
 
 
 /* =====================================================
-   CART
+   CART CONTENT
 ===================================================== */
 
 #cartItems {
@@ -747,9 +691,7 @@ main {
 .cart-row {
   padding: 13px;
 
-  border:
-    1px solid #e5e5e5;
-
+  border: 1px solid #e5e5e5;
   border-radius: 12px;
 
   background: #fafafa;
@@ -780,7 +722,6 @@ main {
   height: 30px;
 
   border: 0;
-
   border-radius: 8px;
 
   background: #111;
@@ -798,9 +739,7 @@ main {
 
   padding: 9px;
 
-  border:
-    1px solid #ddd;
-
+  border: 1px solid #ddd;
   border-radius: 9px;
 
   background: #fff;
@@ -824,11 +763,8 @@ main {
 
   margin-bottom: 18px;
 
-  border-top:
-    1px solid #e5e5e5;
-
-  border-bottom:
-    1px solid #e5e5e5;
+  border-top: 1px solid #e5e5e5;
+  border-bottom: 1px solid #e5e5e5;
 
   color: #777;
 }
@@ -861,9 +797,7 @@ textarea {
 
   resize: vertical;
 
-  border:
-    1px solid #ddd;
-
+  border: 1px solid #ddd;
   border-radius: 12px;
 
   outline: none;
@@ -883,9 +817,7 @@ textarea::placeholder {
 
   padding: 15px;
 
-  border:
-    1px solid #111;
-
+  border: 1px solid #111;
   border-radius: 12px;
 
   background: #111;
@@ -899,7 +831,7 @@ textarea::placeholder {
 
 
 /* =====================================================
-   MY ORDERS
+   ORDERS
 ===================================================== */
 
 .my-order {
@@ -907,9 +839,7 @@ textarea::placeholder {
 
   padding: 16px;
 
-  border:
-    1px solid #e4e4e4;
-
+  border: 1px solid #e4e4e4;
   border-radius: 16px;
 
   background: #fafafa;
@@ -918,12 +848,10 @@ textarea::placeholder {
 .my-order.active-order {
   background: #fff;
 
-  border:
-    1px solid #111;
+  border: 1px solid #111;
 
   box-shadow:
-    0 4px 16px
-    rgba(0,0,0,.08);
+    0 4px 16px rgba(0,0,0,.08);
 }
 
 .my-order-head {
@@ -945,19 +873,12 @@ textarea::placeholder {
   font-size: 15px;
 }
 
-
-/* =====================================================
-   STATUS
-===================================================== */
-
 .my-order-status {
   display: inline-block;
 
   margin-bottom: 15px;
 
-  padding:
-    7px
-    10px;
+  padding: 7px 10px;
 
   border-radius: 9px;
 
@@ -1001,10 +922,7 @@ textarea::placeholder {
 
   justify-content: space-between;
 
-  margin:
-    8px
-    4px
-    20px;
+  margin: 8px 4px 20px;
 }
 
 .order-progress::before {
@@ -1061,9 +979,7 @@ textarea::placeholder {
   width: 19px;
   height: 19px;
 
-  border:
-    2px solid #ddd;
-
+  border: 2px solid #ddd;
   border-radius: 50%;
 
   background: #fff;
@@ -1075,22 +991,18 @@ textarea::placeholder {
   font-weight: 600;
 }
 
-.progress-step.done
-.progress-dot {
+.progress-step.done .progress-dot {
   border-color: #111;
-
   background: #111;
 }
 
-.progress-step.current
-.progress-dot {
+.progress-step.current .progress-dot {
   border-color: #111;
 
   background: #fff;
 
   box-shadow:
-    0 0 0 4px
-    rgba(0,0,0,.08);
+    0 0 0 4px rgba(0,0,0,.08);
 }
 
 
@@ -1111,12 +1023,9 @@ textarea::placeholder {
 
   gap: 10px;
 
-  padding:
-    8px
-    0;
+  padding: 8px 0;
 
-  border-bottom:
-    1px solid #eee;
+  border-bottom: 1px solid #eee;
 
   color: #333;
 
@@ -1129,7 +1038,7 @@ textarea::placeholder {
 
 
 /* =====================================================
-   ORDER TOTAL
+   TOTAL
 ===================================================== */
 
 .my-order-total {
@@ -1141,8 +1050,7 @@ textarea::placeholder {
 
   padding-top: 12px;
 
-  border-top:
-    1px solid #ddd;
+  border-top: 1px solid #ddd;
 
   color: #777;
 }
@@ -1153,11 +1061,6 @@ textarea::placeholder {
   font-size: 17px;
 }
 
-
-/* =====================================================
-   GRAND TOTAL
-===================================================== */
-
 .my-orders-grand-total {
   display: flex;
 
@@ -1167,8 +1070,7 @@ textarea::placeholder {
 
   padding-top: 16px;
 
-  border-top:
-    2px solid #111;
+  border-top: 2px solid #111;
 
   color: #111;
 
@@ -1237,18 +1139,7 @@ textarea::placeholder {
 
 }
 
-
-/* =====================================================
-   LANGUAGE LOADING
-===================================================== */
-
-.translation-loading {
-  opacity: .65;
-  pointer-events: none;
-}
-
 </style>
-
 </head>
 
 
@@ -1256,7 +1147,7 @@ textarea::placeholder {
 
 
 <!-- =====================================================
-     MRX WELCOME
+     WELCOME
 ===================================================== -->
 
 <section id="mrxWelcome">
@@ -1281,9 +1172,6 @@ textarea::placeholder {
     <div class="mrx-footer">
       POWERED BY MRX
     </div>
-
-
-    <!-- LANGUAGE -->
 
     <div class="language-selector">
 
@@ -1330,14 +1218,13 @@ textarea::placeholder {
 
 <div id="mainMenuContent">
 
-
 <header class="topbar">
 
   <div>
 
     <div
       class="eyebrow"
-      data-i18n="qr_menu"
+      id="qrMenuLabel"
     >
       QR MENÜ
     </div>
@@ -1377,12 +1264,10 @@ textarea::placeholder {
     class="notice hidden"
   ></div>
 
-
   <div
     id="categories"
     class="categories"
   ></div>
-
 
   <section
     id="menu"
@@ -1392,26 +1277,19 @@ textarea::placeholder {
 </main>
 
 
-<!-- CART BUTTON -->
-
 <button
   id="cartButton"
   class="cart-button"
   onclick="openCart()"
 >
-
-  <span data-i18n="cart">
-    Sepet
-  </span>
-
-  <span id="cartCount">
-    0
-  </span>
-
+  Sepet
+  <span id="cartCount">0</span>
 </button>
 
 
-<!-- CART MODAL -->
+<!-- =====================================================
+     CART MODAL
+===================================================== -->
 
 <div
   id="cartModal"
@@ -1434,9 +1312,7 @@ textarea::placeholder {
 
     </div>
 
-
     <div id="cartItems"></div>
-
 
     <div class="order-summary">
 
@@ -1450,7 +1326,6 @@ textarea::placeholder {
 
     </div>
 
-
     <label
       class="label"
       id="orderNoteLabel"
@@ -1458,12 +1333,10 @@ textarea::placeholder {
       Sipariş notu
     </label>
 
-
     <textarea
       id="orderNote"
       placeholder="Örn. Soğansız, sos ayrı, acele değil..."
     ></textarea>
-
 
     <button
       class="primary"
@@ -1478,7 +1351,9 @@ textarea::placeholder {
 </div>
 
 
-<!-- MY ORDERS MODAL -->
+<!-- =====================================================
+     MY ORDERS MODAL
+===================================================== -->
 
 <div
   id="myOrdersModal"
@@ -1501,15 +1376,11 @@ textarea::placeholder {
 
     </div>
 
-
     <div id="myOrders">
-
       <p id="ordersLoadingText">
         Siparişler yükleniyor...
       </p>
-
     </div>
-
 
     <div class="my-orders-grand-total">
 
@@ -1544,7 +1415,7 @@ const SUPABASE_URL =
   "https://dppqwqsawarkyzzonzyu.supabase.co";
 
 const SUPABASE_ANON_KEY =
-  "sb_publishable_fhNovHoi8Xgh1jScRsdrgQ_ZCe6I4tP";
+  "sb_publishable_fhNovHoi8Xgh1jScRsdrgZ_Ce6I4tP";
 
 const db =
   supabase.createClient(
@@ -1554,7 +1425,7 @@ const db =
 
 
 /* =====================================================
-   CUSTOMER ID
+   CUSTOMER
 ===================================================== */
 
 let customerId =
@@ -1599,7 +1470,7 @@ let currentLanguage =
 
 
 /* =====================================================
-   TRANSLATION CACHE
+   AI CACHE
 ===================================================== */
 
 const translationMemory =
@@ -1620,33 +1491,26 @@ let cart = [];
 
 
 /* =====================================================
-   STATIC TRANSLATIONS
+   TRANSLATIONS
 ===================================================== */
 
 const translations = {
 
   tr: {
 
-    qr_menu:
-      "QR MENÜ",
+    qr_menu: "QR MENÜ",
 
-    menu:
-      "Menü",
+    menu: "Menü",
 
-    table:
-      "Masa",
+    table: "Masa",
 
-    my_orders:
-      "🧾 Siparişlerim",
+    my_orders: "🧾 Siparişlerim",
 
-    cart:
-      "Sepet",
+    cart: "Sepet",
 
-    total:
-      "Toplam",
+    total: "Toplam",
 
-    order_note:
-      "Sipariş notu",
+    order_note: "Sipariş notu",
 
     note_placeholder:
       "Örn. Soğansız, sos ayrı, acele değil...",
@@ -1712,44 +1576,25 @@ const translations = {
       "Masa bilgisi bulunamadı.",
 
     menu_failed:
-      "Menü yüklenemedi.",
-
-    order_failed:
-      "Sipariş gönderilemedi: ",
-
-    items_failed:
-      "Sipariş ürünleri kaydedilemedi: ",
-
-    history_failed:
-      "Sipariş geçmişi yüklenemedi: ",
-
-    language:
-      "Dil"
+      "Menü yüklenemedi."
 
   },
 
   en: {
 
-    qr_menu:
-      "QR MENU",
+    qr_menu: "QR MENU",
 
-    menu:
-      "Menu",
+    menu: "Menu",
 
-    table:
-      "Table",
+    table: "Table",
 
-    my_orders:
-      "🧾 My Orders",
+    my_orders: "🧾 My Orders",
 
-    cart:
-      "Cart",
+    cart: "Cart",
 
-    total:
-      "Total",
+    total: "Total",
 
-    order_note:
-      "Order note",
+    order_note: "Order note",
 
     note_placeholder:
       "E.g. No onions, sauce on the side, no rush...",
@@ -1815,19 +1660,7 @@ const translations = {
       "Table information not found.",
 
     menu_failed:
-      "Menu could not be loaded.",
-
-    order_failed:
-      "Order could not be placed: ",
-
-    items_failed:
-      "Order items could not be saved: ",
-
-    history_failed:
-      "Order history could not be loaded: ",
-
-    language:
-      "Language"
+      "Menu could not be loaded."
 
   }
 
@@ -1835,7 +1668,223 @@ const translations = {
 
 
 /* =====================================================
-   INIT
+   TRANSLATION HELPER
+===================================================== */
+
+function t(key) {
+
+  return (
+    translations[currentLanguage]?.[key] ||
+    translations.tr[key] ||
+    key
+  );
+
+}
+
+
+/* =====================================================
+   AI TRANSLATOR
+===================================================== */
+
+async function translateWithAI(text) {
+
+  if (!text || !String(text).trim()) {
+    return "";
+  }
+
+  const original =
+    String(text).trim();
+
+
+  /* Local cache */
+
+  if (
+    translationMemory[original]
+  ) {
+
+    return translationMemory[original];
+
+  }
+
+
+  try {
+
+    console.log(
+      "Translating:",
+      original
+    );
+
+
+    const {
+      data,
+      error
+    } =
+      await db.functions.invoke(
+        "translate-demo",
+        {
+          body: {
+            text: original
+          }
+        }
+      );
+
+
+    if (error) {
+
+      console.error(
+        "FUNCTION ERROR:",
+        error
+      );
+
+      return original;
+
+    }
+
+
+    const translated =
+      data?.translation?.trim();
+
+
+    if (!translated) {
+
+      console.error(
+        "No translation returned:",
+        data
+      );
+
+      return original;
+
+    }
+
+
+    translationMemory[original] =
+      translated;
+
+
+    localStorage.setItem(
+      "mrx_translation_memory",
+      JSON.stringify(
+        translationMemory
+      )
+    );
+
+
+    console.log(
+      "Translated:",
+      original,
+      "→",
+      translated
+    );
+
+
+    return translated;
+
+  } catch (error) {
+
+    console.error(
+      "AI TRANSLATION ERROR:",
+      error
+    );
+
+    return original;
+
+  }
+
+}
+
+
+/* =====================================================
+   TRANSLATE PRODUCTS
+===================================================== */
+
+async function translateProducts() {
+
+  if (
+    currentLanguage !== "en"
+  ) {
+
+    return;
+
+  }
+
+
+  if (
+    !products.length
+  ) {
+
+    return;
+
+  }
+
+
+  console.log(
+    "AI translation started..."
+  );
+
+
+  for (
+    const product of products
+  ) {
+
+
+    /* PRODUCT NAME */
+
+    product._enName =
+      await translateWithAI(
+        product.name
+      );
+
+
+    /* DESCRIPTION */
+
+    if (
+      product.description
+    ) {
+
+      product._enDescription =
+        await translateWithAI(
+          product.description
+        );
+
+    } else {
+
+      product._enDescription =
+        "";
+
+    }
+
+
+    /* CATEGORY */
+
+    if (
+      product.category
+    ) {
+
+      product._enCategory =
+        await translateWithAI(
+          product.category
+        );
+
+    } else {
+
+      product._enCategory =
+        "";
+
+    }
+
+  }
+
+
+  console.log(
+    "AI translation finished.",
+    products
+  );
+
+}
+
+
+/* =====================================================
+   INITIALIZE
 ===================================================== */
 
 document.addEventListener(
@@ -1846,7 +1895,8 @@ document.addEventListener(
 
 async function init() {
 
-  applyStaticLanguage();
+  applyLanguageUI();
+
 
   if (!tableNumber) {
 
@@ -1854,27 +1904,16 @@ async function init() {
       t("no_table")
     );
 
-    return;
   }
 
 
-  const badge =
-    document.getElementById(
-      "tableBadge"
-    );
-
-
-  if (badge) {
-
-    badge.textContent =
-      `${t("table")} ${tableNumber}`;
-
-  }
+  updateTable();
 
 
   await loadRestaurant();
 
   await loadProducts();
+
 
   renderCategories();
 
@@ -1886,123 +1925,10 @@ async function init() {
 
 
 /* =====================================================
-   LANGUAGE FUNCTIONS
+   LANGUAGE UI
 ===================================================== */
 
-function t(key) {
-
-  return (
-    translations[
-      currentLanguage
-    ]?.[key] ||
-    translations.tr[key] ||
-    key
-  );
-
-}
-
-
-function toggleLanguageMenu() {
-
-  const menu =
-    document.getElementById(
-      "languageMenu"
-    );
-
-  if (!menu) {
-    return;
-  }
-
-  menu.classList.toggle(
-    "visible"
-  );
-
-}
-
-
-function setLanguage(language) {
-
-  if (
-    language !== "tr" &&
-    language !== "en"
-  ) {
-
-    return;
-
-  }
-
-
-  currentLanguage =
-    language;
-
-
-  localStorage.setItem(
-    "mrx_language",
-    language
-  );
-
-
-  const button =
-    document.getElementById(
-      "languageButton"
-    );
-
-
-  if (button) {
-
-    button.textContent =
-      language === "en"
-        ? "🇬🇧"
-        : "🇹🇷";
-
-  }
-
-
-  const menu =
-    document.getElementById(
-      "languageMenu"
-    );
-
-
-  if (menu) {
-
-    menu.classList.remove(
-      "visible"
-    );
-
-  }
-
-
-  document.documentElement.lang =
-    language;
-
-
-  applyStaticLanguage();
-
-  renderCategories();
-
-  renderMenu();
-
-  renderCart();
-
-  if (
-    !document
-      .getElementById(
-        "myOrdersModal"
-      )
-      .classList.contains(
-        "hidden"
-      )
-  ) {
-
-    loadMyOrders();
-
-  }
-
-}
-
-
-function applyStaticLanguage() {
+function applyLanguageUI() {
 
   document.documentElement.lang =
     currentLanguage;
@@ -2021,14 +1947,14 @@ function applyStaticLanguage() {
   }
 
 
-  const menuButton =
+  const viewMenu =
     document.querySelector(
       ".mrx-menu-button"
     );
 
-  if (menuButton) {
+  if (viewMenu) {
 
-    menuButton.textContent =
+    viewMenu.textContent =
       t("view_menu");
 
   }
@@ -2047,14 +1973,14 @@ function applyStaticLanguage() {
   }
 
 
-  const eyebrow =
-    document.querySelector(
-      ".eyebrow"
+  const qrMenu =
+    document.getElementById(
+      "qrMenuLabel"
     );
 
-  if (eyebrow) {
+  if (qrMenu) {
 
-    eyebrow.textContent =
+    qrMenu.textContent =
       t("qr_menu");
 
   }
@@ -2076,14 +2002,14 @@ function applyStaticLanguage() {
   }
 
 
-  const myOrdersButton =
+  const orders =
     document.getElementById(
       "myOrdersButton"
     );
 
-  if (myOrdersButton) {
+  if (orders) {
 
-    myOrdersButton.textContent =
+    orders.textContent =
       t("my_orders");
 
   }
@@ -2096,22 +2022,12 @@ function applyStaticLanguage() {
 
   if (cartButton) {
 
-    const count =
-      document.getElementById(
-        "cartCount"
-      );
-
-    cartButton.innerHTML =
-      `
-        ${t("cart")}
-        <span id="cartCount">
-          ${
-            count
-              ? count.textContent
-              : "0"
-          }
-        </span>
-      `;
+    cartButton.innerHTML = `
+      ${t("cart")}
+      <span id="cartCount">
+        ${cart.length}
+      </span>
+    `;
 
   }
 
@@ -2142,40 +2058,40 @@ function applyStaticLanguage() {
   }
 
 
-  const orderNoteLabel =
+  const noteLabel =
     document.getElementById(
       "orderNoteLabel"
     );
 
-  if (orderNoteLabel) {
+  if (noteLabel) {
 
-    orderNoteLabel.textContent =
+    noteLabel.textContent =
       t("order_note");
 
   }
 
 
-  const orderNote =
+  const note =
     document.getElementById(
       "orderNote"
     );
 
-  if (orderNote) {
+  if (note) {
 
-    orderNote.placeholder =
+    note.placeholder =
       t("note_placeholder");
 
   }
 
 
-  const placeOrderButton =
+  const place =
     document.getElementById(
       "placeOrderButton"
     );
 
-  if (placeOrderButton) {
+  if (place) {
 
-    placeOrderButton.textContent =
+    place.textContent =
       t("place_order");
 
   }
@@ -2189,11 +2105,9 @@ function applyStaticLanguage() {
   if (myOrdersTitle) {
 
     myOrdersTitle.textContent =
-      t("my_orders")
-        .replace(
-          "🧾 ",
-          ""
-        );
+      currentLanguage === "en"
+        ? "My Orders"
+        : "Siparişlerim";
 
   }
 
@@ -2242,221 +2156,32 @@ function applyStaticLanguage() {
 
 
 /* =====================================================
-   AI TRANSLATION
+   LANGUAGE MENU
 ===================================================== */
 
-async function translateWithAI(
-  text
-) {
+function toggleLanguageMenu() {
 
-  if (
-    !text ||
-    !String(text).trim()
-  ) {
-
-    return "";
-
-  }
-
-
-  const original =
-    String(text).trim();
-
-
-  if (
-    translationMemory[
-      original
-    ]
-  ) {
-
-    return translationMemory[
-      original
-    ];
-
-  }
-
-
-  try {
-
-    const {
-      data,
-      error
-    } = await db.functions.invoke(
-      "translate-demo",
-      {
-        body: {
-          text: original
-        }
-      }
+  const menu =
+    document.getElementById(
+      "languageMenu"
     );
 
-
-    if (error) {
-
-      console.error(
-        "TRANSLATION ERROR:",
-        error
-      );
-
-      return original;
-
-    }
-
-
-    const translated =
-      data?.translation?.trim();
-
-
-    if (!translated) {
-
-      return original;
-
-    }
-
-
-    translationMemory[
-      original
-    ] =
-      translated;
-
-
-    localStorage.setItem(
-      "mrx_translation_memory",
-      JSON.stringify(
-        translationMemory
-      )
-    );
-
-
-    return translated;
-
-  } catch (error) {
-
-    console.error(
-      "AI TRANSLATION ERROR:",
-      error
-    );
-
-    return original;
-
-  }
-
-}
-
-
-/* =====================================================
-   TRANSLATE PRODUCTS
-===================================================== */
-
-async function translateProducts() {
-
-  if (currentLanguage !== "en") {
+  if (!menu) {
     return;
   }
 
-  if (!products.length) {
-    return;
-  }
-
-  console.log("AI translation started...");
-
-  for (const product of products) {
-
-    // PRODUCT NAME
-    try {
-
-      product._enName =
-        await translateWithAI(
-          product.name
-        );
-
-      console.log(
-        "Translated product:",
-        product.name,
-        "→",
-        product._enName
-      );
-
-    } catch (error) {
-
-      console.error(
-        "PRODUCT NAME TRANSLATION ERROR:",
-        product.name,
-        error
-      );
-
-      product._enName =
-        product.name;
-
-    }
-
-
-    // DESCRIPTION
-    try {
-
-      if (product.description) {
-
-        product._enDescription =
-          await translateWithAI(
-            product.description
-          );
-
-      } else {
-
-        product._enDescription = "";
-
-      }
-
-    } catch (error) {
-
-      console.error(
-        "DESCRIPTION TRANSLATION ERROR:",
-        error
-      );
-
-      product._enDescription =
-        product.description || "";
-
-    }
-
-
-    // CATEGORY
-    try {
-
-      if (product.category) {
-
-        product._enCategory =
-          await translateWithAI(
-            product.category
-          );
-
-      } else {
-
-        product._enCategory = "";
-
-      }
-
-    } catch (error) {
-
-      console.error(
-        "CATEGORY TRANSLATION ERROR:",
-        error
-      );
-
-      product._enCategory =
-        product.category || "";
-
-    }
-
-  }
-
-  console.log(
-    "AI translation finished:",
-    products
+  menu.classList.toggle(
+    "visible"
   );
+
 }
+
+
+function setLanguage(language) {
+
   if (
-    currentLanguage !== "en"
+    language !== "tr" &&
+    language !== "en"
   ) {
 
     return;
@@ -2464,55 +2189,51 @@ async function translateProducts() {
   }
 
 
-  if (!products.length) {
+  currentLanguage =
+    language;
 
-    return;
+
+  localStorage.setItem(
+    "mrx_language",
+    language
+  );
+
+
+  const menu =
+    document.getElementById(
+      "languageMenu"
+    );
+
+  if (menu) {
+
+    menu.classList.remove(
+      "visible"
+    );
 
   }
 
 
-  for (
-    const product of products
+  applyLanguageUI();
+
+
+  if (
+    currentLanguage === "en"
   ) {
 
-    product._enName =
-      await translateWithAI(
-        product.name
-      );
+    translateProducts()
+      .then(() => {
 
+        renderCategories();
+        renderMenu();
+        renderCart();
 
-    if (
-      product.description
-    ) {
+      });
 
-      product._enDescription =
-        await translateWithAI(
-          product.description
-        );
+  } else {
 
-    } else {
-
-      product._enDescription =
-        "";
-
-    }
-
-
-    if (
-      product.category
-    ) {
-
-      product._enCategory =
-        await translateWithAI(
-          product.category
-        );
-
-    } else {
-
-      product._enCategory =
-        "";
-
-    }
+    renderCategories();
+    renderMenu();
+    renderCart();
 
   }
 
@@ -2528,13 +2249,14 @@ async function loadRestaurant() {
   const {
     data,
     error
-  } = await db
-    .from(
-      "restaurant_settings"
-    )
-    .select("name")
-    .limit(1)
-    .maybeSingle();
+  } =
+    await db
+      .from(
+        "restaurant_settings"
+      )
+      .select("name")
+      .limit(1)
+      .maybeSingle();
 
 
   if (error) {
@@ -2550,22 +2272,13 @@ async function loadRestaurant() {
 
 
   if (
-    data &&
-    data.name
+    data?.name
   ) {
 
-    const element =
-      document.getElementById(
-        "restaurantName"
-      );
-
-
-    if (element) {
-
-      element.textContent =
-        data.name;
-
-    }
+    document.getElementById(
+      "restaurantName"
+    ).textContent =
+      data.name;
 
   }
 
@@ -2581,21 +2294,22 @@ async function loadProducts() {
   const {
     data,
     error
-  } = await db
-    .from("products")
-    .select(
-      "id,name,description,category,price,is_active,sort_order"
-    )
-    .eq(
-      "is_active",
-      true
-    )
-    .order(
-      "sort_order",
-      {
-        ascending: true
-      }
-    );
+  } =
+    await db
+      .from("products")
+      .select(
+        "id,name,description,category,price,is_active,sort_order"
+      )
+      .eq(
+        "is_active",
+        true
+      )
+      .order(
+        "sort_order",
+        {
+          ascending: true
+        }
+      );
 
 
   if (error) {
@@ -2625,12 +2339,10 @@ async function loadProducts() {
   ) {
 
     await translateProducts();
-    renderCategories();
-  renderMenu();
-
 
   }
 
+}
 
 
 /* =====================================================
@@ -2641,17 +2353,28 @@ function getCategories() {
 
   return [
     ...new Set(
+
       products
         .map(
-          p =>
-            currentLanguage === "en"
-              ? (
-                  p._enCategory ||
-                  p.category
-                )
-              : p.category
+          product => {
+
+            if (
+              currentLanguage === "en"
+            ) {
+
+              return (
+                product._enCategory ||
+                product.category
+              );
+
+            }
+
+            return product.category;
+
+          }
         )
         .filter(Boolean)
+
     )
   ];
 
@@ -2660,19 +2383,23 @@ function getCategories() {
 
 function renderCategories() {
 
-  const element =
+  const container =
     document.getElementById(
       "categories"
     );
 
 
-  if (!element) {
+  if (!container) {
     return;
   }
 
 
-  element.innerHTML =
-    getCategories()
+  const categories =
+    getCategories();
+
+
+  container.innerHTML =
+    categories
       .map(
         (
           category,
@@ -2685,9 +2412,9 @@ function renderCategories() {
                 ? "active"
                 : ""
             }"
-            onclick="scrollToCategory('${escAttr(
-              category
-            )}')"
+            onclick="scrollToCategory(
+              '${escAttr(category)}'
+            )"
           >
             ${esc(category)}
           </button>
@@ -2716,22 +2443,27 @@ function renderMenu() {
   }
 
 
+  const categories =
+    getCategories();
+
+
   menu.innerHTML =
-    getCategories()
+    categories
       .map(
         category => {
 
           const categoryProducts =
             products.filter(
-              p => {
+              product => {
 
                 const productCategory =
                   currentLanguage === "en"
                     ? (
-                        p._enCategory ||
-                        p.category
+                        product._enCategory ||
+                        product.category
                       )
-                    : p.category;
+                    : product.category;
+
 
                 return (
                   productCategory ===
@@ -2755,7 +2487,9 @@ function renderMenu() {
               </h2>
 
               ${categoryProducts
-                .map(productHTML)
+                .map(
+                  productHTML
+                )
                 .join("")}
 
             </section>
@@ -2768,6 +2502,10 @@ function renderMenu() {
 
 }
 
+
+/* =====================================================
+   PRODUCT HTML
+===================================================== */
 
 function productHTML(
   product
@@ -2819,9 +2557,9 @@ function productHTML(
 
       <button
         class="add"
-        onclick="addToCart('${escAttr(
-          product.id
-        )}')"
+        onclick="addToCart(
+          '${escAttr(product.id)}'
+        )"
       >
         ${t("add")}
       </button>
@@ -2841,8 +2579,8 @@ function addToCart(id) {
 
   const product =
     products.find(
-      p =>
-        String(p.id) ===
+      product =>
+        String(product.id) ===
         String(id)
     );
 
@@ -2912,8 +2650,8 @@ function changeQty(
 
   const item =
     cart.find(
-      i =>
-        String(i.id) ===
+      item =>
+        String(item.id) ===
         String(id)
     );
 
@@ -2933,8 +2671,8 @@ function changeQty(
 
     cart =
       cart.filter(
-        i =>
-          String(i.id) !==
+        item =>
+          String(item.id) !==
           String(id)
       );
 
@@ -2953,8 +2691,8 @@ function updateItemNote(
 
   const item =
     cart.find(
-      i =>
-        String(i.id) ===
+      item =>
+        String(item.id) ===
         String(id)
     );
 
@@ -2973,15 +2711,22 @@ function renderCart() {
 
   const count =
     cart.reduce(
-      (sum, item) =>
-        sum + item.qty,
+      (
+        sum,
+        item
+      ) =>
+        sum +
+        item.qty,
       0
     );
 
 
   const total =
     cart.reduce(
-      (sum, item) =>
+      (
+        sum,
+        item
+      ) =>
         sum +
         item.price *
         item.qty,
@@ -3066,7 +2811,6 @@ function renderCart() {
 
             </div>
 
-
             <div class="qty">
 
               <button
@@ -3092,7 +2836,6 @@ function renderCart() {
               </button>
 
             </div>
-
 
             <input
               class="item-note"
@@ -3147,7 +2890,10 @@ async function placeOrder() {
 
   const total =
     cart.reduce(
-      (sum, item) =>
+      (
+        sum,
+        item
+      ) =>
         sum +
         item.price *
         item.qty,
@@ -3168,29 +2914,30 @@ async function placeOrder() {
   const {
     data: order,
     error
-  } = await db
-    .from("orders")
-    .insert({
+  } =
+    await db
+      .from("orders")
+      .insert({
 
-      table_number:
-        String(tableNumber),
+        table_number:
+          String(tableNumber),
 
-      status:
-        "new",
+        status:
+          "new",
 
-      total:
-        total,
+        total:
+          total,
 
-      customer_note:
-        customerNote ||
-        null,
+        customer_note:
+          customerNote ||
+          null,
 
-      customer_id:
-        customerId
+        customer_id:
+          customerId
 
-    })
-    .select()
-    .single();
+      })
+      .select()
+      .single();
 
 
   if (error) {
@@ -3200,8 +2947,9 @@ async function placeOrder() {
       error
     );
 
+
     alert(
-      t("order_failed") +
+      "Order could not be placed: " +
       error.message
     );
 
@@ -3227,14 +2975,6 @@ async function placeOrder() {
         product_id:
           item.id,
 
-        /*
-         * IMPORTANT:
-         * The original Turkish product
-         * name is stored in the order.
-         * This keeps the existing system
-         * compatible.
-         */
-
         product_name:
           item.name,
 
@@ -3254,11 +2994,12 @@ async function placeOrder() {
 
   const {
     error: itemsError
-  } = await db
-    .from("order_items")
-    .insert(
-      orderItems
-    );
+  } =
+    await db
+      .from("order_items")
+      .insert(
+        orderItems
+      );
 
 
   if (itemsError) {
@@ -3268,8 +3009,9 @@ async function placeOrder() {
       itemsError
     );
 
+
     alert(
-      t("items_failed") +
+      "Order items could not be saved: " +
       itemsError.message
     );
 
@@ -3337,42 +3079,40 @@ async function openMyOrders() {
 
 function closeMyOrders() {
 
-  document.getElementById(
-    "myOrdersModal"
-  ).classList.add(
-    "hidden"
-  );
+  document
+    .getElementById(
+      "myOrdersModal"
+    )
+    .classList.add(
+      "hidden"
+    );
 
 }
 
 
 /* =====================================================
-   STATUS PROGRESS
+   ORDER PROGRESS
 ===================================================== */
 
 function getProgressStatus(
   status
 ) {
 
-  const orderStatus = {
+  const statuses = {
 
-    new:
-      0,
+    new: 0,
 
-    preparing:
-      1,
+    preparing: 1,
 
-    ready:
-      2,
+    ready: 2,
 
-    completed:
-      3
+    completed: 3
 
   };
 
 
   return (
-    orderStatus[status] ??
+    statuses[status] ??
     0
   );
 
@@ -3392,33 +3132,21 @@ function progressHTML(
   const steps = [
 
     {
-      key:
-        "new",
-
       label:
         t("received")
     },
 
     {
-      key:
-        "preparing",
-
       label:
         t("preparing")
     },
 
     {
-      key:
-        "ready",
-
       label:
         t("ready")
     },
 
     {
-      key:
-        "completed",
-
       label:
         t("completed")
     }
@@ -3427,9 +3155,7 @@ function progressHTML(
 
 
   const lineWidth =
-    current === 0
-      ? 0
-      : (current / 3) * 100;
+    (current / 3) * 100;
 
 
   return `
@@ -3446,42 +3172,37 @@ function progressHTML(
           (
             step,
             index
-          ) => {
+          ) => `
 
-            const done =
-              index <= current
-                ? "done"
-                : "";
-
-            const currentClass =
-              index === current
-                ? "current"
-                : "";
-
-
-            return `
+            <div
+              class="
+                progress-step
+                ${
+                  index <= current
+                    ? "done"
+                    : ""
+                }
+                ${
+                  index === current
+                    ? "current"
+                    : ""
+                }
+              "
+            >
 
               <div
-                class="
-                  progress-step
-                  ${done}
-                  ${currentClass}
-                "
-              >
+                class="progress-dot"
+              ></div>
 
-                <div
-                  class="progress-dot"
-                ></div>
+              <span>
+                ${esc(
+                  step.label
+                )}
+              </span>
 
-                <span>
-                  ${step.label}
-                </span>
+            </div>
 
-              </div>
-
-            `;
-
-          }
+          `
         )
         .join("")}
 
@@ -3493,7 +3214,7 @@ function progressHTML(
 
 
 /* =====================================================
-   LOAD MY ORDERS
+   LOAD ORDERS
 ===================================================== */
 
 async function loadMyOrders() {
@@ -3513,31 +3234,31 @@ async function loadMyOrders() {
   const {
     data,
     error
-  } = await db
-    .from("orders")
-    .select(`
-      id,
-      created_at,
-      status,
-      total,
-      order_items (
-        product_name,
-        quantity,
-        unit_price,
-        note
+  } =
+    await db
+      .from("orders")
+      .select(`
+        id,
+        created_at,
+        status,
+        total,
+        order_items (
+          product_name,
+          quantity,
+          unit_price,
+          note
+        )
+      `)
+      .eq(
+        "customer_id",
+        customerId
       )
-    `)
-    .eq(
-      "customer_id",
-      customerId
-    )
-    .order(
-      "created_at",
-      {
-        ascending:
-          false
-      }
-    );
+      .order(
+        "created_at",
+        {
+          ascending: false
+        }
+      );
 
 
   if (error) {
@@ -3548,18 +3269,10 @@ async function loadMyOrders() {
     );
 
 
-    container.innerHTML = `
-
-      <p>
-        ${esc(
-          t("history_failed")
-        )}
-        ${esc(
-          error.message
-        )}
-      </p>
-
-    `;
+    container.innerHTML =
+      `<p>${esc(
+        error.message
+      )}</p>`;
 
     return;
 
@@ -3573,9 +3286,7 @@ async function loadMyOrders() {
 
     container.innerHTML = `
 
-      <div
-        class="my-orders-empty"
-      >
+      <div class="my-orders-empty">
 
         <strong>
           ${esc(
@@ -3616,9 +3327,7 @@ async function loadMyOrders() {
   container.innerHTML =
     data
       .map(
-        (
-          order
-        ) => {
+        order => {
 
           const total =
             Number(
@@ -3651,7 +3360,7 @@ async function loadMyOrders() {
             );
 
 
-          const statusNames = {
+          const statusLabels = {
 
             new:
               t("new"),
@@ -3668,16 +3377,11 @@ async function loadMyOrders() {
           };
 
 
-          const statusName =
-            statusNames[
+          const statusLabel =
+            statusLabels[
               order.status
             ] ||
             order.status;
-
-
-          const isActive =
-            order.status !==
-            "completed";
 
 
           const items =
@@ -3725,7 +3429,8 @@ async function loadMyOrders() {
               class="
                 my-order
                 ${
-                  isActive
+                  order.status !==
+                  "completed"
                     ? "active-order"
                     : ""
                 }
@@ -3738,7 +3443,8 @@ async function loadMyOrders() {
 
                 <strong>
                   ${
-                    isActive
+                    order.status !==
+                    "completed"
                       ? t("active_order")
                       : t("order")
                   }
@@ -3750,7 +3456,6 @@ async function loadMyOrders() {
 
               </div>
 
-
               <div
                 class="
                   my-order-status
@@ -3759,31 +3464,25 @@ async function loadMyOrders() {
                   )}
                 "
               >
-
                 ${esc(
-                  statusName
+                  statusLabel
                 )}
-
               </div>
 
-
               ${
-                isActive
+                order.status !==
+                "completed"
                   ? progressHTML(
                       order.status
                     )
                   : ""
               }
 
-
               <div
                 class="my-order-items"
               >
-
                 ${items}
-
               </div>
-
 
               <div
                 class="my-order-total"
@@ -3825,11 +3524,13 @@ async function loadMyOrders() {
 
 function openCart() {
 
-  document.getElementById(
-    "cartModal"
-  ).classList.remove(
-    "hidden"
-  );
+  document
+    .getElementById(
+      "cartModal"
+    )
+    .classList.remove(
+      "hidden"
+    );
 
   renderCart();
 
@@ -3838,11 +3539,13 @@ function openCart() {
 
 function closeCart() {
 
-  document.getElementById(
-    "cartModal"
-  ).classList.add(
-    "hidden"
-  );
+  document
+    .getElementById(
+      "cartModal"
+    )
+    .classList.add(
+      "hidden"
+    );
 
 }
 
@@ -3910,6 +3613,38 @@ function showNotice(
 
 
 /* =====================================================
+   TABLE
+===================================================== */
+
+function updateTable() {
+
+  const badge =
+    document.getElementById(
+      "tableBadge"
+    );
+
+
+  if (!badge) {
+    return;
+  }
+
+
+  if (tableNumber) {
+
+    badge.textContent =
+      `${t("table")} ${tableNumber}`;
+
+  } else {
+
+    badge.textContent =
+      t("table");
+
+  }
+
+}
+
+
+/* =====================================================
    HELPERS
 ===================================================== */
 
@@ -3970,7 +3705,7 @@ function escAttr(
 
 
 /* =====================================================
-   MRX MENU
+   OPEN MENU
 ===================================================== */
 
 function openMRXMenu() {
@@ -3998,7 +3733,7 @@ function openMRXMenu() {
 
 
   setTimeout(
-    function() {
+    () => {
 
       welcome.style.display =
         "none";
@@ -4011,14 +3746,12 @@ function openMRXMenu() {
 
 
 /* =====================================================
-   INITIAL LANGUAGE
+   INITIAL UI
 ===================================================== */
 
-applyStaticLanguage();
+applyLanguageUI();
 
 </script>
 
 </body>
-
 </html>
-```
