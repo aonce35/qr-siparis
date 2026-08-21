@@ -2350,6 +2350,111 @@ async function translateWithAI(
 
 async function translateProducts() {
 
+  if (currentLanguage !== "en") {
+    return;
+  }
+
+  if (!products.length) {
+    return;
+  }
+
+  console.log("AI translation started...");
+
+  for (const product of products) {
+
+    // PRODUCT NAME
+    try {
+
+      product._enName =
+        await translateWithAI(
+          product.name
+        );
+
+      console.log(
+        "Translated product:",
+        product.name,
+        "→",
+        product._enName
+      );
+
+    } catch (error) {
+
+      console.error(
+        "PRODUCT NAME TRANSLATION ERROR:",
+        product.name,
+        error
+      );
+
+      product._enName =
+        product.name;
+
+    }
+
+
+    // DESCRIPTION
+    try {
+
+      if (product.description) {
+
+        product._enDescription =
+          await translateWithAI(
+            product.description
+          );
+
+      } else {
+
+        product._enDescription = "";
+
+      }
+
+    } catch (error) {
+
+      console.error(
+        "DESCRIPTION TRANSLATION ERROR:",
+        error
+      );
+
+      product._enDescription =
+        product.description || "";
+
+    }
+
+
+    // CATEGORY
+    try {
+
+      if (product.category) {
+
+        product._enCategory =
+          await translateWithAI(
+            product.category
+          );
+
+      } else {
+
+        product._enCategory = "";
+
+      }
+
+    } catch (error) {
+
+      console.error(
+        "CATEGORY TRANSLATION ERROR:",
+        error
+      );
+
+      product._enCategory =
+        product.category || "";
+
+    }
+
+  }
+
+  console.log(
+    "AI translation finished:",
+    products
+  );
+}
   if (
     currentLanguage !== "en"
   ) {
