@@ -1,3 +1,4 @@
+```html
 <!doctype html>
 <html lang="tr">
 
@@ -150,6 +151,102 @@ input {
   font-size: 10px;
 
   letter-spacing: 2px;
+}
+
+
+/* =====================================================
+   LANGUAGE SELECTOR
+===================================================== */
+
+.language-selector {
+  position: relative;
+
+  margin-top: 18px;
+
+  display: flex;
+  justify-content: center;
+}
+
+.language-button {
+  width: 44px;
+  height: 44px;
+
+  padding: 0;
+
+  border: 2px solid #fff;
+  border-radius: 50%;
+
+  background: #fff;
+
+  font-size: 24px;
+  line-height: 1;
+
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  box-shadow:
+    0 4px 14px
+    rgba(0,0,0,.25);
+
+  transition:
+    transform .15s ease;
+}
+
+.language-button:active {
+  transform: scale(.94);
+}
+
+.language-menu {
+  position: absolute;
+
+  left: 50%;
+  bottom: 54px;
+
+  transform: translateX(-50%);
+
+  display: none;
+
+  min-width: 155px;
+
+  padding: 6px;
+
+  border-radius: 14px;
+
+  background: #fff;
+
+  box-shadow:
+    0 8px 30px
+    rgba(0,0,0,.3);
+}
+
+.language-menu.visible {
+  display: block;
+}
+
+.language-option {
+  width: 100%;
+
+  padding: 11px 13px;
+
+  border: 0;
+  border-radius: 10px;
+
+  background: transparent;
+  color: #111;
+
+  font-size: 14px;
+  font-weight: 600;
+
+  text-align: left;
+
+  cursor: pointer;
+}
+
+.language-option:hover {
+  background: #f1f1f1;
 }
 
 
@@ -872,9 +969,6 @@ textarea::placeholder {
   font-weight: 700;
 }
 
-
-/* Active status */
-
 .my-order-status.new {
   background: #f1f1f1;
   color: #222;
@@ -1143,6 +1237,16 @@ textarea::placeholder {
 
 }
 
+
+/* =====================================================
+   LANGUAGE LOADING
+===================================================== */
+
+.translation-loading {
+  opacity: .65;
+  pointer-events: none;
+}
+
 </style>
 
 </head>
@@ -1178,6 +1282,43 @@ textarea::placeholder {
       POWERED BY MRX
     </div>
 
+
+    <!-- LANGUAGE -->
+
+    <div class="language-selector">
+
+      <button
+        id="languageButton"
+        class="language-button"
+        onclick="toggleLanguageMenu()"
+        aria-label="Language"
+      >
+        🇬🇧
+      </button>
+
+      <div
+        id="languageMenu"
+        class="language-menu"
+      >
+
+        <button
+          class="language-option"
+          onclick="setLanguage('tr')"
+        >
+          🇹🇷 Türkçe
+        </button>
+
+        <button
+          class="language-option"
+          onclick="setLanguage('en')"
+        >
+          🇬🇧 English
+        </button>
+
+      </div>
+
+    </div>
+
   </div>
 
 </section>
@@ -1194,7 +1335,10 @@ textarea::placeholder {
 
   <div>
 
-    <div class="eyebrow">
+    <div
+      class="eyebrow"
+      data-i18n="qr_menu"
+    >
       QR MENÜ
     </div>
 
@@ -1248,9 +1392,7 @@ textarea::placeholder {
 </main>
 
 
-<!-- =====================================================
-     CART BUTTON
-===================================================== -->
+<!-- CART BUTTON -->
 
 <button
   id="cartButton"
@@ -1258,7 +1400,9 @@ textarea::placeholder {
   onclick="openCart()"
 >
 
-  Sepet
+  <span data-i18n="cart">
+    Sepet
+  </span>
 
   <span id="cartCount">
     0
@@ -1267,9 +1411,7 @@ textarea::placeholder {
 </button>
 
 
-<!-- =====================================================
-     CART MODAL
-===================================================== -->
+<!-- CART MODAL -->
 
 <div
   id="cartModal"
@@ -1280,7 +1422,7 @@ textarea::placeholder {
 
     <div class="modal-head">
 
-      <h2>
+      <h2 id="cartTitle">
         Sepet
       </h2>
 
@@ -1298,7 +1440,7 @@ textarea::placeholder {
 
     <div class="order-summary">
 
-      <span>
+      <span id="totalLabel">
         Toplam
       </span>
 
@@ -1309,7 +1451,10 @@ textarea::placeholder {
     </div>
 
 
-    <label class="label">
+    <label
+      class="label"
+      id="orderNoteLabel"
+    >
       Sipariş notu
     </label>
 
@@ -1322,6 +1467,7 @@ textarea::placeholder {
 
     <button
       class="primary"
+      id="placeOrderButton"
       onclick="placeOrder()"
     >
       Siparişi Gönder
@@ -1332,9 +1478,7 @@ textarea::placeholder {
 </div>
 
 
-<!-- =====================================================
-     MY ORDERS MODAL
-===================================================== -->
+<!-- MY ORDERS MODAL -->
 
 <div
   id="myOrdersModal"
@@ -1345,7 +1489,7 @@ textarea::placeholder {
 
     <div class="modal-head">
 
-      <h2>
+      <h2 id="myOrdersTitle">
         Siparişlerim
       </h2>
 
@@ -1360,7 +1504,7 @@ textarea::placeholder {
 
     <div id="myOrders">
 
-      <p>
+      <p id="ordersLoadingText">
         Siparişler yükleniyor...
       </p>
 
@@ -1369,7 +1513,7 @@ textarea::placeholder {
 
     <div class="my-orders-grand-total">
 
-      <span>
+      <span id="grandTotalLabel">
         Toplam
       </span>
 
@@ -1445,12 +1589,249 @@ const tableNumber =
 
 
 /* =====================================================
+   LANGUAGE
+===================================================== */
+
+let currentLanguage =
+  localStorage.getItem(
+    "mrx_language"
+  ) || "tr";
+
+
+/* =====================================================
+   TRANSLATION CACHE
+===================================================== */
+
+const translationMemory =
+  JSON.parse(
+    localStorage.getItem(
+      "mrx_translation_memory"
+    ) || "{}"
+  );
+
+
+/* =====================================================
    STATE
 ===================================================== */
 
 let products = [];
 
 let cart = [];
+
+
+/* =====================================================
+   STATIC TRANSLATIONS
+===================================================== */
+
+const translations = {
+
+  tr: {
+
+    qr_menu:
+      "QR MENÜ",
+
+    menu:
+      "Menü",
+
+    table:
+      "Masa",
+
+    my_orders:
+      "🧾 Siparişlerim",
+
+    cart:
+      "Sepet",
+
+    total:
+      "Toplam",
+
+    order_note:
+      "Sipariş notu",
+
+    note_placeholder:
+      "Örn. Soğansız, sos ayrı, acele değil...",
+
+    place_order:
+      "Siparişi Gönder",
+
+    sending:
+      "Gönderiliyor...",
+
+    orders_loading:
+      "Siparişler yükleniyor...",
+
+    empty_cart:
+      "Sepet boş.",
+
+    empty_orders_title:
+      "Henüz siparişiniz yok.",
+
+    empty_orders_text:
+      "Verdiğiniz siparişler burada görünecek.",
+
+    active_order:
+      "Aktif Sipariş",
+
+    order:
+      "Sipariş",
+
+    new:
+      "Yeni",
+
+    preparing:
+      "Hazırlanıyor",
+
+    ready:
+      "Hazır",
+
+    completed:
+      "Tamamlandı",
+
+    received:
+      "Alındı",
+
+    view_menu:
+      "Menüyü Gör →",
+
+    slogan:
+      "Yeni nesil sipariş deneyimi.",
+
+    powered:
+      "POWERED BY MRX",
+
+    add:
+      "Ekle",
+
+    item_note:
+      "Bu ürün için not...",
+
+    order_received:
+      "Siparişiniz alındı. Masa {table}.",
+
+    no_table:
+      "Masa bilgisi bulunamadı.",
+
+    menu_failed:
+      "Menü yüklenemedi.",
+
+    order_failed:
+      "Sipariş gönderilemedi: ",
+
+    items_failed:
+      "Sipariş ürünleri kaydedilemedi: ",
+
+    history_failed:
+      "Sipariş geçmişi yüklenemedi: ",
+
+    language:
+      "Dil"
+
+  },
+
+  en: {
+
+    qr_menu:
+      "QR MENU",
+
+    menu:
+      "Menu",
+
+    table:
+      "Table",
+
+    my_orders:
+      "🧾 My Orders",
+
+    cart:
+      "Cart",
+
+    total:
+      "Total",
+
+    order_note:
+      "Order note",
+
+    note_placeholder:
+      "E.g. No onions, sauce on the side, no rush...",
+
+    place_order:
+      "Place Order",
+
+    sending:
+      "Sending...",
+
+    orders_loading:
+      "Loading orders...",
+
+    empty_cart:
+      "Your cart is empty.",
+
+    empty_orders_title:
+      "You have no orders yet.",
+
+    empty_orders_text:
+      "Your orders will appear here.",
+
+    active_order:
+      "Active Order",
+
+    order:
+      "Order",
+
+    new:
+      "New",
+
+    preparing:
+      "Preparing",
+
+    ready:
+      "Ready",
+
+    completed:
+      "Completed",
+
+    received:
+      "Received",
+
+    view_menu:
+      "View Menu →",
+
+    slogan:
+      "The next generation of ordering.",
+
+    powered:
+      "POWERED BY MRX",
+
+    add:
+      "Add",
+
+    item_note:
+      "Note for this item...",
+
+    order_received:
+      "Your order has been received. Table {table}.",
+
+    no_table:
+      "Table information not found.",
+
+    menu_failed:
+      "Menu could not be loaded.",
+
+    order_failed:
+      "Order could not be placed: ",
+
+    items_failed:
+      "Order items could not be saved: ",
+
+    history_failed:
+      "Order history could not be loaded: ",
+
+    language:
+      "Language"
+
+  }
+
+};
 
 
 /* =====================================================
@@ -1465,10 +1846,12 @@ document.addEventListener(
 
 async function init() {
 
+  applyStaticLanguage();
+
   if (!tableNumber) {
 
     showNotice(
-      "Masa bilgisi bulunamadı."
+      t("no_table")
     );
 
     return;
@@ -1484,7 +1867,7 @@ async function init() {
   if (badge) {
 
     badge.textContent =
-      `Masa ${tableNumber}`;
+      `${t("table")} ${tableNumber}`;
 
   }
 
@@ -1498,6 +1881,535 @@ async function init() {
   renderMenu();
 
   renderCart();
+
+}
+
+
+/* =====================================================
+   LANGUAGE FUNCTIONS
+===================================================== */
+
+function t(key) {
+
+  return (
+    translations[
+      currentLanguage
+    ]?.[key] ||
+    translations.tr[key] ||
+    key
+  );
+
+}
+
+
+function toggleLanguageMenu() {
+
+  const menu =
+    document.getElementById(
+      "languageMenu"
+    );
+
+  if (!menu) {
+    return;
+  }
+
+  menu.classList.toggle(
+    "visible"
+  );
+
+}
+
+
+function setLanguage(language) {
+
+  if (
+    language !== "tr" &&
+    language !== "en"
+  ) {
+
+    return;
+
+  }
+
+
+  currentLanguage =
+    language;
+
+
+  localStorage.setItem(
+    "mrx_language",
+    language
+  );
+
+
+  const button =
+    document.getElementById(
+      "languageButton"
+    );
+
+
+  if (button) {
+
+    button.textContent =
+      language === "en"
+        ? "🇬🇧"
+        : "🇹🇷";
+
+  }
+
+
+  const menu =
+    document.getElementById(
+      "languageMenu"
+    );
+
+
+  if (menu) {
+
+    menu.classList.remove(
+      "visible"
+    );
+
+  }
+
+
+  document.documentElement.lang =
+    language;
+
+
+  applyStaticLanguage();
+
+  renderCategories();
+
+  renderMenu();
+
+  renderCart();
+
+  if (
+    !document
+      .getElementById(
+        "myOrdersModal"
+      )
+      .classList.contains(
+        "hidden"
+      )
+  ) {
+
+    loadMyOrders();
+
+  }
+
+}
+
+
+function applyStaticLanguage() {
+
+  document.documentElement.lang =
+    currentLanguage;
+
+
+  const slogan =
+    document.querySelector(
+      ".mrx-slogan"
+    );
+
+  if (slogan) {
+
+    slogan.textContent =
+      t("slogan");
+
+  }
+
+
+  const menuButton =
+    document.querySelector(
+      ".mrx-menu-button"
+    );
+
+  if (menuButton) {
+
+    menuButton.textContent =
+      t("view_menu");
+
+  }
+
+
+  const footer =
+    document.querySelector(
+      ".mrx-footer"
+    );
+
+  if (footer) {
+
+    footer.textContent =
+      t("powered");
+
+  }
+
+
+  const eyebrow =
+    document.querySelector(
+      ".eyebrow"
+    );
+
+  if (eyebrow) {
+
+    eyebrow.textContent =
+      t("qr_menu");
+
+  }
+
+
+  const tableBadge =
+    document.getElementById(
+      "tableBadge"
+    );
+
+  if (
+    tableBadge &&
+    tableNumber
+  ) {
+
+    tableBadge.textContent =
+      `${t("table")} ${tableNumber}`;
+
+  }
+
+
+  const myOrdersButton =
+    document.getElementById(
+      "myOrdersButton"
+    );
+
+  if (myOrdersButton) {
+
+    myOrdersButton.textContent =
+      t("my_orders");
+
+  }
+
+
+  const cartButton =
+    document.getElementById(
+      "cartButton"
+    );
+
+  if (cartButton) {
+
+    const count =
+      document.getElementById(
+        "cartCount"
+      );
+
+    cartButton.innerHTML =
+      `
+        ${t("cart")}
+        <span id="cartCount">
+          ${
+            count
+              ? count.textContent
+              : "0"
+          }
+        </span>
+      `;
+
+  }
+
+
+  const cartTitle =
+    document.getElementById(
+      "cartTitle"
+    );
+
+  if (cartTitle) {
+
+    cartTitle.textContent =
+      t("cart");
+
+  }
+
+
+  const totalLabel =
+    document.getElementById(
+      "totalLabel"
+    );
+
+  if (totalLabel) {
+
+    totalLabel.textContent =
+      t("total");
+
+  }
+
+
+  const orderNoteLabel =
+    document.getElementById(
+      "orderNoteLabel"
+    );
+
+  if (orderNoteLabel) {
+
+    orderNoteLabel.textContent =
+      t("order_note");
+
+  }
+
+
+  const orderNote =
+    document.getElementById(
+      "orderNote"
+    );
+
+  if (orderNote) {
+
+    orderNote.placeholder =
+      t("note_placeholder");
+
+  }
+
+
+  const placeOrderButton =
+    document.getElementById(
+      "placeOrderButton"
+    );
+
+  if (placeOrderButton) {
+
+    placeOrderButton.textContent =
+      t("place_order");
+
+  }
+
+
+  const myOrdersTitle =
+    document.getElementById(
+      "myOrdersTitle"
+    );
+
+  if (myOrdersTitle) {
+
+    myOrdersTitle.textContent =
+      t("my_orders")
+        .replace(
+          "🧾 ",
+          ""
+        );
+
+  }
+
+
+  const loading =
+    document.getElementById(
+      "ordersLoadingText"
+    );
+
+  if (loading) {
+
+    loading.textContent =
+      t("orders_loading");
+
+  }
+
+
+  const grandTotal =
+    document.getElementById(
+      "grandTotalLabel"
+    );
+
+  if (grandTotal) {
+
+    grandTotal.textContent =
+      t("total");
+
+  }
+
+
+  const languageButton =
+    document.getElementById(
+      "languageButton"
+    );
+
+  if (languageButton) {
+
+    languageButton.textContent =
+      currentLanguage === "en"
+        ? "🇬🇧"
+        : "🇹🇷";
+
+  }
+
+}
+
+
+/* =====================================================
+   AI TRANSLATION
+===================================================== */
+
+async function translateWithAI(
+  text
+) {
+
+  if (
+    !text ||
+    !String(text).trim()
+  ) {
+
+    return "";
+
+  }
+
+
+  const original =
+    String(text).trim();
+
+
+  if (
+    translationMemory[
+      original
+    ]
+  ) {
+
+    return translationMemory[
+      original
+    ];
+
+  }
+
+
+  try {
+
+    const {
+      data,
+      error
+    } = await db.functions.invoke(
+      "translate-demo",
+      {
+        body: {
+          text: original
+        }
+      }
+    );
+
+
+    if (error) {
+
+      console.error(
+        "TRANSLATION ERROR:",
+        error
+      );
+
+      return original;
+
+    }
+
+
+    const translated =
+      data?.translation?.trim();
+
+
+    if (!translated) {
+
+      return original;
+
+    }
+
+
+    translationMemory[
+      original
+    ] =
+      translated;
+
+
+    localStorage.setItem(
+      "mrx_translation_memory",
+      JSON.stringify(
+        translationMemory
+      )
+    );
+
+
+    return translated;
+
+  } catch (error) {
+
+    console.error(
+      "AI TRANSLATION ERROR:",
+      error
+    );
+
+    return original;
+
+  }
+
+}
+
+
+/* =====================================================
+   TRANSLATE PRODUCTS
+===================================================== */
+
+async function translateProducts() {
+
+  if (
+    currentLanguage !== "en"
+  ) {
+
+    return;
+
+  }
+
+
+  if (!products.length) {
+
+    return;
+
+  }
+
+
+  for (
+    const product of products
+  ) {
+
+    product._enName =
+      await translateWithAI(
+        product.name
+      );
+
+
+    if (
+      product.description
+    ) {
+
+      product._enDescription =
+        await translateWithAI(
+          product.description
+        );
+
+    } else {
+
+      product._enDescription =
+        "";
+
+    }
+
+
+    if (
+      product.category
+    ) {
+
+      product._enCategory =
+        await translateWithAI(
+          product.category
+        );
+
+    } else {
+
+      product._enCategory =
+        "";
+
+    }
+
+  }
 
 }
 
@@ -1528,6 +2440,7 @@ async function loadRestaurant() {
     );
 
     return;
+
   }
 
 
@@ -1588,10 +2501,11 @@ async function loadProducts() {
     );
 
     showNotice(
-      "Menü yüklenemedi."
+      t("menu_failed")
     );
 
     return;
+
   }
 
 
@@ -1599,6 +2513,15 @@ async function loadProducts() {
     Array.isArray(data)
       ? data
       : [];
+
+
+  if (
+    currentLanguage === "en"
+  ) {
+
+    await translateProducts();
+
+  }
 
 }
 
@@ -1614,7 +2537,12 @@ function getCategories() {
       products
         .map(
           p =>
-            p.category
+            currentLanguage === "en"
+              ? (
+                  p._enCategory ||
+                  p.category
+                )
+              : p.category
         )
         .filter(Boolean)
     )
@@ -1629,6 +2557,11 @@ function renderCategories() {
     document.getElementById(
       "categories"
     );
+
+
+  if (!element) {
+    return;
+  }
 
 
   element.innerHTML =
@@ -1671,6 +2604,11 @@ function renderMenu() {
     );
 
 
+  if (!menu) {
+    return;
+  }
+
+
   menu.innerHTML =
     getCategories()
       .map(
@@ -1678,9 +2616,22 @@ function renderMenu() {
 
           const categoryProducts =
             products.filter(
-              p =>
-                p.category ===
-                category
+              p => {
+
+                const productCategory =
+                  currentLanguage === "en"
+                    ? (
+                        p._enCategory ||
+                        p.category
+                      )
+                    : p.category;
+
+                return (
+                  productCategory ===
+                  category
+                );
+
+              }
             );
 
 
@@ -1715,6 +2666,28 @@ function productHTML(
   product
 ) {
 
+  const name =
+    currentLanguage === "en"
+      ? (
+          product._enName ||
+          product.name
+        )
+      : product.name;
+
+
+  const description =
+    currentLanguage === "en"
+      ? (
+          product._enDescription ||
+          product.description ||
+          ""
+        )
+      : (
+          product.description ||
+          ""
+        );
+
+
   return `
 
     <article class="product">
@@ -1722,13 +2695,11 @@ function productHTML(
       <div class="product-info">
 
         <h3>
-          ${esc(product.name)}
+          ${esc(name)}
         </h3>
 
         <p>
-          ${esc(
-            product.description || ""
-          )}
+          ${esc(description)}
         </p>
 
         <div class="price">
@@ -1745,7 +2716,7 @@ function productHTML(
           product.id
         )}')"
       >
-        Ekle
+        ${t("add")}
       </button>
 
     </article>
@@ -1795,6 +2766,14 @@ function addToCart(id) {
 
       name:
         product.name,
+
+      displayName:
+        currentLanguage === "en"
+          ? (
+              product._enName ||
+              product.name
+            )
+          : product.name,
 
       price:
         Number(
@@ -1903,17 +2882,33 @@ function renderCart() {
     );
 
 
-  document.getElementById(
-    "cartCount"
-  ).textContent =
-    count;
+  const countElement =
+    document.getElementById(
+      "cartCount"
+    );
 
 
-  document.getElementById(
-    "cartTotal"
-  ).textContent =
-    "₺" +
-    total.toFixed(2);
+  if (countElement) {
+
+    countElement.textContent =
+      count;
+
+  }
+
+
+  const totalElement =
+    document.getElementById(
+      "cartTotal"
+    );
+
+
+  if (totalElement) {
+
+    totalElement.textContent =
+      "₺" +
+      total.toFixed(2);
+
+  }
 
 
   const container =
@@ -1922,12 +2917,20 @@ function renderCart() {
     );
 
 
+  if (!container) {
+    return;
+  }
+
+
   if (!cart.length) {
 
     container.innerHTML =
-      "<p>Sepet boş.</p>";
+      `<p>${esc(
+        t("empty_cart")
+      )}</p>`;
 
     return;
+
   }
 
 
@@ -1941,7 +2944,10 @@ function renderCart() {
             <div class="cart-main">
 
               <strong>
-                ${esc(item.name)}
+                ${esc(
+                  item.displayName ||
+                  item.name
+                )}
               </strong>
 
               <strong>
@@ -1984,7 +2990,9 @@ function renderCart() {
             <input
               class="item-note"
               value="${escAttr(item.note)}"
-              placeholder="Bu ürün için not..."
+              placeholder="${escAttr(
+                t("item_note")
+              )}"
               oninput="updateItemNote(
                 '${escAttr(item.id)}',
                 this.value
@@ -2009,16 +3017,17 @@ async function placeOrder() {
   if (!cart.length) {
 
     alert(
-      "Sepet boş."
+      t("empty_cart")
     );
 
     return;
+
   }
 
 
   const button =
-    document.querySelector(
-      ".primary"
+    document.getElementById(
+      "placeOrderButton"
     );
 
 
@@ -2026,7 +3035,7 @@ async function placeOrder() {
     true;
 
   button.textContent =
-    "Gönderiliyor...";
+    t("sending");
 
 
   const total =
@@ -2085,17 +3094,19 @@ async function placeOrder() {
     );
 
     alert(
-      "Sipariş gönderilemedi: " +
+      t("order_failed") +
       error.message
     );
+
 
     button.disabled =
       false;
 
     button.textContent =
-      "Siparişi Gönder";
+      t("place_order");
 
     return;
+
   }
 
 
@@ -2108,6 +3119,14 @@ async function placeOrder() {
 
         product_id:
           item.id,
+
+        /*
+         * IMPORTANT:
+         * The original Turkish product
+         * name is stored in the order.
+         * This keeps the existing system
+         * compatible.
+         */
 
         product_name:
           item.name,
@@ -2143,17 +3162,19 @@ async function placeOrder() {
     );
 
     alert(
-      "Sipariş ürünleri kaydedilemedi: " +
+      t("items_failed") +
       itemsError.message
     );
+
 
     button.disabled =
       false;
 
     button.textContent =
-      "Siparişi Gönder";
+      t("place_order");
 
     return;
+
   }
 
 
@@ -2168,7 +3189,11 @@ async function placeOrder() {
 
 
   showNotice(
-    `Siparişiniz alındı. Masa ${tableNumber}.`
+    t("order_received")
+      .replace(
+        "{table}",
+        tableNumber
+      )
   );
 
 
@@ -2176,7 +3201,7 @@ async function placeOrder() {
     false;
 
   button.textContent =
-    "Siparişi Gönder";
+    t("place_order");
 
 }
 
@@ -2224,13 +3249,17 @@ function getProgressStatus(
 
   const orderStatus = {
 
-    new: 0,
+    new:
+      0,
 
-    preparing: 1,
+    preparing:
+      1,
 
-    ready: 2,
+    ready:
+      2,
 
-    completed: 3
+    completed:
+      3
 
   };
 
@@ -2260,7 +3289,7 @@ function progressHTML(
         "new",
 
       label:
-        "Alındı"
+        t("received")
     },
 
     {
@@ -2268,7 +3297,7 @@ function progressHTML(
         "preparing",
 
       label:
-        "Hazırlanıyor"
+        t("preparing")
     },
 
     {
@@ -2276,7 +3305,7 @@ function progressHTML(
         "ready",
 
       label:
-        "Hazır"
+        t("ready")
     },
 
     {
@@ -2284,7 +3313,7 @@ function progressHTML(
         "completed",
 
       label:
-        "Tamamlandı"
+        t("completed")
     }
 
   ];
@@ -2369,7 +3398,9 @@ async function loadMyOrders() {
 
 
   container.innerHTML =
-    "<p>Siparişler yükleniyor...</p>";
+    `<p>${esc(
+      t("orders_loading")
+    )}</p>`;
 
 
   const {
@@ -2413,13 +3444,18 @@ async function loadMyOrders() {
     container.innerHTML = `
 
       <p>
-        Sipariş geçmişi yüklenemedi:
-        ${esc(error.message)}
+        ${esc(
+          t("history_failed")
+        )}
+        ${esc(
+          error.message
+        )}
       </p>
 
     `;
 
     return;
+
   }
 
 
@@ -2435,11 +3471,19 @@ async function loadMyOrders() {
       >
 
         <strong>
-          Henüz siparişiniz yok.
+          ${esc(
+            t(
+              "empty_orders_title"
+            )
+          )}
         </strong>
 
         <p>
-          Verdiğiniz siparişler burada görünecek.
+          ${esc(
+            t(
+              "empty_orders_text"
+            )
+          )}
         </p>
 
       </div>
@@ -2454,6 +3498,7 @@ async function loadMyOrders() {
 
 
     return;
+
   }
 
 
@@ -2465,8 +3510,7 @@ async function loadMyOrders() {
     data
       .map(
         (
-          order,
-          index
+          order
         ) => {
 
           const total =
@@ -2487,7 +3531,9 @@ async function loadMyOrders() {
 
           const time =
             date.toLocaleTimeString(
-              "tr-TR",
+              currentLanguage === "en"
+                ? "en-GB"
+                : "tr-TR",
               {
                 hour:
                   "2-digit",
@@ -2501,16 +3547,16 @@ async function loadMyOrders() {
           const statusNames = {
 
             new:
-              "Yeni",
+              t("new"),
 
             preparing:
-              "Hazırlanıyor",
+              t("preparing"),
 
             ready:
-              "Hazır",
+              t("ready"),
 
             completed:
-              "Tamamlandı"
+              t("completed")
 
           };
 
@@ -2586,8 +3632,8 @@ async function loadMyOrders() {
                 <strong>
                   ${
                     isActive
-                      ? "Aktif Sipariş"
-                      : "Sipariş"
+                      ? t("active_order")
+                      : t("order")
                   }
                 </strong>
 
@@ -2637,7 +3683,9 @@ async function loadMyOrders() {
               >
 
                 <span>
-                  Toplam
+                  ${esc(
+                    t("total")
+                  )}
                 </span>
 
                 <strong>
@@ -2854,8 +3902,16 @@ function openMRXMenu() {
 
 }
 
+
+/* =====================================================
+   INITIAL LANGUAGE
+===================================================== */
+
+applyStaticLanguage();
+
 </script>
 
 </body>
 
 </html>
+```
