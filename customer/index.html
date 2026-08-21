@@ -1999,6 +1999,12 @@ async function translateProducts() {
       await translateWithAI(
         product.name
       );
+    console.log(
+  "TRANSLATION RESULT:",
+  product.name,
+  "=>",
+  product._enName
+);
 
   }
 
